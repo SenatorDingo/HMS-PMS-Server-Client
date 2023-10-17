@@ -1,4 +1,4 @@
-package seg3102.group25.wellmeadows.HMSPMS
+package seg3102.group25.wellmeadows.hmspms
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
