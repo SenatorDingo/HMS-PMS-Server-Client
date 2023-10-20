@@ -62,5 +62,11 @@ class StepsDefinition{
     @Then("The HMS displays unauthorized access error message")
     fun throwUnauthorizedStaffError(){}
 
+    @When("The Staff Member initiates Log Out")
+    fun initiateStaffLogOut(){}
+
+    @Then("The HMS displays a Log Out acknowledgment")
+    fun displayLogOutAcknowledgment(){}
+
 
 }
