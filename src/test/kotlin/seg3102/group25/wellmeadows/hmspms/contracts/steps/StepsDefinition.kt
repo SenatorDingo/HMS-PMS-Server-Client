@@ -26,7 +26,7 @@ class StepsDefinition{
     @And("The Staff Member is registered")
     fun checkStaffRegistration(){}
 
-    @Then("The HMS displays an incomplete information error message")
+    @Then("The HMS displays an incomplete staff information error message")
     fun throwIncompleteStaffInformationError(){}
 
     @But("The user is not found in the system")
@@ -59,6 +59,9 @@ class StepsDefinition{
     @And("The Staff Member is not authorized")
     fun staffNotAuthorized(){}
 
+    @And("The Staff Member is authorized")
+    fun staffAuthorized(){}
+
     @Then("The HMS displays unauthorized access error message")
     fun throwUnauthorizedStaffError(){}
 
@@ -67,6 +70,34 @@ class StepsDefinition{
 
     @Then("The HMS displays a Log Out acknowledgment")
     fun displayLogOutAcknowledgment(){}
+
+    @When("The Staff Member initiates Patient Registration")
+    fun initiatePatientRegistration(){}
+
+    @Then("The HMS registers the Staff Member")
+    fun registerStaff(){}
+
+    @And("The HMS request Patient information")
+    fun requestPatientInformation(){}
+
+    @And("The Staff Member submits patient information")
+    fun submitPatientInformation(){}
+
+    @And("The information provided is complete")
+    fun patientInformationValid(){}
+
+    @And("The information provided is incomplete")
+    fun patientInformationInvalid(){}
+
+    @Then("The HMS issues new identification for Patient")
+    fun issuePatientIdentification(){}
+
+    @And("The HMS registers the Patient")
+    fun registerPatient(){}
+
+    @And("The HMS displays an incomplete patient information error message")
+    fun throwIncompletePatientInformationError(){}
+
 
 
 }

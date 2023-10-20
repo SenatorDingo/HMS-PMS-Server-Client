@@ -7,7 +7,8 @@ Feature: Register a new Staff to the System
     When The Staff Member selects to register
     And The HMS asks for Staff Member information
     And The Staff Member provides all the required information
-    Then The HMS displays an acknowledgement message
+    Then The HMS registers the Staff Member
+    And The HMS displays an acknowledgement message
     And The Staff Member is registered
 
   @Second @StaffRegistration
@@ -16,7 +17,7 @@ Feature: Register a new Staff to the System
     And The Staff Member is not already registered
     When The Staff Member selects to register
     And The HMS asks for Staff Member information
-    Then The HMS displays an incomplete information error message
+    Then The HMS displays an incomplete staff information error message
 
   @Third @StaffRegistration
   Scenario: Staff Member User not found in the system
