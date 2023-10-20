@@ -8,7 +8,7 @@ email: `aariy031@uottawa.ca` <br>
 Josiah Bigras : 300125987 <br>
 email: `jbigr092@uottawa.ca` <br>
 
-Noah Ndahirwa : <br>
+Noah Ndahirwa : 300152285 <br>
 email: `nndah090@uottawa.ca` <br>
 
 Haochen Qin : <br>
