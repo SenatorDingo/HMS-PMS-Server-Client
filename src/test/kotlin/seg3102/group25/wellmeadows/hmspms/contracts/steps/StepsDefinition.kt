@@ -98,6 +98,23 @@ class StepsDefinition{
     @And("The HMS displays an incomplete patient information error message")
     fun throwIncompletePatientInformationError(){}
 
+    @When("The Staff Member initiates viewing Patient File")
+    fun initiateViewingPatientFile(){}
+
+    @And("The HMS requests Patient identification number")
+    fun requestPatientIdentificationNumber(){}
+
+    @And("The Staff Member inputs a valid Patient identification number")
+    fun checkValidPatientIdentificationNumber(){}
+
+    @And("The Staff Member inputs a invalid Patient identification number")
+    fun checkInvalidPatientIdentificationNumber(){}
+
+    @Then("The HMS displays the Patients File")
+    fun displayPatientFile(){}
+
+    @Then("The HMS displays a Patient not found error message")
+    fun throwInvalidPatientIdentificationError(){}
 
 
 }
