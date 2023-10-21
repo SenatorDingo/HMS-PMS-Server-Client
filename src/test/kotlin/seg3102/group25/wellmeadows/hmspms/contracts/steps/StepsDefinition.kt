@@ -153,7 +153,8 @@ class StepsDefinition{
     fun throwUnknownDivisionIdentifierError(){}
 
     @When("The Staff Member initiates Patient Admittance")
-    fun initiatePatientAdmittance(){}
+    @Then("initiate Admit Patient")
+    fun initiatePatientAdmission(){}
 
     @And("The HMS request room and bed number")
     fun requestRoomAndBedNumber(){}
@@ -206,6 +207,29 @@ class StepsDefinition{
     @Then("The HMS displays a patient already in ward error message")
     fun throwPatientAlreadyAdmittedToWardError(){}
 
+    @And("There is a Patient on the Admission Request List")
+    fun checkPatientAdmissionRequestListNotEmpty(){}
+
+    @When("The Staff Member views Admission Request List")
+    fun viewPatientAdmissionRequestList(){}
+
+    @And("The Staff Member selects Patient from Admission Request List")
+    fun submitSelectedPatientFromAdmissionRequestList(){}
+
+    @And("The HMS displays the Patient Registration")
+    fun displayPatientRegistration(){}
+
+    @And("The Staff Member invokes admission of the Patient")
+    fun invokeAdmissionOfPatient(){}
+
+    @And("The Patient Admission not possible")
+    fun patientAdmissionNotPossible(){}
+
+    @Then("The Staff Member denies Patient Admission")
+    fun deniesPatientAdmission(){}
+
+    @And("The HMS notifies Charge Nurse who requested admission")
+    fun notifyRequestedAdmissionChargeNurse(){}
 
 
 }
