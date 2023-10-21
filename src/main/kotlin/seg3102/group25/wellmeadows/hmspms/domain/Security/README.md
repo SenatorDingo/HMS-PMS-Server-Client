@@ -26,6 +26,9 @@ initiated the access.
 <h3>Relevant Use Cases</h3>
 <ul>
 <li>
+Register Staff
+</li>
+<li>
 Staff log in 
 </li>
 <li>
