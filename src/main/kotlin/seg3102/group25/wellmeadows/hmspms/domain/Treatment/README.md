@@ -12,7 +12,7 @@ as it is not available off the shelf. It also comprises the core features of the
 </p>
 
 
-<h3>Relevant Functional Requirements</h3>
+<!-- <h3>Relevant Functional Requirements</h3>
 <ul>
 <li>
 </li>
@@ -25,3 +25,4 @@ as it is not available off the shelf. It also comprises the core features of the
 <li></li>
 <li></li>
 </ul>
+-->
