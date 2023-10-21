@@ -1,4 +1,5 @@
 package seg3102.group25.wellmeadows.hmspms.application.dtos.queries
 
-class DischargePatientDTO {
-}
+data class DischargePatientDTO(
+    var patientId: String
+)

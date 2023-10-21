@@ -1,4 +1,8 @@
 package seg3102.group25.wellmeadows.hmspms.application.dtos.queries
 
-class AdmitPatientRequestListDTO {
-}
+data class AdmitPatientRequestListDTO(
+    var patientId: String,
+    var chargeNurseId: String,
+    var division: String,
+    var admissionStatus: String,
+)
