@@ -131,4 +131,26 @@ class StepsDefinition{
     @Then("The HMS displays a modification not allowed error message")
     fun throwNotAllowedModificationError(){}
 
+    @And("The Staff Member is a Charge Nurse")
+    fun checkStaffTypeChargeNurse(){}
+
+    @When("The Staff Member selects to Visualize Division")
+    fun initializeVisualizeDivision(){}
+
+    @And("The HMS requests Division Identifier")
+    fun requestDivisionIdentifier(){}
+
+    @And("The Staff Member submits correct division identifier")
+    fun submitAndCheckValidDivisionIdentifier(){}
+
+    @Then("The HMS displays information about division")
+    fun displayDivisionInformation(){}
+
+    @And("The Staff Member submits incorrect division identifier")
+    fun submitAndCheckInvalidDivisionIdentifier(){}
+
+    @Then("The HMS displays a division not found error message")
+    fun throwUnknownDivisionIdentifierError(){}
+
+
 }
