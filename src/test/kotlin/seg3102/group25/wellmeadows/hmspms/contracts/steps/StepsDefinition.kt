@@ -116,5 +116,19 @@ class StepsDefinition{
     @Then("The HMS displays a Patient not found error message")
     fun throwInvalidPatientIdentificationError(){}
 
+    @When("Consult Patient File")
+    fun consultPatientFile(){}
+
+    @And("The Staff Member modifies the Patient information")
+    fun attemptModifyPatientInformation(){}
+
+    @And("The Staff Member submits the changes")
+    fun submitModifyPatientInformation(){}
+
+    @Then("The HMS updates the Patient File")
+    fun modifyPatientInformation(){}
+
+    @Then("The HMS displays a modification not allowed error message")
+    fun throwNotAllowedModificationError(){}
 
 }
