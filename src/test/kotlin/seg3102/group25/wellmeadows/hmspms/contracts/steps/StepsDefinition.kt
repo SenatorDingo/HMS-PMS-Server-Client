@@ -152,5 +152,35 @@ class StepsDefinition{
     @Then("The HMS displays a division not found error message")
     fun throwUnknownDivisionIdentifierError(){}
 
+    @When("The Staff Member initiates Patient Admittance")
+    fun initiatePatientAdmittance(){}
+
+    @And("The HMS request room and bed number")
+    fun requestRoomAndBedNumber(){}
+
+    @And("The Staff browses and selects or enters room and bed number")
+    fun displaySelectionRoomAndBedNumber(){}
+
+    @And("The Staff Member submits room and bed number")
+    fun submitRoomAndBedNumber(){}
+
+    @And("The HMS asks for remaining admission information")
+    fun requestOtherAdmittanceInformation(){}
+
+    @And("The Staff Member submits requested information")
+    fun submitOtherAdmittanceInformation(){}
+
+    @And("The HMS admits the Patient")
+    fun admitPatient(){}
+
+    @And("The Division is complete")
+    fun divisionIsComplete(){}
+
+    @Then("The HMS notifies the Staff Member that the division is complete")
+    fun displayDivisionIsComplete(){}
+
+    @And("The HMS displays Request Patient Admission")
+    fun requestPatientAdmission(){}
+
 
 }
