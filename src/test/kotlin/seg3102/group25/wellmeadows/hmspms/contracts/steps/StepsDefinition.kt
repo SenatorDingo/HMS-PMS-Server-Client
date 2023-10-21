@@ -252,5 +252,30 @@ class StepsDefinition{
     @And("discharge information slated to be sent to Patient")
     fun prepareDischargeDocumentsForPatient(){}
 
+    @And("The Staff Member is a Doctor")
+    fun checkStaffTypeDoctor(){}
 
+    @When("The Staff Member requests to add prescription to Patient")
+    fun requestAddPrescriptionPatient(){}
+
+    @And("The HMS requests for required prescription information")
+    fun requestPrescriptionPatientInformation(){}
+
+    @And("The Staff Member submits required prescription information")
+    fun submitPrescriptionPatientInformation(){}
+
+    @And("The HMS records the prescription in Patient File")
+    fun updatePrescriptionPatientFile(){}
+
+    @And("The Selected Patient not assigned to current Doctor")
+    fun isPatientUnderDoctorCareInvalid(){}
+
+    @Then("The HMS notifies Doctor that the patient is not under their case")
+    fun notifyDoctorOfPatientNotUnderTheirCare(){}
+
+    @And("The Staff Member submits incorrect prescription information")
+    fun submitIncorrectPrescriptionInformation(){}
+
+    @Then("The HMS displays an incorrect prescription information error message")
+    fun throwIncorrectPrescriptionInformationError(){}
 }
