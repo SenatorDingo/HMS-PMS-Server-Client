@@ -1,4 +1,24 @@
 package seg3102.group25.wellmeadows.hmspms.application.usecases
 
-class RegisterPatient {
+// Define an interface for registering patients
+interface RegisterPatient {
+    fun registerPatient(
+            uniqueInsuranceNumber: String,
+            firstName: String,
+            lastName: String,
+            address: String,
+            telephoneNumber: String,
+            dateOfBirth: String,
+            gender: String,
+            maritalStatus: String,
+            externalDoctor: String,
+            nextOfKin: NextOfKin
+    ): String
+
+    data class NextOfKin(
+            val fullName: String,
+            val relationship: String,
+            val kinAddress: String,
+            val kinTelephoneNumber: String
+    )
 }
