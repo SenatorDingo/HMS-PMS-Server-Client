@@ -11,7 +11,7 @@ email: `jbigr092@uottawa.ca` <br>
 Noah Ndahirwa : 300152285 <br>
 email: `nndah090@uottawa.ca` <br>
 
-Haochen Qin : <br>
+Haochen Qin : 300187831 <br>
 email: `hqin036@uottawa.ca` <br>
 
 Hassan Hadji-Ibrahim : <br>
