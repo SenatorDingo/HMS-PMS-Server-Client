@@ -182,5 +182,30 @@ class StepsDefinition{
     @And("The HMS displays Request Patient Admission")
     fun requestPatientAdmission(){}
 
+    @When("The Staff Member initiates request patient admission")
+    fun initiateRequestPatientAdmission(){}
+
+    @Then("The HMS assigns patient to ward for awaiting admission")
+    fun assignPatientToWardAdmissionWaitList(){}
+
+    @And("The HMS notifies Ward Charge Nurse")
+    fun notifyWardChargeNursePatientAdmissionWaitList(){}
+
+    @And("The Staff Member submits correct request admission information")
+    fun submitRequestPatientAdmissionValid(){}
+
+    @And("The Staff Member submits incorrect request admission information")
+    fun submitRequestPatientAdmissionInvalid(){}
+
+    @Then("The HMS displays an incorrect request patient admission message")
+    fun throwRequestPatientAdmissionInformationError(){}
+
+    @And("The Patient is already admitted to division")
+    fun checkPatientAlreadyAdmittedDivision(){}
+
+    @Then("The HMS displays a patient already in ward error message")
+    fun throwPatientAlreadyAdmittedToWardError(){}
+
+
 
 }
