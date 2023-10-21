@@ -231,5 +231,26 @@ class StepsDefinition{
     @And("The HMS notifies Charge Nurse who requested admission")
     fun notifyRequestedAdmissionChargeNurse(){}
 
+    @When("The Staff Member selects Patient discharge")
+    fun selectPatientDischarge(){}
+
+    @And("The Staff Member submits discharge for Patient")
+    fun submitPatientDischarge(){}
+
+    @Then("The HMS updated bed availability")
+    fun updateBedAvailability(){}
+
+    @And("The HMS displays discharge information")
+    fun displayPatientDischargeInformation(){}
+
+    @And("The Patient is no longer admitted")
+    fun setPatientToNoLongerAdmitted(){}
+
+    @And("The Patients bed is added to the division availability")
+    fun updateDivisionAvailability(){}
+
+    @And("discharge information slated to be sent to Patient")
+    fun prepareDischargeDocumentsForPatient(){}
+
 
 }
