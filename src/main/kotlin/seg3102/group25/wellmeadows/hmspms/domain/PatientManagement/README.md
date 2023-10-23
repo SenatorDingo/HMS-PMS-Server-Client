@@ -1,9 +1,10 @@
-<h1>Treatment Sub-Domain</h1>
+<h1>Patient Management Sub-Domain</h1>
 
 <h2>Core</h2>
 
 <p>
-Treatment sub domain is the core subdomain of the Patient Management Subsystem.
+This subdomain is the core of the PMS system. It will contain instances of each treatment which will have references
+to instances of staff, patient, facilities and other domains.
 </p>
 
 <h3>Rationale</h3>
