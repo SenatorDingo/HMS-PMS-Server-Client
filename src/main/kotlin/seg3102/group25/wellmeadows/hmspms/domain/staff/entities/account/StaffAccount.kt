@@ -23,7 +23,7 @@ class StaffAccount(
         this.password = password
     }
 
-    fun updateRole(roles: List<Role>){
+    fun updateRoles(roles: List<Role>){
         this.role.clear()
         this.role.addAll(roles)
     }
@@ -36,24 +36,24 @@ class StaffAccount(
         this.role.remove(role)
     }
 
-    fun getRole(): List<Role> {
+    fun getRoles(): List<Role> {
         return this.role.toList()
     }
 
-    fun updateFacility(facilityIDs: List<Role>) {
+    fun updateFacilityIDs(facilityIDs: List<Role>) {
         this.role.clear()
         this.role.addAll(facilityIDs)
     }
 
-    fun addFacility(facilityID: String){
+    fun addFacilityID(facilityID: String){
         this.facilityID.add(facilityID)
     }
 
-    fun removeFacility(facilityID: String){
+    fun removeFacilityID(facilityID: String){
         this.facilityID.remove(facilityID)
     }
 
-    fun getFacility(): List<String> { // Change to Facility Object
+    fun getFacilityIDs(): List<String> { // Change to Facility Object
         return this.facilityID.toList()
     }
 
