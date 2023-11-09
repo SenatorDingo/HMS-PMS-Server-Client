@@ -1,6 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.application.usecases
 
-interface PerscribeMedication {
+interface PrescribeMedication {
     fun prescribeMedication(
             patientId: String,
             drugNumber: String,
