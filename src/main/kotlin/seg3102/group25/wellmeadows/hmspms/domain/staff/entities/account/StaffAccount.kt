@@ -4,14 +4,14 @@ import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.Role
 
 class StaffAccount(
     val employeeNumber: String,
-    var password: String,
-    var firstName: String,
-    var lastName: String,
-    var emailAddress: String,
+    private var password: String,
+    private var firstName: String,
+    private var lastName: String,
+    private var emailAddress: String,
 ) {
-    var role: MutableList<Role> = ArrayList()
-    var facilityID: MutableList<String> = ArrayList() // Change to Facility Object
-    var active: Boolean = true
+    private var role: MutableList<Role> = ArrayList()
+    private var facilityID: MutableList<String> = ArrayList() // Change to Facility Object
+    private var active: Boolean = true
 
     fun update(updated: StaffAccount){
         this.firstName = updated.firstName
@@ -58,7 +58,7 @@ class StaffAccount(
     }
 
     fun deactivate(){
-        this.active = false;
+        this.active = false
     }
 
 }

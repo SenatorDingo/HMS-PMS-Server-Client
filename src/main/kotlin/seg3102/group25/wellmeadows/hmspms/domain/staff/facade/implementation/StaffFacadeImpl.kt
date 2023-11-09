@@ -112,7 +112,7 @@ class StaffFacadeImpl(
         val role = ArrayList<Role>()
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            role.addAll(staffAccount.role)
+            role.addAll(staffAccount.getRoles())
         }
         return role
     }
@@ -166,7 +166,7 @@ class StaffFacadeImpl(
         val facilityID = ArrayList<String>()
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            facilityID.addAll(staffAccount.facilityID)
+            facilityID.addAll(staffAccount.getFacilityIDs())
         }
         return facilityID
     }
