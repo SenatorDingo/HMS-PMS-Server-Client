@@ -40,9 +40,9 @@ class StaffAccount(
         return this.role.toList()
     }
 
-    fun updateFacilityIDs(facilityIDs: List<Role>) {
-        this.role.clear()
-        this.role.addAll(facilityIDs)
+    fun updateFacilityIDs(facilityIDs: List<String>) {
+        this.facilityID.clear()
+        this.facilityID.addAll(facilityIDs)
     }
 
     fun addFacilityID(facilityID: String){
