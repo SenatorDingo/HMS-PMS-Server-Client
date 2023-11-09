@@ -3,6 +3,7 @@ package seg3102.group25.wellmeadows.hmspms.domain.staff.facade.implementation
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterStaffDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
+import seg3102.group25.wellmeadows.hmspms.domain.staff.events.StaffAccountCreated
 import seg3102.group25.wellmeadows.hmspms.domain.staff.facade.StaffFacade
 import seg3102.group25.wellmeadows.hmspms.domain.staff.factories.StaffAccountFactory
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
@@ -26,7 +27,9 @@ class StaffFacadeImpl(
             StaffAccountCreated(
                 UUID.randomUUID(),
                 Date(),
-                staffAccount.employeeNumber))
+                staffAccount.employeeNumber
+            )
+        )
         return true
     }
 
