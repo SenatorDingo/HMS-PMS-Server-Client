@@ -13,7 +13,8 @@ data class RegisterPatientDTO(
     var gender: String,
     var maritalStatus: String,
     var externalDoctorId: String,
-    var nextOfKinFullName: String,
+    var nextOfKinFirstName: String,
+    var nextOfKinLastName: String,
     var nextOfKinRelationshipToPatient: String,
     var nextOfKinAddress: String,
     var nextOfKinTelephoneNumber: String

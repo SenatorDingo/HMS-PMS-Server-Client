@@ -12,13 +12,6 @@ interface RegisterPatient {
             gender: String,
             maritalStatus: String,
             externalDoctor: String,
-            nextOfKin: NextOfKin
+            nextOfKinID: String
     ): String
-
-    data class NextOfKin(
-            val fullName: String,
-            val relationship: String,
-            val kinAddress: String,
-            val kinTelephoneNumber: String
-    )
 }
