@@ -1,7 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.domain.constituent.facade
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterPatientDTO
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterStaffDTO
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.ConstituentFile
 
 interface ConstituentFacade {
