@@ -2,6 +2,7 @@ package seg3102.group25.wellmeadows.hmspms.domain.facility.facade.implementation
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.Division
 import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionBedAdded
 import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionBedRemoved
 import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionCreated
@@ -77,6 +78,10 @@ class FacilityFacadeImpl(
             return true
         }
         return false
+    }
+
+    override fun visualizeDivision(divisionType: FacilityType): Division? {
+        return facilityRepository.find(divisionType)
     }
 
     override fun addAvailableBed(divisionType: FacilityType): Boolean {
