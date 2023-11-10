@@ -1,6 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account
 
-import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.Role
+import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
 
 class StaffAccount(
     val employeeNumber: String,
@@ -9,7 +9,7 @@ class StaffAccount(
     private var lastName: String,
     private var emailAddress: String,
 ) {
-    private var role: MutableList<Role> = ArrayList()
+    private var type: MutableList<StaffType> = ArrayList()
     private var facilityID: MutableList<String> = ArrayList() // Change to Facility Object
     private var active: Boolean = true
 
@@ -23,21 +23,21 @@ class StaffAccount(
         this.password = password
     }
 
-    fun updateRoles(roles: List<Role>){
-        this.role.clear()
-        this.role.addAll(roles)
+    fun updateTypes(types: List<StaffType>){
+        this.type.clear()
+        this.type.addAll(types)
     }
 
-    fun addRole(role: Role){
-        this.role.add(role)
+    fun addType(type: StaffType){
+        this.type.add(type)
     }
 
-    fun removeRole(role: Role){
-        this.role.remove(role)
+    fun removeType(type: StaffType){
+        this.type.remove(type)
     }
 
-    fun getRoles(): List<Role> {
-        return this.role.toList()
+    fun getTypes(): List<StaffType> {
+        return this.type.toList()
     }
 
     fun updateFacilityIDs(facilityIDs: List<String>) {

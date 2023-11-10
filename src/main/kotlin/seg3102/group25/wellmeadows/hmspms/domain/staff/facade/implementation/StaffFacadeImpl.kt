@@ -7,7 +7,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.staff.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.staff.facade.StaffFacade
 import seg3102.group25.wellmeadows.hmspms.domain.staff.factories.StaffAccountFactory
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
-import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.Role
+import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -63,12 +63,12 @@ class StaffFacadeImpl(
         return false
     }
 
-    override fun addRole(employeeNumber: String, role: Role): Boolean {
+    override fun addRole(employeeNumber: String, type: StaffType): Boolean {
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            staffAccount.addRole(role)
+            staffAccount.addType(type)
             staffAccountRepository.save(staffAccount)
-            eventEmitter.emit(RoleAdded(
+            eventEmitter.emit(TypeAdded(
                 UUID.randomUUID(),
                 Date(),
                 employeeNumber
@@ -78,12 +78,12 @@ class StaffFacadeImpl(
         return false
     }
 
-    override fun removeRole(employeeNumber: String, role: Role): Boolean {
+    override fun removeRole(employeeNumber: String, type: StaffType): Boolean {
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            staffAccount.removeRole(role)
+            staffAccount.removeType(type)
             staffAccountRepository.save(staffAccount)
-            eventEmitter.emit(RoleRemoved(
+            eventEmitter.emit(TypeRemoved(
                 UUID.randomUUID(),
                 Date(),
                 employeeNumber
@@ -93,12 +93,12 @@ class StaffFacadeImpl(
         return false
     }
 
-    override fun updateRoles(employeeNumber: String, roles: List<Role>): Boolean {
+    override fun updateRoles(employeeNumber: String, types: List<StaffType>): Boolean {
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            staffAccount.updateRoles(roles)
+            staffAccount.updateTypes(types)
             staffAccountRepository.save(staffAccount)
-            eventEmitter.emit(RolesUpdated(
+            eventEmitter.emit(TypesUpdated(
                 UUID.randomUUID(),
                 Date(),
                 employeeNumber
@@ -108,13 +108,13 @@ class StaffFacadeImpl(
         return false
     }
 
-    override fun getRoles(employeeNumber: String): List<Role> {
-        val role = ArrayList<Role>()
+    override fun getRoles(employeeNumber: String): List<StaffType> {
+        val types = ArrayList<StaffType>()
         val staffAccount = staffAccountRepository.find(employeeNumber)
         if (staffAccount != null) {
-            role.addAll(staffAccount.getRoles())
+            types.addAll(staffAccount.getTypes())
         }
-        return role
+        return types
     }
 
     override fun addFacilityID(employeeNumber: String, facilityID: String): Boolean {
