@@ -6,5 +6,6 @@ import java.util.*
 class DivisionBedRemoved(
     val id: UUID,
     val occurredOn: Date,
+    val divisionType: String,
     val divisionNumber: String
 ): DomainEvent

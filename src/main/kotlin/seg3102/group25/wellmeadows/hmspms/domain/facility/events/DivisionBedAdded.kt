@@ -6,5 +6,6 @@ import java.util.*
 class DivisionBedAdded(
     val id: UUID,
     val occurredOn: Date,
+    val divisionType: String,
     val divisionNumber: String
 ): DomainEvent
