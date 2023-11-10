@@ -1,21 +1,24 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.facade.implementation
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.Shift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.Division
-import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionBedAdded
-import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionBedRemoved
-import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionCreated
-import seg3102.group25.wellmeadows.hmspms.domain.facility.events.DivisionUpdated
+import seg3102.group25.wellmeadows.hmspms.domain.facility.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
+import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.ShiftFactory
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityRepository
+import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.ShiftRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 import java.util.*
 
 class FacilityFacadeImpl(
     private val facilityRepository: FacilityRepository,
+    private val shiftRepository: ShiftRepository,
     private val facilityFactory: FacilityFactory,
+    private val shiftFactory: ShiftFactory,
     private val eventEmitter: DomainEventEmitter
 ): FacilityFacade {
     override fun createWardDivision(wardInfo: CreateDivisionDTO): Boolean {
@@ -80,7 +83,7 @@ class FacilityFacadeImpl(
         return false
     }
 
-    override fun visualizeDivision(divisionType: FacilityType): Division? {
+    override fun getDivision(divisionType: FacilityType): Division? {
         return facilityRepository.find(divisionType)
     }
 
@@ -132,6 +135,46 @@ class FacilityFacadeImpl(
             return division.isFull()
         }
         return true // Assume Full If Error.
+    }
+
+    override fun addShift(staffShiftInfo: StaffShiftDTO): Boolean {
+        val shift = shiftFactory.createShift(staffShiftInfo)
+        val existAccount = shiftRepository.find(shift)
+        if (existAccount != null){
+            return false
+        }
+        shift.division.addShift(shift.staffNumber, shift.shiftType)
+        shiftRepository.save(shift)
+        eventEmitter.emit(
+            ShiftAdded(
+                UUID.randomUUID(),
+                Date(),
+                shift.staffNumber
+            )
+        )
+        return true
+    }
+
+    override fun removeShift(staffShiftInfo: StaffShiftDTO): Boolean {
+        val shift = shiftFactory.createShift(staffShiftInfo)
+        val existAccount = shiftRepository.find(shift)
+        if (existAccount != null){
+            shift.division.removeShift(shift.staffNumber, shift.shiftType)
+            shiftRepository.save(shift)
+            eventEmitter.emit(
+                ShiftRemoved(
+                    UUID.randomUUID(),
+                    Date(),
+                    shift.staffNumber
+                )
+            )
+            return true
+        }
+        return false
+    }
+
+    override fun getShifts(staffNumber: String): List<Shift> {
+        return shiftRepository.findAll(staffNumber)
     }
 
 }
