@@ -19,8 +19,8 @@ class AdmitPatientRequestListImpl(
         staffNumber: String,
         admitPatientRequestListInfo: AdmitPatientRequestListDTO
     ): Boolean {
-        if(securityFacade.checkAccess(staffNumber, security)){
-            TODO("Not yet implemented")
+        if(securityFacade.checkAccess(staffNumber, security) && Security.isLoggedIn(staffNumber)){
+            return facilityFacade.createAdmissionWaitList(admitPatientRequestListInfo)
         }
         return false
     }

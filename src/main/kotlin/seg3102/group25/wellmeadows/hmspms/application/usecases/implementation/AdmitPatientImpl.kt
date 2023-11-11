@@ -2,7 +2,6 @@ package seg3102.group25.wellmeadows.hmspms.application.usecases.implementation
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientDTO
 import seg3102.group25.wellmeadows.hmspms.application.usecases.AdmitPatient
-import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
