@@ -11,7 +11,7 @@ class Security(
 
     companion object {
         val logger: MutableList<DomainEvent> = ArrayList()
-        val staffLoggedIn: MutableList<String> = ArrayList() // List of staff Numbers
+        private val staffLoggedIn: MutableList<String> = ArrayList() // List of staff Numbers
 
 
         // Won't be used by domain

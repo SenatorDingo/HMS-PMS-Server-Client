@@ -65,7 +65,9 @@ class PatientManagementFacadeImpl(
         return isLoggedIn(staffNumber)
     }
 
-    override fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean {
+    override fun requestAdmitPatient(
+        staffNumber: String, admitPatientInfo: AdmitPatientDTO
+    ): Boolean {
         eventEmitter.emit(
             RequestAdmitPatient(
                 UUID.randomUUID(),
