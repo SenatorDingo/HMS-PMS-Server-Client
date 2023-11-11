@@ -3,9 +3,8 @@ package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.imple
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.application.usecases.*
-import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.events.CheckLogged
-import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.events.StaffLoggedIn
-import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.events.StaffLoggedOut
+import seg3102.group25.wellmeadows.hmspms.application.usecases.RequestPatientAdmission
+import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.isLoggedIn
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.logIn
@@ -67,6 +66,13 @@ class PatientManagementFacadeImpl(
     }
 
     override fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean {
+        eventEmitter.emit(
+            RequestAdmitPatient(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return admitPatientUseCase.admitPatient(staffNumber, admitPatientInfo)
     }
 
@@ -74,10 +80,24 @@ class PatientManagementFacadeImpl(
         staffNumber: String,
         admitPatientRequestListInfo: AdmitPatientRequestListDTO
     ): Boolean {
+        eventEmitter.emit(
+            RequestAdmitPatientRequestList(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return admitPatientRequestListUseCase.admitPatientFromRequestList(staffNumber, admitPatientRequestListInfo)
     }
 
     override fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean {
+        eventEmitter.emit(
+            RequestDischargePatient(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return dischargePatientUseCase.dischargePatient(staffNumber, dischargePatientInfo)
     }
 
@@ -85,6 +105,13 @@ class PatientManagementFacadeImpl(
         staffNumber: String,
         requestPatientAdmissionInfo: RequestPatientAdmissionDTO
     ): Boolean {
+        eventEmitter.emit(
+            RequestRequestPatientAdmission(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return requestPatientAdmissionUseCase.requestAdmission(staffNumber, requestPatientAdmissionInfo)
     }
 
@@ -92,18 +119,46 @@ class PatientManagementFacadeImpl(
         staffNumber: String,
         prescribeMedicationInfo: PrescribeMedicationDTO
     ): Boolean {
+        eventEmitter.emit(
+            RequestPrescribeMedication(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return prescribeMedicationUseCase.prescribeMedication(staffNumber, prescribeMedicationInfo)
     }
 
     override fun requestRegisterPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean {
+        eventEmitter.emit(
+            RequestRegisterPatient(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return registerPatientUseCase.registerPatient(staffNumber, registerPatientInfo)
     }
 
     override fun requestRegisterStaff(staffNumber: String, registerStaffInfo: RegisterStaffDTO): Boolean {
+        eventEmitter.emit(
+            RequestRegisterStaff(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return registerStaffUseCase.registerStaff(staffNumber, registerStaffInfo)
     }
 
     override fun requestUpdatePatientFile(staffNumber: String, updatePatientFileInfo: UpdatePatientFileDTO): Boolean {
+        eventEmitter.emit(
+            RequestUpdatePatientFile(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
         return updatePatientFileUseCase.updatePatientFile(staffNumber, updatePatientFileInfo)
     }
 
