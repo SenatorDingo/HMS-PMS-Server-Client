@@ -14,7 +14,8 @@ data class UpdatePatientFileDTO(
     var gender: String? = null,
     var maritalStatus: String? = null,
     var externalDoctorId: String? = null,
-    var nextOfKinFullName: String? = null,
+    var nextOfKinFirstName: String? = null,
+    var nextOfKinLastName: String? = null,
     var nextOfKinRelationshipToPatient: String? = null,
     var nextOfKinAddress: String? = null,
     var nextOfKinTelephoneNumber: String? = null
