@@ -1,5 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division
 
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWaitList.FacilityAdmissionWaitList
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityStatus
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
@@ -21,7 +22,7 @@ class FacilityDivision(
     private var numberBedsAvailable: Int = numberBeds
     private var status: FacilityStatus = FacilityStatus.Incomplete
     private val shifts: MutableList<FacilityShift> = ArrayList()
-
+    private val admissionWaitList: MutableList<FacilityAdmissionWaitList> = ArrayList()
 
     fun update(updated: FacilityDivision){
         this.facilityType = updated.facilityType
@@ -77,4 +78,18 @@ class FacilityDivision(
     fun removeShift(staffNumber: String, shiftType: ShiftType): Boolean{
         return shifts.removeIf { it.staffNumber == staffNumber && it.shiftType == shiftType }
     }
+
+    fun getAdmissionWaitList(): List<FacilityAdmissionWaitList>{
+        return admissionWaitList
+    }
+
+    fun addAdmissionWaitList(admissionWaitList: FacilityAdmissionWaitList): Boolean{
+        return this.admissionWaitList.add(admissionWaitList)
+    }
+
+    fun removeAdmissionWaitList(patientNumber: String): Boolean{
+        return admissionWaitList.removeIf { it.patientId == patientNumber }
+    }
+
+
 }

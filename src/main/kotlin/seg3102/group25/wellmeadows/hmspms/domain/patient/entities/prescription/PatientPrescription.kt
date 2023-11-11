@@ -8,7 +8,7 @@ import java.util.*
 class PatientPrescription(
     var createdOn: Date,
     var updatedLast: Date,
-    var prescriptionID: String = UUID.randomUUID().toString(),
+    var prescriptionID: String,
     var prescriptionType: PrescriptionType,
     var doctorId: String,
     var patientId: String,

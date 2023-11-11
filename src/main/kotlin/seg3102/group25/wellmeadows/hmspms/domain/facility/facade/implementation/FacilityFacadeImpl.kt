@@ -1,14 +1,18 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.facade.implementation
 
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientRequestListDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWaitList.FacilityAdmissionWaitList
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.facility.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
+import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityAdmissionWaitListFactory
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.ShiftFactory
+import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityAdmissionWaitListRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.ShiftRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
@@ -17,8 +21,10 @@ import java.util.*
 class FacilityFacadeImpl(
     private val facilityRepository: FacilityRepository,
     private val shiftRepository: ShiftRepository,
+    private val admissionWaitListRepository: FacilityAdmissionWaitListRepository,
     private val facilityFactory: FacilityFactory,
     private val shiftFactory: ShiftFactory,
+    private val admissionWaitListFactory: FacilityAdmissionWaitListFactory,
     private val eventEmitter: DomainEventEmitter
 ): FacilityFacade {
     override fun createWardDivision(wardInfo: CreateDivisionDTO): Boolean {
@@ -175,6 +181,57 @@ class FacilityFacadeImpl(
 
     override fun getShifts(staffNumber: String): List<FacilityShift> {
         return shiftRepository.findAll(staffNumber)
+    }
+
+    override fun getAdmissionWaitList(divisionType: FacilityType): List<FacilityAdmissionWaitList> {
+        return admissionWaitListRepository.findAll()
+    }
+
+    override fun createAdmissionWaitList(admissionWaitListInfo: AdmitPatientRequestListDTO): Boolean {
+
+        val divisionType = FacilityType.Ward
+        divisionType.setDivisionID(admissionWaitListInfo.divisionID)
+        val division = facilityRepository.find(divisionType)
+
+        val admissionWaitList = admissionWaitListFactory.createAdmissionWaitList(admissionWaitListInfo)
+        val existAccount = admissionWaitListRepository.find(admissionWaitList)
+        if (existAccount != null){
+            return false
+        }
+        admissionWaitList.division = divisionType
+        if(division != null){
+            division.addAdmissionWaitList(admissionWaitList)
+            facilityRepository.save(division)
+            admissionWaitListRepository.save(admissionWaitList)
+            eventEmitter.emit(
+                PatientAdmissionWaitListed(
+                    UUID.randomUUID(),
+                    Date(),
+                    admissionWaitList.patientId
+                )
+            )
+            return true
+        }
+        return false
+    }
+
+    override fun removeAdmissionWaitList(divisionType: FacilityType, patientID: String): Boolean {
+        val division = facilityRepository.find(divisionType)
+        if(division != null){
+            val success = division.removeAdmissionWaitList(patientID)
+            facilityRepository.save(division)
+            if(success) {
+                eventEmitter.emit(
+                    PatientAdmissionUnWaitListed(
+                        UUID.randomUUID(),
+                        Date(),
+                        patientID
+                    )
+                )
+                return true
+            }
+        }
+        return false
     }
 
 }
