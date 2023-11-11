@@ -1,9 +1,8 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.facade.implementation
 
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientRequestListDTO
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admission.Admission
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWaitList.FacilityAdmissionWaitList
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
@@ -17,6 +16,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityR
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.ShiftRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FacilityFacadeImpl(
     private val facilityRepository: FacilityRepository,
@@ -187,10 +187,10 @@ class FacilityFacadeImpl(
         return admissionWaitListRepository.findAll()
     }
 
-    override fun createAdmissionWaitList(admissionWaitListInfo: AdmitPatientRequestListDTO): Boolean {
+    override fun createAdmissionWaitList(admissionWaitListInfo: RequestPatientAdmissionDTO): Boolean {
 
         val divisionType = FacilityType.Ward
-        divisionType.setDivisionID(admissionWaitListInfo.divisionID)
+        divisionType.setDivisionID(admissionWaitListInfo.divisionId)
         val division = facilityRepository.find(divisionType)
 
         val admissionWaitList = admissionWaitListFactory.createAdmissionWaitList(admissionWaitListInfo)
@@ -230,6 +230,38 @@ class FacilityFacadeImpl(
                 )
                 return true
             }
+        }
+        return false
+    }
+
+    override fun getAdmissions(divisionType: FacilityType): List<Admission> {
+        val division = facilityRepository.find(divisionType)
+        var admissions: List<Admission> = ArrayList()
+        if(division != null){
+            admissions = division.getAdmissions()
+        }
+        return admissions
+    }
+
+    override fun addAdmission(divisionType: FacilityType, admissionInfo: AdmitPatientDTO): Boolean {
+        val division = facilityRepository.find(divisionType)
+        val admission: Admission = Admission(
+            admissionInfo.patientNumber,
+            admissionInfo.localDoctor,
+            admissionInfo.roomNumber,
+            admissionInfo.bedNumber,
+            admissionInfo.privateInsuranceNumber
+        )
+        if(division != null){
+            return division.addAdmission(admission)
+        }
+        return false
+    }
+
+    override fun removeAdmission(divisionType: FacilityType, patientID: String): Boolean {
+        val division = facilityRepository.find(divisionType)
+        if(division != null){
+            return division.removeAdmission(patientID)
         }
         return false
     }
