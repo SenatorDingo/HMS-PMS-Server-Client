@@ -1,9 +1,12 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division
 
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWaitList.FacilityAdmissionWaitList
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityStatus
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
+import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.ShiftType
 
-class Division(
+class FacilityDivision(
     var divisionId: String,
     var divisionName: String,
     var chargeNurseFirstName: String,
@@ -18,9 +21,10 @@ class Division(
     private var facilityType: FacilityType = FacilityType.None
     private var numberBedsAvailable: Int = numberBeds
     private var status: FacilityStatus = FacilityStatus.Incomplete
+    private val shifts: MutableList<FacilityShift> = ArrayList()
+    private val admissionWaitList: MutableList<FacilityAdmissionWaitList> = ArrayList()
 
-
-    fun update(updated: Division){
+    fun update(updated: FacilityDivision){
         this.facilityType = updated.facilityType
         this.divisionId = updated.divisionId
         this.divisionName = updated.divisionName
@@ -62,4 +66,30 @@ class Division(
     fun isFull(): Boolean{
         return status == FacilityStatus.Complete
     }
+
+    fun getShifts(): List<FacilityShift>{
+        return shifts
+    }
+
+    fun addShift(staffNumber: String, shiftType: ShiftType): Boolean{
+        return shifts.add(FacilityShift(staffNumber, shiftType, this))
+    }
+
+    fun removeShift(staffNumber: String, shiftType: ShiftType): Boolean{
+        return shifts.removeIf { it.staffNumber == staffNumber && it.shiftType == shiftType }
+    }
+
+    fun getAdmissionWaitList(): List<FacilityAdmissionWaitList>{
+        return admissionWaitList
+    }
+
+    fun addAdmissionWaitList(admissionWaitList: FacilityAdmissionWaitList): Boolean{
+        return this.admissionWaitList.add(admissionWaitList)
+    }
+
+    fun removeAdmissionWaitList(patientNumber: String): Boolean{
+        return admissionWaitList.removeIf { it.patientId == patientNumber }
+    }
+
+
 }
