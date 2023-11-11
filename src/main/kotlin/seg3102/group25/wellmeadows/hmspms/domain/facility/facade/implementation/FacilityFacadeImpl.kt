@@ -166,7 +166,7 @@ class FacilityFacadeImpl(
         val existAccount = shiftRepository.find(shift)
         if (existAccount != null){
             shift.division.removeShift(shift.staffNumber, shift.shiftType)
-            shiftRepository.save(shift)
+            shiftRepository.remove(shift)
             eventEmitter.emit(
                 ShiftRemoved(
                     UUID.randomUUID(),
@@ -245,7 +245,7 @@ class FacilityFacadeImpl(
 
     override fun addAdmission(divisionType: FacilityType, admissionInfo: AdmitPatientDTO): Boolean {
         val division = facilityRepository.find(divisionType)
-        val admission: Admission = Admission(
+        val admission = Admission(
             admissionInfo.patientNumber,
             admissionInfo.localDoctor,
             admissionInfo.roomNumber,

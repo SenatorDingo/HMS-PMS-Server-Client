@@ -40,7 +40,10 @@ class AdmitPatientImpl(
                     ))
                         return false
 
-                    return patientFacade.admitPatient(admitPatientInfo, admitPatientInfo.patientNumber, it)
+                    if(patientFacade.admitPatient(admitPatientInfo, admitPatientInfo.patientNumber, it)) {
+                        it.removeAvailableBed()
+                        return true
+                    }
                 }
         }
         return false
