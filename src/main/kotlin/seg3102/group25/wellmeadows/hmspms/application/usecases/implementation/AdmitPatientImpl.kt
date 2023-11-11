@@ -2,6 +2,7 @@ package seg3102.group25.wellmeadows.hmspms.application.usecases.implementation
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientDTO
 import seg3102.group25.wellmeadows.hmspms.application.usecases.AdmitPatient
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admission.Admission
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
@@ -26,6 +27,19 @@ class AdmitPatientImpl(
             facilityType.setDivisionID(division)
             facilityFacade.getDivision(facilityType)
                 ?.let {
+                    if(it.isFull())
+                        return false
+                    if(!it.addAdmission(
+                        Admission(
+                            admitPatientInfo.patientNumber,
+                            admitPatientInfo.localDoctor,
+                            admitPatientInfo.roomNumber,
+                            admitPatientInfo.bedNumber,
+                            admitPatientInfo.privateInsuranceNumber
+                        )
+                    ))
+                        return false
+
                     return patientFacade.admitPatient(admitPatientInfo, admitPatientInfo.patientNumber, it)
                 }
         }
