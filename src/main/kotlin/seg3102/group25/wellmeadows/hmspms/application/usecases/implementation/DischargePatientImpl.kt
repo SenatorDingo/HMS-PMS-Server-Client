@@ -16,8 +16,8 @@ class DischargePatientImpl(
 
     val security: Security = Security(AccessLevels.DischargePatient)
     override fun dischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean {
-        if(securityFacade.checkAccess(staffNumber, security)){
-            TODO("Not yet implemented")
+        if(securityFacade.checkAccess(staffNumber, security) && Security.isLoggedIn(staffNumber)){
+            patientFacade.dischargePatient(dischargePatientInfo.patientId)
         }
         return false
     }
