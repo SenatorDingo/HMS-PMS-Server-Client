@@ -61,4 +61,8 @@ class StaffAccount(
         this.active = false
     }
 
+    fun checkPassword(password: String): Boolean{
+        return this.password == password
+    }
+
 }
