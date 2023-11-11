@@ -1,8 +1,7 @@
 package seg3102.group25.wellmeadows.hmspms.domain.facility.facade
 
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientRequestListDTO
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
-import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admission.Admission
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWaitList.FacilityAdmissionWaitList
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
@@ -20,6 +19,9 @@ interface FacilityFacade {
     fun removeShift(staffShiftInfo: StaffShiftDTO): Boolean
     fun getShifts(staffNumber: String): List<FacilityShift> // return all shifts
     fun getAdmissionWaitList(divisionType: FacilityType): List<FacilityAdmissionWaitList>
-    fun createAdmissionWaitList(admissionWaitListInfo: AdmitPatientRequestListDTO): Boolean
+    fun createAdmissionWaitList(admissionWaitListInfo: RequestPatientAdmissionDTO): Boolean
     fun removeAdmissionWaitList(divisionType: FacilityType, patientID: String): Boolean
+    fun getAdmissions(divisionType: FacilityType): List<Admission>
+    fun addAdmission(divisionType: FacilityType, admissionInfo: AdmitPatientDTO): Boolean
+    fun removeAdmission(divisionType: FacilityType, patientID: String): Boolean
 }

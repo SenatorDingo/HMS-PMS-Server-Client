@@ -3,12 +3,12 @@ package seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.valueObjects.ConstituentType
 
 class ConstituentFile(
-    private var constituentID: String,
+    var constituentID: String,
     var firstName: String,
     var lastName: String,
-    private var address: String,
-    private var telephoneNumber: String,
-    private var relationship: String
+    var address: String,
+    var telephoneNumber: String,
+    var relationship: String
 ) {
 
     /*

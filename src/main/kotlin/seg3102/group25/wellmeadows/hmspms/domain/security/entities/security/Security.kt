@@ -11,7 +11,7 @@ class Security(
 
     companion object {
         val logger: MutableList<DomainEvent> = ArrayList()
-        val staffLoggedIn: MutableList<String> = ArrayList() // List of staff Numbers
+        private val staffLoggedIn: MutableList<String> = ArrayList() // List of staff Numbers
 
 
         // Won't be used by domain
@@ -26,11 +26,11 @@ class Security(
             return !isLoggedIn(employeeNumber)
         }
 
-        fun logIn(employeeNumber: String): Boolean{
-            if(!staffLoggedIn.contains(employeeNumber)) {
-                staffLoggedIn.add(employeeNumber)
+        fun logIn(staffAccount: StaffAccount, password: String): Boolean{
+            if(!staffLoggedIn.contains(staffAccount.employeeNumber) && staffAccount.checkPassword(password)) {
+                staffLoggedIn.add(staffAccount.employeeNumber)
             }
-            return isLoggedIn(employeeNumber)
+            return isLoggedIn(staffAccount.employeeNumber)
         }
 
         fun isLoggedIn(employeeNumber: String): Boolean{

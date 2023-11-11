@@ -3,6 +3,7 @@ package seg3102.group25.wellmeadows.hmspms.domain.patient.facade.implementation
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.AdmitPatientDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.PrescribeMedicationDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterPatientDTO
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.UpdatePatientFileDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
@@ -40,17 +41,17 @@ class PatientFacadeImpl(
         return true
     }
 
-    override fun updatePatientFile(patientDTO: RegisterPatientDTO): Boolean {
-        val patient = patientFileFactory.createPatientFile(patientDTO)
-        val existAccount = patientFileRepository.find(patient.patientNumber)
+    override fun updatePatientFile(updatePatientDTO: UpdatePatientFileDTO): Boolean {
+
+        val existAccount = patientFileRepository.find(updatePatientDTO.patientId)
         if (existAccount != null){
-            existAccount.update(patient)
-            patientFileRepository.save(patient)
+            existAccount.update(updatePatientDTO)
+            patientFileRepository.save(existAccount)
             eventEmitter.emit(
                 PatientFileUpdated(
                     UUID.randomUUID(),
                     Date(),
-                    patient.patientNumber
+                    existAccount.patientNumber
                 )
             )
             return true
