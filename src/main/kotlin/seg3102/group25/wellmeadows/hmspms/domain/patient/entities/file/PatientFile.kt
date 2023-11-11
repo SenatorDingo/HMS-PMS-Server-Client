@@ -43,7 +43,7 @@ class PatientFile(
         this.constituentFile = updated.constituentFile
     }
 
-    fun admit(localDoctor: String, roomNumber: String, bedNumber: String, privateInsuranceNumber: String?, division: FacilityDivision){
+    fun admit(localDoctor: String, roomNumber: String, bedNumber: String, privateInsuranceNumber: String?, division: FacilityDivision) {
         admitted = true
 
         this.division = division
@@ -70,5 +70,8 @@ class PatientFile(
         return false
     }
 
+    fun getPrescriptions(): List<PatientPrescription>{
+        return prescriptions
+    }
 
 }
