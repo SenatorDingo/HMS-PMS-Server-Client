@@ -1,12 +1,13 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
-import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
-import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 
 interface PatientManagementFacade {
     fun staffLogIn(staffLogInInfo: StaffLogInDTO): Boolean
     fun staffLogOut(staffLogOutInfo: StaffLogOutDTO): Boolean
+    fun checkLogged(staffNumber: String): Boolean
+
+    /*
     fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean
     fun requestAdmitPatientRequestList(staffNumber: String, admitPatientRequestListInfo: AdmitPatientRequestListDTO): Boolean
     fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean
@@ -17,4 +18,5 @@ interface PatientManagementFacade {
     fun requestUpdatePatientFile(staffNumber: String, updatePatientFileInfo: UpdatePatientFileDTO): Boolean
     fun requestVisualizeDivision(staffNumber: String, visualizeDivisionInfo: VisualizeDivisionDTO): FacilityDivision?
     fun requestConsultPatientFile(staffNumber: String, consultPatientFileInfo: ConsultPatientFileDTO): PatientFile?
+    */
 }

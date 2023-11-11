@@ -1,15 +1,7 @@
 package seg3102.group25.wellmeadows.hmspms.application.usecases
 
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.PrescribeMedicationDTO
+
 interface PrescribeMedication {
-    fun prescribeMedication(
-            patientId: String,
-            drugNumber: String,
-            drugName: String,
-            unitsPerDay: Int,
-            numAdminsPerDay: Int,
-            adminTimes: List<String>,
-            methodOfAdmin: String,
-            startDate: String,
-            finishDate: String
-    ): Boolean
+    fun prescribeMedication(staffNumber: String, prescribeMedicationInfo: PrescribeMedicationDTO): Boolean
 }
