@@ -3,8 +3,8 @@ package seg3102.group25.wellmeadows.hmspms.domain.facility.facade.implementation
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.CreateDivisionDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
-import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.Shift
-import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.Division
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.FacilityShift
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.facility.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
@@ -83,7 +83,7 @@ class FacilityFacadeImpl(
         return false
     }
 
-    override fun getDivision(divisionType: FacilityType): Division? {
+    override fun getDivision(divisionType: FacilityType): FacilityDivision? {
         return facilityRepository.find(divisionType)
     }
 
@@ -173,7 +173,7 @@ class FacilityFacadeImpl(
         return false
     }
 
-    override fun getShifts(staffNumber: String): List<Shift> {
+    override fun getShifts(staffNumber: String): List<FacilityShift> {
         return shiftRepository.findAll(staffNumber)
     }
 
