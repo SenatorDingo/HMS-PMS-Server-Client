@@ -7,7 +7,6 @@ interface PatientManagementFacade {
     fun staffLogOut(staffLogOutInfo: StaffLogOutDTO): Boolean
     fun checkLogged(staffNumber: String): Boolean
 
-    /*
     fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean
     fun requestAdmitPatientRequestList(staffNumber: String, admitPatientRequestListInfo: AdmitPatientRequestListDTO): Boolean
     fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean
@@ -16,7 +15,4 @@ interface PatientManagementFacade {
     fun requestRegisterPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean
     fun requestRegisterStaff(staffNumber: String, registerStaffInfo: RegisterStaffDTO): Boolean
     fun requestUpdatePatientFile(staffNumber: String, updatePatientFileInfo: UpdatePatientFileDTO): Boolean
-    fun requestVisualizeDivision(staffNumber: String, visualizeDivisionInfo: VisualizeDivisionDTO): FacilityDivision?
-    fun requestConsultPatientFile(staffNumber: String, consultPatientFileInfo: ConsultPatientFileDTO): PatientFile?
-    */
 }
