@@ -8,5 +8,5 @@ interface AdmitPatientRequestList {
             roomNumber: String,
             bedNumber: String,
             additionalInfo: String
-    ): String
+    ): Boolean
 }

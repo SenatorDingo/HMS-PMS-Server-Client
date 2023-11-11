@@ -17,7 +17,7 @@ class PrescribeMedicationImpl: PrescribeMedication {
         methodOfAdmin: String,
         startDate: String,
         finishDate: String
-    ): String {
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }

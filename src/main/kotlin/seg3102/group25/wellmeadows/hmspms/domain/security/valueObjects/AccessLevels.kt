@@ -15,17 +15,23 @@ enum class AccessLevels{
     },
     PrescribeMedication{
         override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
-                       },
+    },
     RegisterPatient{
         override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
-                   },
+    },
     RegisterStaff{
         override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
-                 },
+    },
     RequestPatientAdmission{
         override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
-                           },
+    },
     UpdatePatientFile{
+        override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
+    },
+    VisualizeDivision{
+        override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
+    },
+    ConsultPatientFile{
         override val staffType: List<StaffType> = listOf() // TODO: Add StaffTypes
     };
 

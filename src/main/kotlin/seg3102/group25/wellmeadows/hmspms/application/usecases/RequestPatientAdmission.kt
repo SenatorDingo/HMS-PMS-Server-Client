@@ -8,5 +8,5 @@ interface RequestPatientAdmission {
             rationale: String,
             priority: Int,
             localDoctor: String
-    ): String
+    ): Boolean
 }

@@ -18,7 +18,7 @@ class RegisterPatientImpl: RegisterPatient {
         maritalStatus: String,
         externalDoctor: String,
         nextOfKinID: String
-    ): String {
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }

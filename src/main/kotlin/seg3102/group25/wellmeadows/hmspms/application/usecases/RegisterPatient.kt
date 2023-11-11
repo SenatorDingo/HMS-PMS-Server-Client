@@ -13,5 +13,5 @@ interface RegisterPatient {
             maritalStatus: String,
             externalDoctor: String,
             nextOfKinID: String
-    ): String
+    ): Boolean
 }

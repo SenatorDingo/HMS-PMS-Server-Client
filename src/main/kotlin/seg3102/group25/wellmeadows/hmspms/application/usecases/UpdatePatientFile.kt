@@ -5,5 +5,5 @@ interface UpdatePatientFile {
     fun updatePatientInformation(
             patientId: String,
             updatedInfo: Map<String, String>
-    ): String
+    ): Boolean
 }

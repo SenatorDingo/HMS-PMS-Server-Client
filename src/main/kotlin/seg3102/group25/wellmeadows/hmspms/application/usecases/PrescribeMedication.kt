@@ -11,5 +11,5 @@ interface PrescribeMedication {
             methodOfAdmin: String,
             startDate: String,
             finishDate: String
-    ): String
+    ): Boolean
 }

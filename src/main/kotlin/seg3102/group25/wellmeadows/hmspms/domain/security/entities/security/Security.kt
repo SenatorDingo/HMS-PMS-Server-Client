@@ -26,11 +26,11 @@ class Security(
             return !isLoggedIn(employeeNumber)
         }
 
-        fun logIn(employeeNumber: String): Boolean{
-            if(!staffLoggedIn.contains(employeeNumber)) {
-                staffLoggedIn.add(employeeNumber)
+        fun logIn(staffAccount: StaffAccount, password: String): Boolean{
+            if(!staffLoggedIn.contains(staffAccount.employeeNumber) && staffAccount.checkPassword(password)) {
+                staffLoggedIn.add(staffAccount.employeeNumber)
             }
-            return isLoggedIn(employeeNumber)
+            return isLoggedIn(staffAccount.employeeNumber)
         }
 
         fun isLoggedIn(employeeNumber: String): Boolean{

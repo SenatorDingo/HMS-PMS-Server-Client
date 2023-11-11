@@ -13,7 +13,7 @@ class RegisterStaffImpl: RegisterStaff {
         firstName: String,
         lastName: String,
         email: String
-    ): String {
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }

@@ -8,5 +8,5 @@ interface RegisterStaff {
             firstName: String,
             lastName: String,
             email: String
-    ): String
+    ): Boolean
 }

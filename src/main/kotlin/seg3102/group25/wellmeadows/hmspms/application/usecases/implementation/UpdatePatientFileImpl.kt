@@ -7,7 +7,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.security.valueObjects.AccessLev
 class UpdatePatientFileImpl: UpdatePatientFile {
 
     val security: Security = Security(AccessLevels.UpdatePatientFile)
-    override fun updatePatientInformation(patientId: String, updatedInfo: Map<String, String>): String {
+    override fun updatePatientInformation(patientId: String, updatedInfo: Map<String, String>): Boolean {
         TODO("Not yet implemented")
     }
 }

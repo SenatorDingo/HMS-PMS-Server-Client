@@ -5,5 +5,5 @@ interface DischargePatient {
     fun dischargePatient(
             patientId: String,
             divisionId: String
-    ): String
+    ): Boolean
 }

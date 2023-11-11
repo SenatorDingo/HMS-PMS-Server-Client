@@ -7,7 +7,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.security.valueObjects.AccessLev
 class DischargePatientImpl: DischargePatient {
 
     val security: Security = Security(AccessLevels.DischargePatient)
-    override fun dischargePatient(patientId: String, divisionId: String): String {
+    override fun dischargePatient(patientId: String, divisionId: String): Boolean {
         TODO("Not yet implemented")
     }
 }

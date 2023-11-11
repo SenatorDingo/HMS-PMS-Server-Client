@@ -9,5 +9,5 @@ interface AdmitPatient {
             roomNumber: String,
             bedNumber: String,
             optionalPrivateInsuranceNumber: String
-    ): String
+    ): Boolean
 }

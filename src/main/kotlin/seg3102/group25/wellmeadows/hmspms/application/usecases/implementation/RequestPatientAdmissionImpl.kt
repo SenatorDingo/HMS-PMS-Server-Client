@@ -13,7 +13,7 @@ class RequestPatientAdmissionImpl: RequestPatientAdmission {
         rationale: String,
         priority: Int,
         localDoctor: String
-    ): String {
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }

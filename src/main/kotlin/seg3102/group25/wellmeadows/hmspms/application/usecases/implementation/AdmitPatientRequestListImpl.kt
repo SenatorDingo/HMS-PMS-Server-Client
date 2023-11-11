@@ -13,7 +13,7 @@ class AdmitPatientRequestListImpl: AdmitPatientRequestList {
         roomNumber: String,
         bedNumber: String,
         additionalInfo: String
-    ): String {
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }
