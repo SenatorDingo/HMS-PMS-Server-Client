@@ -1,18 +1,49 @@
 package seg3102.group25.wellmeadows.hmspms.contracts.steps
 
+import org.springframework.beans.factory.annotation.Autowire
+import seg3102.group25.wellmeadows.hmspms.application.dtos.*
+import seg3102.group25.wellmeadows.hmspms.application.services.*
+import seg3102.group25.wellmeadows.hmspms.application.usecases.*
+import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.*
+import seg3102.group25.wellmeadows.hmspms.domain.*
+
+
 import io.cucumber.java.en.And
 import io.cucumber.java.en.But
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import org.junit.jupiter.api.Assertions
+import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.factories.*
+import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.repositories.*
+import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.services.EventEmitterStub
+import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
 
 class StepsDefinition{
 
+    private var constituentFileFactory = ConstituentFileFactoryStub()
+    private var constituentFileRepository = ConstituentFileRepositoryStub()
+    private var facilityAdmissionWaitListFactory = FacilityAdmissionWaitListFactoryStub()
+    private var facilityAdmissionWaitListRepository = FacilityAdmissionWaitListRepositoryStub()
+    private var facilityFactory = FacilityFactoryStub()
+    private var facilityRepository = FacilityRepositoryStub()
+    private var patientFileFactory = PatientFileFactoryStub()
+    private var patientFileRepository = PatientFileRepositoryStub()
+    private var patientPrescriptionFactory = PatientPrescriptionFactoryStub()
+    private var patientPrescriptionRepository = PatientPrescriptionRepositoryStub()
+    private var shiftFactory = ShiftFactoryStub()
+    private var shiftRepository = ShiftRepositoryStub()
+    private var eventEmitter = EventEmitterStub()
+
     @Given("The HMS is ON")
-    fun checkHMSActive(){}
+    fun checkHMSActive(){
+        Assertions.assertTrue(true)
+    }
 
     @Then("The Staff Member selects to register")
-    fun initializeStaffRegistration(){}
+    fun initializeStaffRegistration(){
+
+    }
 
     @And("The HMS asks for Staff Member information")
     fun requestStaffInformation(){}
