@@ -13,11 +13,16 @@ import io.cucumber.java.en.But
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
-import org.junit.jupiter.api.Assertions
+//import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions
+import org.mockito.internal.matchers.Null
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterStaffDTO
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.factories.*
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.repositories.*
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.services.EventEmitterStub
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
+import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
+import seg3102.group25.wellmeadows.hmspms.domain.staff.facade.implementation.StaffFacadeImpl
 
 class StepsDefinition{
 
@@ -33,11 +38,17 @@ class StepsDefinition{
     private var patientPrescriptionRepository = PatientPrescriptionRepositoryStub()
     private var shiftFactory = ShiftFactoryStub()
     private var shiftRepository = ShiftRepositoryStub()
+    private var staffAccountFactory = StaffAccountFactoryStub()
+    private var staffAccountRepository = StaffAccountRepositoryStub()
     private var eventEmitter = EventEmitterStub()
+    private var staffFacadeImpl = StaffFacadeImpl(staffAccountRepository, staffAccountFactory, eventEmitter)
+
+    private var staff: StaffAccount? = null
+    private var registerStaffDTO: RegisterStaffDTO? = null
 
     @Given("The HMS is ON")
     fun checkHMSActive(){
-        Assertions.assertTrue(true)
+        Assertions.assertThat(true).isTrue()
     }
 
     @Then("The Staff Member selects to register")
@@ -46,25 +57,48 @@ class StepsDefinition{
     }
 
     @And("The HMS asks for Staff Member information")
-    fun requestStaffInformation(){}
+    fun requestStaffInformation(){
+
+    }
 
     @And("The Staff Member provides all the required information")
-    fun submitStaffInformation(){}
+    fun submitStaffInformation(){
+        staff = StaffAccount("", "", "", "", "")
+        Assertions.assertThat(staff!!.employeeNumber).isNotNull
+        Assertions.assertThat(staff!!.getPassword()).isNotNull
+        Assertions.assertThat(staff!!.getFirstName()).isNotNull
+        Assertions.assertThat(staff!!.getLastName()).isNotNull
+        Assertions.assertThat(staff!!.getEmailAddress()).isNotNull
+    }
 
     @Then("The HMS displays an acknowledgement message")
-    fun displayStaffRegistrationAcknowledgement(){}
+    fun displayStaffRegistrationAcknowledgement(){
+
+    }
 
     @And("The Staff Member is registered")
-    fun checkStaffRegistration(){}
+    fun checkStaffRegistration(){
+        staff = StaffAccount("01", "", "", "", "")
+        registerStaffDTO = RegisterStaffDTO(staff!!.employeeNumber, "", "", "", "")
+        staffFacadeImpl.createStaffAccount(registerStaffDTO!!)
+        Assertions.assertThat(staffFacadeImpl.getStaffAccount(staff!!.employeeNumber)).isNotNull
+    }
 
     @Then("The HMS displays an incomplete staff information error message")
-    fun throwIncompleteStaffInformationError(){}
+    fun throwIncompleteStaffInformationError(){
+
+    }
 
     @But("The user is not found in the system")
-    fun checkUserStaffExists(){}
+    fun checkUserStaffExists(){
+
+    }
 
     @And("The Staff Member is not already registered")
-    fun checkUserStaffNotExist(){}
+    fun checkUserStaffNotExist(){
+        staff = StaffAccount("", "", "", "", "")
+        Assertions.assertThat(staffFacadeImpl.getStaffAccount(staff!!.employeeNumber) == null).isTrue()
+    }
 
     @And("The HMS displays an invalid uer error message")
     fun throwInvalidStaffUserError(){}

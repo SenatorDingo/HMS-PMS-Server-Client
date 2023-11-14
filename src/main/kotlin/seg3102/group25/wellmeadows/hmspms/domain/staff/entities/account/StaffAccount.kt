@@ -65,4 +65,19 @@ class StaffAccount(
         return this.password == password
     }
 
+    fun getPassword(): String {
+        return this.password
+    }
+
+    fun getFirstName(): String {
+        return this.firstName
+    }
+
+    fun getLastName(): String {
+        return this.lastName
+    }
+
+    fun getEmailAddress(): String {
+        return this.emailAddress
+    }
 }
