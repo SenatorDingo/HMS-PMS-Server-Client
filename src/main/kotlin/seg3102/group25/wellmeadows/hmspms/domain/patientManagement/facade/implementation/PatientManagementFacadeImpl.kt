@@ -80,6 +80,7 @@ class PatientManagementFacadeImpl(
 
     override fun requestAdmitPatientRequestList(
         staffNumber: String,
+        admitPatientInfo: AdmitPatientDTO,
         admitPatientRequestListInfo: AdmitPatientRequestListDTO
     ): Boolean {
         eventEmitter.emit(
@@ -89,7 +90,7 @@ class PatientManagementFacadeImpl(
                 staffNumber
             )
         )
-        return admitPatientRequestListUseCase.admitPatientFromRequestList(staffNumber, admitPatientRequestListInfo)
+        return admitPatientRequestListUseCase.admitPatientFromRequestList(staffNumber, admitPatientRequestListInfo, admitPatientInfo)
     }
 
     override fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean {
