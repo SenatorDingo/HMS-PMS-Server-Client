@@ -198,7 +198,7 @@ class FacilityFacadeImpl(
         if (existAccount != null){
             return false
         }
-        admissionWaitList.division = divisionType
+        admissionWaitList.division = divisionType.facilityDivisionID
         if(division != null){
             division.addAdmissionWaitList(admissionWaitList)
             facilityRepository.save(division)
