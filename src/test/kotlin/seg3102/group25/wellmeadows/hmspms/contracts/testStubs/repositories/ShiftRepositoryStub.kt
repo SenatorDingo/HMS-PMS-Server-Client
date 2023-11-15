@@ -15,4 +15,8 @@ class ShiftRepositoryStub : ShiftRepository {
     override fun save(shift: FacilityShift): FacilityShift {
         TODO("Not yet implemented")
     }
+
+    override fun remove(shift: FacilityShift): Boolean {
+        TODO("Not yet implemented")
+    }
 }
