@@ -8,12 +8,14 @@ import java.util.Date
 class FacilityAdmissionWaitListFactoryStub : FacilityAdmissionWaitListFactory {
     // placeholder date
     var date = Date()
-    override fun createAdmissionWaitList(admissionPatientWaitList: AdmitPatientRequestListDTO): FacilityAdmissionWaitList {
+    
+    override fun createAdmissionWaitList(requestPatientAdmissionInfo: RequestPatientAdmissionDTO): FacilityAdmissionWaitList {
         return FacilityAdmissionWaitList(
-                admissionPatientWaitList.patientId,
-                admissionPatientWaitList.chargeNurseId,
-                admissionPatientWaitList.divisionID,
-                admissionPatientWaitList.admissionStatus,
-                date)
+            requestPatientAdmissionInfo.patientId,
+            requestPatientAdmissionInfo.chargeNurseId,
+            requestPatientAdmissionInfo.divisionId,
+            "",
+            date
+        )
     }
 }
