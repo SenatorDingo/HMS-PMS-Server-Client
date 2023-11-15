@@ -8,9 +8,9 @@ interface PatientManagementFacade {
     fun checkLogged(staffNumber: String): Boolean
 
     fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean
-    fun requestAdmitPatientRequestList(staffNumber: String, admitPatientRequestListInfo: AdmitPatientRequestListDTO): Boolean
+    fun requestAdmitPatientRequestList(staffNumber: String, admitPatientInfo: AdmitPatientDTO, admitPatientRequestListInfo: AdmitPatientRequestListDTO): Boolean
     fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean
-    fun requestPatientAdmission(staffNumber: String, admitPatientInfo: AdmitPatientDTO, requestPatientAdmissionInfo: RequestPatientAdmissionDTO): Boolean
+    fun requestPatientAdmission(staffNumber: String, requestPatientAdmissionInfo: RequestPatientAdmissionDTO): Boolean
     fun requestPrescribeMedication(staffNumber: String, prescribeMedicationInfo: PrescribeMedicationDTO): Boolean
     fun requestRegisterPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean
     fun requestRegisterStaff(staffNumber: String, registerStaffInfo: RegisterStaffDTO): Boolean
