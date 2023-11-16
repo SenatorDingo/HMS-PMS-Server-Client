@@ -80,4 +80,8 @@ class StaffAccount(
     fun getEmailAddress(): String {
         return this.emailAddress
     }
+
+    fun getType(): MutableList<StaffType> {
+        return type;
+    }
 }
