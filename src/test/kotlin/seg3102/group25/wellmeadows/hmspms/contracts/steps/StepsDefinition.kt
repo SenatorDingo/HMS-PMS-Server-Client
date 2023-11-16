@@ -23,6 +23,7 @@ import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.services.EventEmit
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.facade.implementation.StaffFacadeImpl
+import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
 
 class StepsDefinition{
 
@@ -104,7 +105,9 @@ class StepsDefinition{
     fun throwInvalidStaffUserError(){}
 
     @And("The Staff Member is not logged in")
-    fun checkStaffNotLoggedIn(){}
+    fun checkStaffNotLoggedIn(){
+
+    }
 
     @And("The Staff Member is logged in")
     fun checkStaffLoggedIn(){}
@@ -140,7 +143,12 @@ class StepsDefinition{
     fun initiatePatientRegistration(){}
 
     @Then("The HMS registers the Staff Member")
-    fun registerStaff(){}
+    fun registerStaff(){
+        staff = StaffAccount("01", "", "", "", "")
+        registerStaffDTO = RegisterStaffDTO(staff!!.employeeNumber, "", "", "", "")
+        staffFacadeImpl.createStaffAccount(registerStaffDTO!!)
+        Assertions.assertThat(staffFacadeImpl.getStaffAccount(staff!!.employeeNumber)).isNotNull
+    }
 
     @And("The HMS request Patient information")
     fun requestPatientInformation(){}
@@ -158,7 +166,9 @@ class StepsDefinition{
     fun issuePatientIdentification(){}
 
     @And("The HMS registers the Patient")
-    fun registerPatient(){}
+    fun registerPatient(){
+
+    }
 
     @And("The HMS displays an incomplete patient information error message")
     fun throwIncompletePatientInformationError(){}
@@ -318,7 +328,17 @@ class StepsDefinition{
     fun prepareDischargeDocumentsForPatient(){}
 
     @And("The Staff Member is a Doctor")
-    fun checkStaffTypeDoctor(){}
+    fun checkStaffTypeDoctor(){
+        staff = StaffAccount("01", "", "", "", "")
+        staff!!.addType(StaffType.LocalDoctor);
+        for (type in staff!!.getType()) {
+            if (type == StaffType.LocalDoctor) {
+                Assertions.assertThat(true).isTrue();
+                return;
+            }
+        }
+        Assertions.assertThat(false).isTrue();
+    }
 
     @When("The Staff Member requests to add prescription to Patient")
     fun requestAddPrescriptionPatient(){}
