@@ -7,10 +7,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
-import seg3102.group25.wellmeadows.hmspms.infrastructure.security.StaffDetailsServiceImpl
 
 @Configuration
-class WebSecurityConfig(private val staffDetailsService: StaffDetailsServiceImpl) {
+class WebSecurityConfig() {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http

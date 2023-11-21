@@ -82,6 +82,10 @@ class StaffAccount(
     }
 
     fun getType(): MutableList<StaffType> {
-        return type;
+        return type
+    }
+
+    fun isActive(): Boolean {
+        return active
     }
 }

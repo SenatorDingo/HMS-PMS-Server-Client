@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.authority.SimpleGrantedAuthority
-import seg3102.group25.wellmeadows.hmspms.infrastructure.security.credentials.Staff
+import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 
-class StaffDetailsImpl(val id: Long, private val username: String,
+class StaffDetailsImpl(val id: String,
                       @field:JsonIgnore private val password: String,
                       private val enabled: Boolean,
                       private val authorities: Collection<GrantedAuthority>) : UserDetails {
@@ -20,7 +20,7 @@ class StaffDetailsImpl(val id: Long, private val username: String,
     }
 
     override fun getUsername(): String {
-        return username
+        return id
     }
 
     override fun isAccountNonExpired(): Boolean {
@@ -40,13 +40,15 @@ class StaffDetailsImpl(val id: Long, private val username: String,
     }
 }
 
-fun build(staff: Staff): StaffDetailsImpl {
+fun build(staffAccount: StaffAccount): StaffDetailsImpl {
     val authorities = ArrayList<GrantedAuthority>()
-    authorities.add(SimpleGrantedAuthority(staff.role.name))
+    staffAccount.getTypes().forEach{role ->
+        authorities.add(SimpleGrantedAuthority(role.name))
+    }
+
     return StaffDetailsImpl(
-        staff.id,
-        staff.username,
-        staff.password,
-        staff.enabled,
+        staffAccount.employeeNumber,
+        staffAccount.getPassword(),
+        staffAccount.isActive(),
         authorities)
 }

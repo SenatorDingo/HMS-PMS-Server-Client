@@ -1,4 +1,4 @@
-package seg3102.group25.wellmeadows.hmspms.infrastructure.web.services
+package seg3102.group25.wellmeadows.hmspms.infrastructure.database.services
 
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
@@ -14,7 +14,7 @@ class FireBaseInitialize {
     @PostConstruct
     fun initialize(){
         try {
-            val serviceAccount = FileInputStream("static/keys/databaseKey.json")
+            val serviceAccount = FileInputStream("serviceAccountKey.json")
             val options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://seg3102-josiahbigras-default-rtdb.firebaseio.com/")
