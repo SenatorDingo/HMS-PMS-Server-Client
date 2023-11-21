@@ -32,8 +32,6 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
-
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	implementation("org.springframework.boot:spring-boot-starter-cache")
