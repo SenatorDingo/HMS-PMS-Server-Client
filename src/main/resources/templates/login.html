@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
     <title>Login</title>
 </head>
-<body>
-
-</body>
+    <body>
+        <div th:if="${param.error}">
+            <p>Invalid Username and Password, Try Again</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p>You Have Been Logged Out Successfully</p>
+        </div>
+        <form th:action="@{/login}" method="post">
+            <label for="usr"><b>Username</b></label>
+            <input type="text" id="usr" name="username"/>
+            <br>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id="psw" name="password"/>
+            <br>
+            <input type="submit" value="Sign In"/>
+        </form>
+    </body>
 </html>
