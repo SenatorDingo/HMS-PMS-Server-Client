@@ -5,8 +5,12 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
 
 @Configuration
 class WebSecurityConfig() {
@@ -19,22 +23,40 @@ class WebSecurityConfig() {
             }
             .formLogin{form -> form
                 .loginPage("/login")
-                .successForwardUrl("/")
                 .permitAll()
             }
             .logout { logout -> logout
                 .permitAll()
-                .logoutSuccessUrl("/")
             }
 
         return http.build()
     }
 
     @Bean
+    fun userDetailService(): UserDetailsService {
+        val admin: UserDetails = User
+            .withUsername("admin")
+            .password(passwordEncoder()?.encode("admin"))
+            .roles("ADMIN")
+            .build()
+
+        return InMemoryUserDetailsManager(admin)
+    }
+
+    @Bean
     fun webSecurityCustomizer(): WebSecurityCustomizer {
         return WebSecurityCustomizer { web: WebSecurity ->
             web.ignoring()
-                .requestMatchers("/resources/**")
+                .requestMatchers(
+                    "/resources/**",
+                    "/static/**",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**",
+                    "/vendor/**",
+                    "/fonts/**",
+                    "/error"
+                )
         }
     }
 
