@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.*
 import seg3102.group25.wellmeadows.hmspms.adapters.repositories.StaffAccountRepoAdapter
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 
-
 @RestController
 class StaffAccountController {
+
     @Autowired
     var staffAccountService = StaffAccountRepoAdapter()
 
