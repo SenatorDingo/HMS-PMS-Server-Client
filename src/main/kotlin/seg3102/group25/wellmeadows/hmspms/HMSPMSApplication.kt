@@ -12,6 +12,5 @@ import seg3102.group25.wellmeadows.hmspms.infrastructure.database.services.FireB
 class HmspmsApplication
 
 fun main(args: Array<String>) {
-
 	runApplication<HmspmsApplication>(*args)
 }
