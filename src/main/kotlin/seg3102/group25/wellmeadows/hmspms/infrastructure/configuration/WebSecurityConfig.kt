@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.http.HttpMethod
 import seg3102.group25.wellmeadows.hmspms.domain.security.valueObjects.AccessLevels
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.services.StaffAuthenticationProvider
 import java.util.*
@@ -52,22 +53,35 @@ class WebSecurityConfig{
         return http.build()
     }
 
-
     @Bean
     @Order(2)
+    fun filterAdminChain(http: HttpSecurity): SecurityFilterChain {
+        http
+            .authorizeHttpRequests{ requests -> requests
+                .requestMatchers("/admin/**").hasAnyRole(*superRole)
+                .requestMatchers("/swagger-ui/**").hasAnyRole(*superRole)
+                .requestMatchers("/actions/**").hasAnyRole(*superRole) // Cannot be performed through swagger
+           }
+
+        return http.build()
+    }
+
+
+    @Bean
+    @Order(3)
     fun filterStaffChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests { requests -> requests
-                .requestMatchers("/actions/admit-patient").hasAnyRole(*superRole, *admitPatientRole)
-                .requestMatchers("/actions/admit-patient-request-list").hasAnyRole(*superRole, *admitPatientRequestListRole)
-                .requestMatchers("/actions/consult-patient").hasAnyRole(*superRole, *consultPatientFileRole)
-                .requestMatchers("/actions/discharge-patient").hasAnyRole(*superRole, *dischargePatientRole)
-                .requestMatchers("/actions/prescribe-medication").hasAnyRole(*superRole, *prescribeMedicationRole)
-                .requestMatchers("/actions/register-patient").hasAnyRole(*superRole, *registerPatientRole)
-                .requestMatchers("/actions/register-staff").hasAnyRole(*superRole, *registerStaffRole)
-                .requestMatchers("/actions/request-patient-admission").hasAnyRole(*superRole, *requestPatientAdmissionRole)
-                .requestMatchers("/actions/update-patient-file").hasAnyRole(*superRole, *updatePatientFileRole)
-                .requestMatchers("/actions/visualize-division").hasAnyRole(*superRole, *visualizeDivisionRole)
+                .requestMatchers("/actions/admit-patient").hasAnyRole(*admitPatientRole)
+                .requestMatchers("/actions/admit-patient-request-list").hasAnyRole(*admitPatientRequestListRole)
+                .requestMatchers("/actions/consult-patient").hasAnyRole(*consultPatientFileRole)
+                .requestMatchers("/actions/discharge-patient").hasAnyRole(*dischargePatientRole)
+                .requestMatchers("/actions/prescribe-medication").hasAnyRole(*prescribeMedicationRole)
+                .requestMatchers("/actions/register-patient").hasAnyRole(*registerPatientRole)
+                .requestMatchers("/actions/register-staff").hasAnyRole(*registerStaffRole)
+                .requestMatchers("/actions/request-patient-admission").hasAnyRole(*requestPatientAdmissionRole)
+                .requestMatchers("/actions/update-patient-file").hasAnyRole(*updatePatientFileRole)
+                .requestMatchers("/actions/visualize-division").hasAnyRole(*visualizeDivisionRole)
             }
             .authenticationProvider(StaffAuthenticationProvider())
         return  http.build()
@@ -96,7 +110,10 @@ class WebSecurityConfig{
                     "/images/**",
                     "/vendor/**",
                     "/fonts/**",
-                    "/error"
+                    "/error/**",
+                    "/test/**",
+                    "/admin/**", //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
+                    "/actions/**" //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
                 )
         }
     }

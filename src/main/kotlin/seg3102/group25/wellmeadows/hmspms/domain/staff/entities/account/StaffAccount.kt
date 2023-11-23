@@ -17,6 +17,9 @@ class StaffAccount(
         this.firstName = updated.firstName
         this.lastName = updated.lastName
         this.emailAddress = updated.emailAddress
+        this.type = updated.type
+        this.facilityID = updated.facilityID
+        this.active = updated.active
     }
 
     fun updatePassword(password: String){

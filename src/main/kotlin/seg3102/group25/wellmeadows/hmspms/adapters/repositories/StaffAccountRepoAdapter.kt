@@ -10,13 +10,15 @@ import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccount
 class StaffAccountRepoAdapter: StaffAccountRepository {
 
     override fun find(employeeNumber: String): StaffAccount? {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
+        return null
     }
 
     override fun save(staffAccount: StaffAccount): StaffAccount {
         val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference.child("staffAccounts").push()
         val nodeKey: String = newNode.key
         newNode.setValueAsync(staffAccount)
-        TODO("Not yet implemented")
+        return staffAccount
+        //TODO("Not yet implemented")
     }
 }
