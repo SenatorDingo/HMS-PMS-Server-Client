@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
 </head>
 <body>
-  <h1>Consult Patient File</h1>
+<h1>Consult Patient File</h1>
+
+<form th:action="@{/actions/consult-patient-file}" th:object="${consultPatientFileDTO}" method="post">
+    <label for="staffId">Staff ID:</label>
+    <input type="text" id="staffId" th:field="*{staffId}" required>
+    <br>
+
+    <label for="patientId">Patient ID:</label>
+    <input type="text" id="patientId" th:field="*{patientId}" required>
+    <br>
+
+    <button type="submit">Consult Patient File</button>
+</form>
 </body>
 </html>
