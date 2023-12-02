@@ -7,7 +7,7 @@
 <body>
 <h1>Update Patient File</h1>
 
-<form th:action="@{/update-patient-file}" th:object="${updatePatientFileDTO}" method="post">
+<form th:action="@{/update-patient-file}" th:object="${updatePatientFileForm}" method="post">
     <label for="medicalStaffId">Medical Staff ID:</label>
     <input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required>
     <br>

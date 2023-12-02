@@ -7,7 +7,7 @@
 <body>
 <h1>Admit Patient Request List</h1>
 
-<form th:action="@{/actions/admit-patient-request-list}" th:object="${admitPatientRequestListDTO}" method="post">
+<form th:action="@{/actions/admit-patient-request-list}" th:object="${admitPatientRequestListForm}" method="post">
     <label for="patientId">Patient ID:</label>
     <input type="text" id="patientId" th:field="*{patientId}" required>
     <br>
