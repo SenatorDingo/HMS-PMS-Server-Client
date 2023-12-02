@@ -12,10 +12,11 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 
 
-@Component
+@Service
 class StaffAuthenticationProvider: AuthenticationProvider {
 
     val dataBase: FirebaseDatabase = FirebaseDatabase.getInstance()

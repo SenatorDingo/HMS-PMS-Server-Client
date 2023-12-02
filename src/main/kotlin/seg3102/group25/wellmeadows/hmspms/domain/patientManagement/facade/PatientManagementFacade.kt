@@ -1,7 +1,10 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade
 
+import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 
+@Component
 interface PatientManagementFacade {
     fun staffLogIn(staffLogInInfo: StaffLogInDTO): Boolean
     fun staffLogOut(staffLogOutInfo: StaffLogOutDTO): Boolean
