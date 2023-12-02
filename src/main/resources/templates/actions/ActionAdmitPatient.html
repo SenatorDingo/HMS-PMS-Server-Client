@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>HMS-PMS</title>
+    <title>Admit Patient</title>
 </head>
 <body>
-    <h1>Admit Patient</h1>
+<h1>Admit Patient</h1>
+
+<form th:action="@{/submit}" th:object="${ patientNumber }" method="post">
+    <label for="patientNumber">Patient Number:</label>
+    <input type="text" id="patientNumber" th:field="*{patientNumber}" required>
+    <br>
+
+    <label for="localDoctor">Local Doctor:</label>
+    <input type="text" id="localDoctor" th:field="*{localDoctor}" required>
+    <br>
+
+    <label for="roomNumber">Room Number:</label>
+    <input type="text" id="roomNumber" th:field="*{roomNumber}" required>
+    <br>
+
+    <label for="bedNumber">Bed Number:</label>
+    <input type="text" id="bedNumber" th:field="*{bedNumber}" required>
+    <br>
+
+    <label for="privateInsuranceNumber">Private Insurance Number:</label>
+    <input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}" required>
+    <br>
+
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>
+
