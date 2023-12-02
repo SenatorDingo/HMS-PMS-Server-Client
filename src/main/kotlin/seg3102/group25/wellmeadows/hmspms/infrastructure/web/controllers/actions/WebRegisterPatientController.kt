@@ -3,6 +3,7 @@ package seg3102.group25.wellmeadows.hmspms.infrastructure.web.controllers.action
 import org.apache.catalina.core.ApplicationContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Controller
@@ -20,7 +21,6 @@ class WebRegisterPatientController {
     @Autowired
     lateinit var patientManagementFacade: PatientManagementFacade
 
-
     @RequestMapping("/actions/register-patient")
     fun actionRegisterPatient(model: Model): String {
 
@@ -32,8 +32,8 @@ class WebRegisterPatientController {
 
     @PostMapping("/actions/register-patient")
     fun actionRegisterPatientPost(@ModelAttribute("registerPatientForm") registerPatientForm: RegisterPatientForm): String {
-        val user: User = SecurityContextHolder.getContext().authentication.principal as User
-        val employeeID: String = user.username
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+        val employeeID: String = authentication.name
 
         val dto = RegisterPatientFormConverter.convertForm(registerPatientForm)
 

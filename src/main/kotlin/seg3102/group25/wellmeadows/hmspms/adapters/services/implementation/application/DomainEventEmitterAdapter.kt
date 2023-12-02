@@ -9,10 +9,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.common.DomainEvent
 @Component
 class DomainEventEmitterAdapter: DomainEventEmitter {
 
-    @Autowired
-    private lateinit var applicationEventPublisher: ApplicationEventPublisher
-
     override fun emit(event: DomainEvent) {
-        applicationEventPublisher.publishEvent(event)
+        println(event.toString())
     }
 }

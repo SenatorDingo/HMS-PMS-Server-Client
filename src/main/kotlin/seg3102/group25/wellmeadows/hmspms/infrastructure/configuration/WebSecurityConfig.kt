@@ -112,8 +112,8 @@ class WebSecurityConfig{
                     "/fonts/**",
                     "/error/**",
                     "/test/**",
-                    "/admin/**", //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
-                    "/actions/**" //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
+                    //"/admin/**", //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
+                    //"/actions/**" //TODO: REMOVE THIS LINE - This is added for OpenAPI ONLY DEV
                 )
         }
     }
