@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
 </head>
 <body>
-    <h1>Discharge Patient</h1>
+<h1>Discharge Patient</h1>
+
+<form th:action="@{/actions/discharge-patient}" th:object="${dischargePatientDTO}" method="post">
+    <label for="patientId">Patient ID:</label>
+    <input type="text" id="patientId" th:field="*{patientId}" required>
+    <br>
+
+    <button type="submit">Discharge Patient</button>
+</form>
 </body>
 </html>

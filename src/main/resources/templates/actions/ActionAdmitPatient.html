@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admit Patient</title>
+    <title>HMS-PMS</title>
 </head>
 <body>
 <h1>Admit Patient</h1>
 
-<form th:action="@{/submit}" th:object="${ patientNumber }" method="post">
+<form th:action="@{/actions/admit-patient}" th:object="${admitPatientDTO}" method="post">
     <label for="patientNumber">Patient Number:</label>
     <input type="text" id="patientNumber" th:field="*{patientNumber}" required>
     <br>
@@ -25,11 +25,10 @@
     <br>
 
     <label for="privateInsuranceNumber">Private Insurance Number:</label>
-    <input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}" required>
+    <input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}">
     <br>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Admit Patient</button>
 </form>
 </body>
 </html>
-
