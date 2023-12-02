@@ -31,11 +31,6 @@ class WebActionsController {
         return "actions/ActionPrescribeMedication"
     }
 
-    @RequestMapping("/actions/register-staff")
-    fun actionRegisterStaff(): String {
-        return "actions/ActionRegisterStaff"
-    }
-
     @RequestMapping("/actions/request-patient-admission")
     fun actionRequestPatientAdmission(): String {
         return "actions/ActionRequestPatientAdmission"

@@ -1,5 +1,7 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.implementation
 
+import jakarta.xml.bind.JAXBElement
+import org.springframework.web.servlet.function.ServerResponse.async
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.application.usecases.*
@@ -9,8 +11,10 @@ import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.Patien
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.isLoggedIn
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.logIn
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.logOut
+import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
 import java.util.*
+import kotlinx.coroutines.*
 
 class PatientManagementFacadeImpl(
     private val staffAccountRepository: StaffAccountRepository,
@@ -26,6 +30,7 @@ class PatientManagementFacadeImpl(
     private val updatePatientFileUseCase: UpdatePatientFile
 ): PatientManagementFacade {
     override fun staffLogIn(staffLogInInfo: StaffLogInDTO): Boolean {
+
         val existingAccount = staffAccountRepository.find(staffLogInInfo.userId)
         if(existingAccount != null && logIn(existingAccount, staffLogInInfo.password)){
             eventEmitter.emit(

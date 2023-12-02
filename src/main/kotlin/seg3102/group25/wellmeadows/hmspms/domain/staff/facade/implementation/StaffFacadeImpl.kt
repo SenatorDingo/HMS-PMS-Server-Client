@@ -18,10 +18,12 @@ class StaffFacadeImpl(
 ): StaffFacade {
     override fun createStaffAccount(accountInfo: RegisterStaffDTO): Boolean {
         val employeeNumber = accountInfo.employeeNumber
+
         val existAccount = staffAccountRepository.find(employeeNumber)
         if (existAccount != null){
             return false
         }
+
         val staffAccount = staffAccountFactory.createStaffAccount(accountInfo)
         staffAccountRepository.save(staffAccount)
         eventEmitter.emit(StaffAccountCreated(
