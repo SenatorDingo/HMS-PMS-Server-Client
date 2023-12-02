@@ -7,7 +7,7 @@
 <body>
 <h1>Register Staff</h1>
 
-<form th:action="@{/register-staff}" th:object="${registerStaffDTO}" method="post">
+<form th:action="@{/register-staff}" th:object="${registerStaffForm}" method="post">
     <label for="employeeNumber">Employee Number:</label>
     <input type="text" id="employeeNumber" th:field="*{employeeNumber}" required>
     <br>

@@ -7,7 +7,7 @@
 <body>
 <h1>Request Patient Admission</h1>
 
-<form th:action="@{/request-patient-admission}" th:object="${requestPatientAdmissionDTO}" method="post">
+<form th:action="@{/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post">
     <label for="chargeNurseId">Charge Nurse ID:</label>
     <input type="text" id="chargeNurseId" th:field="*{chargeNurseId}" required>
     <br>

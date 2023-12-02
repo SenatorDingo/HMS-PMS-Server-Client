@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Register Patient</h1>
-    <form th:action="@{/actions/register-patient}" th:object="${registerPatientDTO}" method="post">
+    <form th:action="@{/actions/register-patient}" th:object="${registerPatientForm}" method="post">
         <label for="medicalStaffId">Medical Staff ID:</label>
         <input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required>
         <br>
