@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
 </head>
 <body>
     <h1>Register Patient</h1>
+    <form th:action="@{/register}" th:object="${registerPatientDTO}" method="post">
+        <label for="medicalStaffId">Medical Staff ID:</label>
+        <input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required>
+        <br>
+
+        <label for="insuranceNumber">Insurance Number:</label>
+        <input type="text" id="insuranceNumber" th:field="*{insuranceNumber}" required>
+        <br>
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required>
+        <br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required>
+        <br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" th:field="*{address}" required>
+        <br>
+
+        <label for="telephoneNumber">Telephone Number:</label>
+        <input type="text" id="telephoneNumber" th:field="*{telephoneNumber}" required>
+        <br>
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required>
+        <br>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" th:field="*{gender}" required>
+        <br>
+
+        <label for="maritalStatus">Marital Status:</label>
+        <input type="text" id="maritalStatus" th:field="*{maritalStatus}" required>
+        <br>
+
+        <label for="externalDoctorId">External Doctor ID:</label>
+        <input type="text" id="externalDoctorId" th:field="*{externalDoctorId}" required>
+        <br>
+
+        <h2>Next of Kin Information</h2>
+
+        <label for="nextOfKinFirstName">First Name:</label>
+        <input type="text" id="nextOfKinFirstName" th:field="*{nextOfKinFirstName}" required>
+        <br>
+
+        <label for="nextOfKinLastName">Last Name:</label>
+        <input type="text" id="nextOfKinLastName" th:field="*{nextOfKinLastName}" required>
+        <br>
+
+        <label for="relationshipToPatient">Relationship to Patient:</label>
+        <input type="text" id="relationshipToPatient" th:field="*{nextOfKinRelationshipToPatient}" required>
+        <br>
+
+        <label for="nextOfKinAddress">Address:</label>
+        <input type="text" id="nextOfKinAddress" th:field="*{nextOfKinAddress}" required>
+        <br>
+
+        <label for="nextOfKinTelephoneNumber">Telephone Number:</label>
+        <input type="text" id="nextOfKinTelephoneNumber" th:field="*{nextOfKinTelephoneNumber}" required>
+        <br>
+
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>
