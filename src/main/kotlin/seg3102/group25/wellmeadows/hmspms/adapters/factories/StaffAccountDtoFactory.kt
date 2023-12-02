@@ -6,6 +6,12 @@ import seg3102.group25.wellmeadows.hmspms.domain.staff.factories.StaffAccountFac
 
 class StaffAccountDtoFactory: StaffAccountFactory {
     override fun createStaffAccount(registerStaffDTO: RegisterStaffDTO): StaffAccount {
-        TODO("Not yet implemented")
+        return StaffAccount(
+            registerStaffDTO.employeeNumber,
+            registerStaffDTO.password,
+            registerStaffDTO.firstName,
+            registerStaffDTO.lastName,
+            registerStaffDTO.emailAddress
+        )
     }
 }

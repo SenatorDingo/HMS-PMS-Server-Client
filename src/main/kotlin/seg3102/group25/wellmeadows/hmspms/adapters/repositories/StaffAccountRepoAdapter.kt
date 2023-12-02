@@ -13,7 +13,7 @@ class StaffAccountRepoAdapter: StaffAccountRepository {
     override fun find(employeeNumber: String): StaffAccount? {
 
         val ref: DatabaseReference = dataBase.reference
-        val uidRef = ref.child("staffAccounts").orderByChild("staffNumber").equalTo(employeeNumber)
+        val uidRef = ref.child("staffAccounts").orderByChild("employeeNumber").equalTo(employeeNumber)
 
         var staffAccount: StaffAccount? = null
 
@@ -35,12 +35,12 @@ class StaffAccountRepoAdapter: StaffAccountRepository {
                 }
             }
         })
-
         return staffAccount
     }
 
     override fun save(staffAccount: StaffAccount): StaffAccount {
-        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference.child("staffAccounts").push()
+        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("staffAccounts").child(staffAccount.employeeNumber)
         newNode.setValueAsync(staffAccount)
         return staffAccount
     }

@@ -38,7 +38,6 @@ class WebRegisterStaffController {
 
         patientManagementFacade.requestRegisterStaff(employeeID, dto)
 
-        println(" Created Staff Successfully")
         return "home"
     }
 }
