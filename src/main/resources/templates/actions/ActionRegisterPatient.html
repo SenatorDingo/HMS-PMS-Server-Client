@@ -7,69 +7,91 @@
 <body>
     <h1>Register Patient</h1>
     <form th:action="@{/actions/register-patient}" th:object="${registerPatientForm}" method="post">
-        <label for="medicalStaffId">Medical Staff ID:</label>
-        <input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required>
-        <br>
+        <table>
+            <tr>
+                <td><label for="medicalStaffId">Medical Staff ID:</label></td>
+                <td><input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required></td>
+            </tr>
 
-        <label for="insuranceNumber">Insurance Number:</label>
-        <input type="text" id="insuranceNumber" th:field="*{insuranceNumber}" required>
-        <br>
+            <tr>
+                <td><label for="insuranceNumber">Insurance Number:</label></td>
+                <td><input type="text" id="insuranceNumber" th:field="*{insuranceNumber}" required></td>
+            </tr>
 
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" th:field="*{firstName}" required>
-        <br>
+            <tr>
+                <td><label for="firstName">First Name:</label></td>
+                <td><input type="text" id="firstName" th:field="*{firstName}" required></td>
+            </tr>
 
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" th:field="*{lastName}" required>
-        <br>
+            <tr>
+                <td><label for="lastName">Last Name:</label></td>
+                <td><input type="text" id="lastName" th:field="*{lastName}" required></td>
+            </tr>
 
-        <label for="address">Address:</label>
-        <input type="text" id="address" th:field="*{address}" required>
-        <br>
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><input type="text" id="address" th:field="*{address}" required></td>
+            </tr>
 
-        <label for="telephoneNumber">Telephone Number:</label>
-        <input type="text" id="telephoneNumber" th:field="*{telephoneNumber}" required>
-        <br>
+            <tr>
+                <td><label for="telephoneNumber">Telephone Number:</label></td>
+                <td><input type="text" id="telephoneNumber" th:field="*{telephoneNumber}" required></td>
+            </tr>
 
-        <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required>
-        <br>
+            <tr>
+                <td><label for="dateOfBirth">Date of Birth:</label></td>
+                <td><input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required></td>
+            </tr>
 
-        <label for="gender">Gender:</label>
-        <input type="text" id="gender" th:field="*{gender}" required>
-        <br>
+            <tr>
+                <td><label for="gender">Gender:</label></td>
+                <td><input type="text" id="gender" th:field="*{gender}" required></td>
+            </tr>
 
-        <label for="maritalStatus">Marital Status:</label>
-        <input type="text" id="maritalStatus" th:field="*{maritalStatus}" required>
-        <br>
+            <tr>
+                <td><label for="maritalStatus">Marital Status:</label></td>
+                <td><input type="text" id="maritalStatus" th:field="*{maritalStatus}" required></td>
+            </tr>
 
-        <label for="externalDoctorId">External Doctor ID:</label>
-        <input type="text" id="externalDoctorId" th:field="*{externalDoctorId}" required>
-        <br>
+            <tr>
+                <td><label for="externalDoctorId">External Doctor ID:</label></td>
+                <td><input type="text" id="externalDoctorId" th:field="*{externalDoctorId}" required></td>
+            </tr>
 
-        <h2>Next of Kin Information</h2>
+            <tr>
+                <td colspan="2"><h2>Next of Kin Information</h2></td>
+            </tr>
 
-        <label for="nextOfKinFirstName">First Name:</label>
-        <input type="text" id="nextOfKinFirstName" th:field="*{nextOfKinFirstName}" required>
-        <br>
+            <tr>
+                <td><label for="nextOfKinFirstName">First Name:</label></td>
+                <td><input type="text" id="nextOfKinFirstName" th:field="*{nextOfKinFirstName}" required></td>
+            </tr>
 
-        <label for="nextOfKinLastName">Last Name:</label>
-        <input type="text" id="nextOfKinLastName" th:field="*{nextOfKinLastName}" required>
-        <br>
+            <tr>
+                <td><label for="nextOfKinLastName">Last Name:</label></td>
+                <td><input type="text" id="nextOfKinLastName" th:field="*{nextOfKinLastName}" required></td>
+            </tr>
 
-        <label for="relationshipToPatient">Relationship to Patient:</label>
-        <input type="text" id="relationshipToPatient" th:field="*{nextOfKinRelationshipToPatient}" required>
-        <br>
+            <tr>
+                <td><label for="relationshipToPatient">Relationship to Patient:</label></td>
+                <td><input type="text" id="relationshipToPatient" th:field="*{nextOfKinRelationshipToPatient}" required></td>
+            </tr>
 
-        <label for="nextOfKinAddress">Address:</label>
-        <input type="text" id="nextOfKinAddress" th:field="*{nextOfKinAddress}" required>
-        <br>
+            <tr>
+                <td><label for="nextOfKinAddress">Address:</label></td>
+                <td><input type="text" id="nextOfKinAddress" th:field="*{nextOfKinAddress}" required></td>
+            </tr>
 
-        <label for="nextOfKinTelephoneNumber">Telephone Number:</label>
-        <input type="text" id="nextOfKinTelephoneNumber" th:field="*{nextOfKinTelephoneNumber}" required>
-        <br>
+            <tr>
+                <td><label for="nextOfKinTelephoneNumber">Telephone Number:</label></td>
+                <td><input type="text" id="nextOfKinTelephoneNumber" th:field="*{nextOfKinTelephoneNumber}" required></td>
+            </tr>
 
-        <button type="submit">Register</button>
+            <tr>
+                <td colspan="2" style="text-align: center;"><button type="submit">Register</button></td>
+            </tr>
+        </table>
     </form>
+
 </body>
 </html>

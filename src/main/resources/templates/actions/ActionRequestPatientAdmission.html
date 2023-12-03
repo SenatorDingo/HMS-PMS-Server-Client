@@ -7,32 +7,43 @@
 <body>
 <h1>Request Patient Admission</h1>
 
-<form th:action="@{/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post">
-    <label for="chargeNurseId">Charge Nurse ID:</label>
-    <input type="text" id="chargeNurseId" th:field="*{chargeNurseId}" required>
-    <br>
+<form th:action="@{/actions/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post">
+    <table>
+        <tr>
+            <td><label for="chargeNurseId">Charge Nurse ID:</label></td>
+            <td><input type="text" id="chargeNurseId" th:field="*{chargeNurseId}" required></td>
+        </tr>
 
-    <label for="patientId">Patient ID:</label>
-    <input type="text" id="patientId" th:field="*{patientId}" required>
-    <br>
+        <tr>
+            <td><label for="patientId">Patient ID:</label></td>
+            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
+        </tr>
 
-    <label for="divisionId">Division ID:</label>
-    <input type="text" id="divisionId" th:field="*{divisionId}" required>
-    <br>
+        <tr>
+            <td><label for="divisionId">Division ID:</label></td>
+            <td><input type="text" id="divisionId" th:field="*{divisionId}" required></td>
+        </tr>
 
-    <label for="rationaleForRequest">Rationale for Request:</label>
-    <textarea id="rationaleForRequest" th:field="*{rationaleForRequest}" required></textarea>
-    <br>
+        <tr>
+            <td><label for="rationaleForRequest">Rationale for Request:</label></td>
+            <td><textarea id="rationaleForRequest" th:field="*{rationaleForRequest}" required></textarea></td>
+        </tr>
 
-    <label for="priorityAssessment">Priority Assessment (1 to 10):</label>
-    <input type="number" id="priorityAssessment" th:field="*{priorityAssessment}" min="1" max="10" required>
-    <br>
+        <tr>
+            <td><label for="priorityAssessment">Priority Assessment (1 to 10):</label></td>
+            <td><input type="number" id="priorityAssessment" th:field="*{priorityAssessment}" min="1" max="10" required></td>
+        </tr>
 
-    <label for="localDoctor">Local Doctor:</label>
-    <input type="text" id="localDoctor" th:field="*{localDoctor}" required>
-    <br>
+        <tr>
+            <td><label for="localDoctor">Local Doctor:</label></td>
+            <td><input type="text" id="localDoctor" th:field="*{localDoctor}" required></td>
+        </tr>
 
-    <button type="submit">Request Patient Admission</button>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="submit">Request Patient Admission</button></td>
+        </tr>
+    </table>
 </form>
+
 </body>
 </html>

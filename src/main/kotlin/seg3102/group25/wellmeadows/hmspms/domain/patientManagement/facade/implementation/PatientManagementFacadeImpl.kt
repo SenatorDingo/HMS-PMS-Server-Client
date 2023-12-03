@@ -1,20 +1,15 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.implementation
 
-import jakarta.xml.bind.JAXBElement
-import org.springframework.web.servlet.function.ServerResponse.async
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.application.usecases.*
-import seg3102.group25.wellmeadows.hmspms.application.usecases.RequestPatientAdmission
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.events.*
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.isLoggedIn
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.logIn
 import seg3102.group25.wellmeadows.hmspms.domain.security.entities.security.Security.Companion.logOut
-import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
 import java.util.*
-import kotlinx.coroutines.*
 
 class PatientManagementFacadeImpl(
     private val staffAccountRepository: StaffAccountRepository,
