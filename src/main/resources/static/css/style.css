@@ -1,30 +1,82 @@
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #1a237e;
-    color: #fff;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    background: linear-gradient(45deg, #6dd5ed, #2193b0, #6dd5ed, #2193b0);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-.header-text {
-    font-size: 1.2em;
-    margin-right: 20px;
+@keyframes gradientBackground {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    width: 50%;
+    max-width: 500px;
+}
+
+header, .content, footer {
+    margin-bottom: 20px;
+}
+
+.column {
+    float: middle;
+    width: 100%;
+}
+
+.page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 120, 212, 0.7); /* Translucent matte glass effect */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(5px); /* Additional blur for glass effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(0, 78, 166, 0.7); /* Darker shade on hover */
+    box-shadow: 0 0 15px 5px rgba(0, 120, 212, 0.6); /* Glowing effect */
+}
+
+p {
+    color: #333;
 }
