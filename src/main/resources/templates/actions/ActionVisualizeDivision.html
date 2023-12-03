@@ -7,16 +7,23 @@
 <body>
 <h1>Visualize Division</h1>
 
-<form th:action="@{/visualize-division}" th:object="${visualizeDivisionForm}" method="post">
-    <label for="chargeNurseID">Charge Nurse ID:</label>
-    <input type="text" id="chargeNurseID" th:field="*{chargeNurseID}" required>
-    <br>
+<form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post">
+    <table>
+        <tr>
+            <td><label for="chargeNurseID">Charge Nurse ID:</label></td>
+            <td><input type="text" id="chargeNurseID" th:field="*{chargeNurseID}" required></td>
+        </tr>
 
-    <label for="divisionId">Division ID:</label>
-    <input type="text" id="divisionId" th:field="*{divisionId}" required>
-    <br>
+        <tr>
+            <td><label for="divisionId">Division ID:</label></td>
+            <td><input type="text" id="divisionId" th:field="*{divisionId}" required></td>
+        </tr>
 
-    <button type="submit">Visualize Division</button>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="submit">Visualize Division</button></td>
+        </tr>
+    </table>
 </form>
+
 </body>
 </html>

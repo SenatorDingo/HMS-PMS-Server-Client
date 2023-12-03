@@ -8,11 +8,17 @@
 <h1>Discharge Patient</h1>
 
 <form th:action="@{/actions/discharge-patient}" th:object="${dischargePatientForm}" method="post">
-    <label for="patientId">Patient ID:</label>
-    <input type="text" id="patientId" th:field="*{patientId}" required>
-    <br>
+    <table>
+        <tr>
+            <td><label for="patientId">Patient ID:</label></td>
+            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
+        </tr>
 
-    <button type="submit">Discharge Patient</button>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="submit">Discharge Patient</button></td>
+        </tr>
+    </table>
 </form>
+
 </body>
 </html>
