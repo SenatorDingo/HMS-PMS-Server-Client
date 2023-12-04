@@ -10,7 +10,7 @@ class StaffAccount(
     var emailAddress: String,
 ) {
     var type: MutableList<StaffType> = mutableListOf()
-    var facilityID: MutableList<String> =  mutableListOf("test") // Change to Facility Object
+    var facilityID: MutableList<String> =  mutableListOf() // Change to Facility Object
     var active: Boolean = true
 
     fun update(updated: StaffAccount){

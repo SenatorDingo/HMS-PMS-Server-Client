@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.ConstituentFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.repositories.PatientFileRepository
-import java.time.LocalDate
+import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabasePatientFile
 
 class PatientFileRepoAdapter: PatientFileRepository {
 
@@ -19,8 +19,8 @@ class PatientFileRepoAdapter: PatientFileRepository {
     }
 
     override suspend fun find(patientNumber: String): PatientFile? {
-        val ref: DatabaseReference = dataBase.getReference("patientFiles")
-        val uidRef = ref.child(patientNumber)
+        val ref: DatabaseReference = dataBase.reference
+        val uidRef = ref.child("patientFiles").orderByChild("patientNumber").equalTo(patientNumber)
 
         val errorAccount = PatientFile("", "", "", "",
             "", "", "", "" , "", "",
@@ -41,36 +41,48 @@ class PatientFileRepoAdapter: PatientFileRepository {
             override fun onCancelled(error: DatabaseError) {
                 timeoutJob.cancel()
                 deferred.complete(errorAccount)
-                println("ERROR")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val patientFile = snapshot.getValue(PatientFile::class.java)
+                    val firebasePatientFile = snapshot.getValue(DatabasePatientFile::class.java)
+                    val patientFile = PatientFile(
+                        firebasePatientFile?.patientNumber ?: "",
+                        firebasePatientFile?.medicalStaffId ?: "",
+                        firebasePatientFile?.insuranceNumber ?: "",
+                        firebasePatientFile?.firstName ?: "",
+                        firebasePatientFile?.lastName ?: "",
+                        firebasePatientFile?.address ?: "",
+                        firebasePatientFile?.telephoneNumber ?: "",
+                        firebasePatientFile?.dateOfBirth ?: "",
+                        firebasePatientFile?.gender ?: "",
+                        firebasePatientFile?.maritalStatus ?: "",
+                        firebasePatientFile?.externalDoctorId ?: "",
+                        firebasePatientFile?.constituentFile ?: ConstituentFile("", "", "", "", "", "")
+                    )
+                    patientFile.prescriptions = firebasePatientFile?.prescriptions ?: mutableListOf()
+                    patientFile.admitted = firebasePatientFile?.admitted ?: false
+                    patientFile.division = firebasePatientFile?.division
+                    patientFile.localDoctor = firebasePatientFile?.localDoctor
+                    patientFile.roomNumber = firebasePatientFile?.roomNumber
+                    patientFile.bedNumber = firebasePatientFile?.bedNumber
+                    patientFile.privateInsuranceNumber = firebasePatientFile?.privateInsuranceNumber
+
                     timeoutJob.cancel()
                     deferred.complete(patientFile)
                 } else {
-                    println("HERE MAYBE?")
                     timeoutJob.cancel()
                     deferred.complete(null)
                 }
             }
         }
 
-        println("Here1")
-
         uidRef.addListenerForSingleValueEvent(valueEventListener)
-
-        println("Here2")
 
         val result = deferred.await()
 
-        println("Here3")
-
         // Remove the listener after getting the result or timeout
         uidRef.removeEventListener(valueEventListener)
-
-        println("Here4")
 
         return result
     }
