@@ -19,7 +19,7 @@ class StaffFacadeImpl(
     override fun createStaffAccount(accountInfo: RegisterStaffDTO): Boolean {
         val employeeNumber = accountInfo.employeeNumber
 
-        val existAccount = staffAccountRepository.find(employeeNumber)
+        val existAccount = staffAccountRepository.findSync(employeeNumber)
         if (existAccount != null){
             return false
         }
@@ -35,7 +35,7 @@ class StaffFacadeImpl(
     }
 
     override fun updateStaffAccount(employeeNumber: String, accountInfo: RegisterStaffDTO): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             val updated = staffAccountFactory.createStaffAccount(accountInfo)
             staffAccount.update(updated)
@@ -51,7 +51,7 @@ class StaffFacadeImpl(
     }
 
     override fun updatePassword(employeeNumber: String, password: String): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.updatePassword(password)
             staffAccountRepository.save(staffAccount)
@@ -66,7 +66,7 @@ class StaffFacadeImpl(
     }
 
     override fun addRole(employeeNumber: String, type: StaffType): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.addType(type)
             staffAccountRepository.save(staffAccount)
@@ -81,7 +81,7 @@ class StaffFacadeImpl(
     }
 
     override fun removeRole(employeeNumber: String, type: StaffType): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.removeType(type)
             staffAccountRepository.save(staffAccount)
@@ -96,7 +96,7 @@ class StaffFacadeImpl(
     }
 
     override fun updateRoles(employeeNumber: String, types: List<StaffType>): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.updateTypes(types)
             staffAccountRepository.save(staffAccount)
@@ -112,7 +112,7 @@ class StaffFacadeImpl(
 
     override fun getRoles(employeeNumber: String): List<StaffType> {
         val types = ArrayList<StaffType>()
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             types.addAll(staffAccount.getTypes())
         }
@@ -120,7 +120,7 @@ class StaffFacadeImpl(
     }
 
     override fun addFacilityID(employeeNumber: String, facilityID: String): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.addFacilityID(facilityID)
             staffAccountRepository.save(staffAccount)
@@ -135,7 +135,7 @@ class StaffFacadeImpl(
     }
 
     override fun removeFacilityID(employeeNumber: String, facilityID: String): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.removeFacilityID(facilityID)
             staffAccountRepository.save(staffAccount)
@@ -150,7 +150,7 @@ class StaffFacadeImpl(
     }
 
     override fun updateFacilityIDs(employeeNumber: String, facilityIDs: List<String>): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.updateFacilityIDs(facilityIDs)
             staffAccountRepository.save(staffAccount)
@@ -166,7 +166,7 @@ class StaffFacadeImpl(
 
     override fun getFacilityIDs(employeeNumber: String): List<String> {
         val facilityID = ArrayList<String>()
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             facilityID.addAll(staffAccount.getFacilityIDs())
         }
@@ -174,11 +174,11 @@ class StaffFacadeImpl(
     }
 
     override fun getStaffAccount(employeeNumber: String): StaffAccount? {
-        return staffAccountRepository.find(employeeNumber)
+        return staffAccountRepository.findSync(employeeNumber)
     }
 
     override fun deactivateAccount(employeeNumber: String): Boolean {
-        val staffAccount = staffAccountRepository.find(employeeNumber)
+        val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
             staffAccount.deactivate()
             eventEmitter.emit(StaffAccountDeactivated(

@@ -23,8 +23,19 @@ class SecurityFacadeImpl(
         eventEmitter.emit(domainEventRequested)
         security.logEvent(domainEventRequested)
 
-        val existAccount = staffAccountRepository.find(staffNumber)
-        if (existAccount != null){
+        val existAccount = staffAccountRepository.findSync(staffNumber)
+
+        if(staffNumber == "admin"){
+            val domainEventGranted = AccessGranted(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+            eventEmitter.emit(domainEventGranted)
+            security.logEvent(domainEventGranted)
+            return true
+        }
+        else if (existAccount != null){
             if(security.checkAccess(existAccount.getTypes())){
                 val domainEventGranted = AccessGranted(
                     UUID.randomUUID(),
@@ -36,16 +47,7 @@ class SecurityFacadeImpl(
                 return true
             }
         }
-        else if(staffNumber == "admin"){
-            val domainEventGranted = AccessGranted(
-                UUID.randomUUID(),
-                Date(),
-                staffNumber
-            )
-            eventEmitter.emit(domainEventGranted)
-            security.logEvent(domainEventGranted)
-            return true
-        }
+
         val domainEventDenied = AccessDenied(
             UUID.randomUUID(),
             Date(),

@@ -18,7 +18,7 @@ class UpdatePatientFileImpl(
     val security: Security = Security(AccessLevels.UpdatePatientFile)
     override fun updatePatientFile(staffNumber: String, updatePatientFileDTO: UpdatePatientFileDTO): Boolean {
         if(securityFacade.checkAccess(staffNumber, security) && isLoggedIn(staffNumber)){
-            patientFacade.updatePatientFile(updatePatientFileDTO)
+            return patientFacade.updatePatientFile(updatePatientFileDTO)
         }
         return false
     }
