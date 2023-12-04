@@ -2,15 +2,10 @@ package seg3102.group25.wellmeadows.hmspms.adapters.repositories
 
 import com.google.firebase.database.*
 import kotlinx.coroutines.*
-import org.springframework.context.annotation.Bean
-import org.springframework.scheduling.annotation.Async
-import org.springframework.security.core.userdetails.User
-import org.springframework.stereotype.Component
-import org.springframework.stereotype.Repository
-import org.springframework.stereotype.Service
-import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
+import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
+import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabaseStaffAccount
 
 open class StaffAccountRepoAdapter: StaffAccountRepository {
 
@@ -38,40 +33,37 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
 
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                println("ERROR")
                 timeoutJob.cancel()
                 deferred.complete(errorAccount)
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    println("BIG MAYBE?")
-                    val staffAccount = snapshot.getValue(StaffAccount::class.java)
-                    println("CREATED??")
+                    val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
+                    val staffAccount = StaffAccount(
+                        firebaseStaffAccount?.employeeNumber ?: "",
+                        firebaseStaffAccount?.password ?: "",
+                        firebaseStaffAccount?.firstName ?: "",
+                        firebaseStaffAccount?.lastName ?: "",
+                        firebaseStaffAccount?.emailAddress ?: ""
+                    )
+                    staffAccount.type = firebaseStaffAccount?.type ?: mutableListOf()
+                    staffAccount.facilityID = firebaseStaffAccount?.facilityID ?: mutableListOf()
+                    staffAccount.active = firebaseStaffAccount?.active ?: true
                     timeoutJob.cancel()
                     deferred.complete(staffAccount)
                 } else {
-                    println("HERE MAYBE?")
                     timeoutJob.cancel()
                     deferred.complete(null)
                 }
             }
         }
-
-        println("Here1")
-
         uidRef.addListenerForSingleValueEvent(valueEventListener)
-
-        println("Here2")
 
         val result = deferred.await()
 
-        println("Here3")
-
         // Remove the listener after getting the result or timeout
         uidRef.removeEventListener(valueEventListener)
-
-        println("Here4")
 
         return result
     }
