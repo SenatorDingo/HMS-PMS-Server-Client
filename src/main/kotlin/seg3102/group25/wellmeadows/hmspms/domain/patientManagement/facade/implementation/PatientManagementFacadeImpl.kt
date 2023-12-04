@@ -26,7 +26,7 @@ class PatientManagementFacadeImpl(
 ): PatientManagementFacade {
     override fun staffLogIn(staffLogInInfo: StaffLogInDTO): Boolean {
 
-        val existingAccount = staffAccountRepository.find(staffLogInInfo.userId)
+        val existingAccount = staffAccountRepository.findSync(staffLogInInfo.userId)
         if(existingAccount != null && logIn(existingAccount, staffLogInInfo.password)){
             eventEmitter.emit(
                     StaffLoggedIn(

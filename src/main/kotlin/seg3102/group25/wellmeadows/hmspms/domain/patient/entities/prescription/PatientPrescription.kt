@@ -6,8 +6,8 @@ import java.time.LocalTime
 import java.util.*
 
 class PatientPrescription(
-    var createdOn: Date,
-    var updatedLast: Date,
+    var createdOn: String,
+    var updatedLast: String,
     var prescriptionID: String,
     var prescriptionType: PrescriptionType,
     var doctorId: String,
@@ -16,11 +16,11 @@ class PatientPrescription(
     var drugName: String,
     var unitsPerDay: Int,
     var numberOfAdministrationsPerDay: Int,
-    var administrationTimes: List<LocalTime>,
+    var administrationTimes: List<String>,
     var unitsAtAdministrationTimes: List<Int>,
     var methodOfAdministration: String,
-    var startDate: LocalDate,
-    var finishDate: LocalDate
+    var startDate: String,
+    var finishDate: String
 ){
 
     fun update(updated: PatientPrescription){
@@ -37,6 +37,6 @@ class PatientPrescription(
         this.drugNumber = updated.drugNumber
         this.drugName = updated.drugName
 
-        updatedLast = Date()
+        updatedLast = Date().toString()
     }
 }

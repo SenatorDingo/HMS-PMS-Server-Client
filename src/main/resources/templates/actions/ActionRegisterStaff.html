@@ -7,7 +7,7 @@
 <body>
 <h1>Register Staff</h1>
 
-<form th:action="@{/actions/register-staff}" th:object="${registerStaffForm}" method="post">
+<form th:action="@{/actions/register-staff}" th:object="${registerStaffForm}" method="post" onsubmit="showLoading()">
     <table>
         <tr>
             <td><label for="employeeNumber">Employee Number:</label></td>
@@ -38,7 +38,19 @@
             <td colspan="2" style="text-align: center;"><button type="submit">Register Staff</button></td>
         </tr>
     </table>
+
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
 </form>
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
 
 </body>
 </html>

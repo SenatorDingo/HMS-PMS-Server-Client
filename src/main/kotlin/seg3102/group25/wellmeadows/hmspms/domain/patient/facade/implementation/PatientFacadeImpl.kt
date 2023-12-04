@@ -26,7 +26,7 @@ class PatientFacadeImpl(
 ): PatientFacade {
     override fun createPatientFile(patientDTO: RegisterPatientDTO): Boolean {
         val patient = patientFileFactory.createPatientFile(patientDTO)
-        val existAccount = patientFileRepository.find(patient.patientNumber)
+        val existAccount = patientFileRepository.findSync(patient.patientNumber)
         if (existAccount != null){
             return false
         }
@@ -43,7 +43,7 @@ class PatientFacadeImpl(
 
     override fun updatePatientFile(updatePatientDTO: UpdatePatientFileDTO): Boolean {
 
-        val existAccount = patientFileRepository.find(updatePatientDTO.patientId)
+        val existAccount = patientFileRepository.findSync(updatePatientDTO.patientId)
         if (existAccount != null){
             existAccount.update(updatePatientDTO)
             patientFileRepository.save(existAccount)
@@ -60,12 +60,12 @@ class PatientFacadeImpl(
     }
 
     override fun getPatientFile(patientNumber: String): PatientFile? {
-        return patientFileRepository.find(patientNumber)
+        return patientFileRepository.findSync(patientNumber)
     }
 
     override fun createPatientPrescription(prescriptionDTO: PrescribeMedicationDTO): Boolean {
         val prescription = patientPrescriptionFactory.createPatientPrescription(prescriptionDTO)
-        val patient = patientFileRepository.find(prescription.patientId)
+        val patient = patientFileRepository.findSync(prescription.patientId)
         val existAccount = patientPrescriptionRepository.find(prescription.prescriptionID)
         if (existAccount != null){
             return false
@@ -88,7 +88,7 @@ class PatientFacadeImpl(
 
     override fun updatePatientPrescription(prescriptionDTO: PrescribeMedicationDTO): Boolean {
         val prescription = patientPrescriptionFactory.createPatientPrescription(prescriptionDTO)
-        val patient = patientFileRepository.find(prescription.patientId)
+        val patient = patientFileRepository.findSync(prescription.patientId)
         val existAccount = patientPrescriptionRepository.find(prescription.prescriptionID)
         if (existAccount != null){
             if(patient != null){
@@ -110,15 +110,15 @@ class PatientFacadeImpl(
 
     override fun getPatientPrescriptions(patientNumber: String): List<PatientPrescription> {
         var prescriptions: List<PatientPrescription> = ArrayList()
-        val existAccount = patientFileRepository.find(patientNumber)
+        val existAccount = patientFileRepository.findSync(patientNumber)
         if (existAccount != null){
-           prescriptions = existAccount.getPrescriptions()
+           prescriptions = existAccount.prescriptions
         }
         return prescriptions
     }
 
     override fun admitPatient(admitPatientInfo: AdmitPatientDTO, patientNumber: String, division: FacilityDivision): Boolean {
-        val existAccount = patientFileRepository.find(patientNumber)
+        val existAccount = patientFileRepository.findSync(patientNumber)
         if (existAccount != null){
             existAccount.admit(
                 admitPatientInfo.localDoctor,
@@ -139,7 +139,7 @@ class PatientFacadeImpl(
     }
 
     override fun dischargePatient(patientNumber: String): Boolean {
-        val existAccount = patientFileRepository.find(patientNumber)
+        val existAccount = patientFileRepository.findSync(patientNumber)
         if (existAccount != null){
             existAccount.discharge()
             eventEmitter.emit(

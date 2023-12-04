@@ -3,15 +3,15 @@ package seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account
 import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
 
 class StaffAccount(
-    val employeeNumber: String,
-    private var password: String,
-    private var firstName: String,
-    private var lastName: String,
-    private var emailAddress: String,
+    var employeeNumber: String,
+    var password: String,
+    var firstName: String,
+    var lastName: String,
+    var emailAddress: String,
 ) {
-    private var type: MutableList<StaffType> = ArrayList()
-    private var facilityID: MutableList<String> = ArrayList() // Change to Facility Object
-    private var active: Boolean = true
+    var type: MutableList<StaffType> = mutableListOf()
+    var facilityID: MutableList<String> =  mutableListOf("test") // Change to Facility Object
+    var active: Boolean = true
 
     fun update(updated: StaffAccount){
         this.firstName = updated.firstName
@@ -39,10 +39,6 @@ class StaffAccount(
         this.type.remove(type)
     }
 
-    fun getTypes(): List<StaffType> {
-        return this.type.toList()
-    }
-
     fun updateFacilityIDs(facilityIDs: List<String>) {
         this.facilityID.clear()
         this.facilityID.addAll(facilityIDs)
@@ -56,39 +52,11 @@ class StaffAccount(
         this.facilityID.remove(facilityID)
     }
 
-    fun getFacilityIDs(): List<String> { // Change to Facility Object
-        return this.facilityID.toList()
-    }
-
-    fun deactivate(){
-        this.active = false
-    }
-
     fun checkPassword(password: String): Boolean{
-        return this.password == password
+        return password == this.password
     }
 
-    fun getPassword(): String {
-        return this.password
-    }
-
-    fun getFirstName(): String {
-        return this.firstName
-    }
-
-    fun getLastName(): String {
-        return this.lastName
-    }
-
-    fun getEmailAddress(): String {
-        return this.emailAddress
-    }
-
-    fun getType(): MutableList<StaffType> {
-        return type
-    }
-
-    fun isActive(): Boolean {
-        return active
+    fun deactivate() {
+        this.active = false
     }
 }

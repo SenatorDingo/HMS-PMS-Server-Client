@@ -9,7 +9,7 @@ data class RegisterPatientDTO(
     var lastName: String,
     var address: String,
     var telephoneNumber: String,
-    var dateOfBirth: LocalDate,
+    var dateOfBirth: String,
     var gender: String,
     var maritalStatus: String,
     var externalDoctorId: String,

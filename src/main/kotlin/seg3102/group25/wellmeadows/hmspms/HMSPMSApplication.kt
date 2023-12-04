@@ -7,6 +7,7 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.scheduling.annotation.EnableAsync
 import seg3102.group25.wellmeadows.hmspms.adapters.factories.*
 import seg3102.group25.wellmeadows.hmspms.adapters.repositories.*
 import seg3102.group25.wellmeadows.hmspms.adapters.services.implementation.application.DomainEventEmitterAdapter
@@ -46,6 +47,7 @@ import seg3102.group25.wellmeadows.hmspms.infrastructure.database.services.FireB
 
 
 @SpringBootApplication
+@EnableAsync
 class HmspmsApplication
 
 fun main(args: Array<String>) {

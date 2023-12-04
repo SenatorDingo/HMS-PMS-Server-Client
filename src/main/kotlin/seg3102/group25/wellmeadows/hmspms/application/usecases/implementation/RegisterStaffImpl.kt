@@ -16,8 +16,8 @@ class RegisterStaffImpl(
 
     val security: Security = Security(AccessLevels.RegisterStaff)
     override fun registerStaff(staffNumber: String, registerStaffInfo: RegisterStaffDTO): Boolean {
-        if(securityFacade.checkAccess(staffNumber, security) && Security.isLoggedIn(staffNumber)){
-            staffFacade.createStaffAccount(registerStaffInfo)
+        if(securityFacade.checkAccess(staffNumber, security)){
+            return staffFacade.createStaffAccount(registerStaffInfo)
         }
         return false
     }

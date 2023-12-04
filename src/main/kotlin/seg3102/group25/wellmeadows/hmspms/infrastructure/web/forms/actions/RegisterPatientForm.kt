@@ -9,7 +9,7 @@ class RegisterPatientForm {
     var lastName: String? = null
     var address: String? = null
     var telephoneNumber: String? = null
-    var dateOfBirth: LocalDate? = null
+    var dateOfBirth: String? = null
     var gender: String? = null
     var maritalStatus: String? = null
     var externalDoctorId: String? = null

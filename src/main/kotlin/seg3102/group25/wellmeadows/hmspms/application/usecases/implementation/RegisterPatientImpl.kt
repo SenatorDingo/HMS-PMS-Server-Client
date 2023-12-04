@@ -16,8 +16,8 @@ class RegisterPatientImpl(
 
     val security: Security = Security(AccessLevels.RegisterPatient)
     override fun registerPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean {
-        if(securityFacade.checkAccess(staffNumber, security) && Security.isLoggedIn(staffNumber)){
-            patientFacade.createPatientFile(registerPatientInfo)
+        if(securityFacade.checkAccess(staffNumber, security)){
+            return patientFacade.createPatientFile(registerPatientInfo)
         }
         return false
     }
