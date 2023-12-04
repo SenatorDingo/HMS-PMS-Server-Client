@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
+import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
 
@@ -29,27 +30,26 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
         val deferred = CompletableDeferred<StaffAccount?>()
 
         val timeoutJob = CoroutineScope(Dispatchers.Default).launch {
-            delay(5000) // Timeout after 5 seconds (adjust as needed)
+            delay(10000) // Timeout after 5 seconds (adjust as needed)
             if (!deferred.isCompleted) { // Check if the deferred is not completed
                 deferred.complete(errorAccount) // Complete with errorAccount in case of timeout
             }
         }
 
         val valueEventListener = object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError?) {
+            override fun onCancelled(error: DatabaseError) {
+                println("ERROR")
                 timeoutJob.cancel()
                 deferred.complete(errorAccount)
-                println("ERROR")
             }
 
-            override fun onDataChange(snapshot: DataSnapshot?) {
-                if (snapshot != null && snapshot.exists()) {
-                    val child = snapshot.children.firstOrNull()
-                    if (child != null) {
-                        val staffAccount = child.getValue(StaffAccount::class.java)
-                        timeoutJob.cancel()
-                        deferred.complete(staffAccount)
-                    }
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    println("BIG MAYBE?")
+                    val staffAccount = snapshot.getValue(StaffAccount::class.java)
+                    println("CREATED??")
+                    timeoutJob.cancel()
+                    deferred.complete(staffAccount)
                 } else {
                     println("HERE MAYBE?")
                     timeoutJob.cancel()
@@ -60,7 +60,7 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
 
         println("Here1")
 
-        uidRef.addValueEventListener(valueEventListener)
+        uidRef.addListenerForSingleValueEvent(valueEventListener)
 
         println("Here2")
 

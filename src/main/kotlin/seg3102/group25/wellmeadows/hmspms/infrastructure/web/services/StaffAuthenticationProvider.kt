@@ -65,8 +65,8 @@ class StaffAuthenticationProvider: AuthenticationProvider {
         })
 
         if(staffAccount != null ) {
-            if(username == staffAccount!!.employeeNumber && passwordEncoder.matches(password, staffAccount!!.getPassword())){
-                val userRoles = staffAccount!!.getTypes().map { it.name }.toTypedArray()
+            if(username == staffAccount!!.employeeNumber && passwordEncoder.matches(password, staffAccount!!.password)){
+                val userRoles = staffAccount!!.type!!.map { it.name }.toTypedArray()
                 return User
                         .withUsername(username)
                         .password(passwordEncoder.encode(password))

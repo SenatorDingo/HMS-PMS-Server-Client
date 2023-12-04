@@ -15,7 +15,7 @@ class ConstituentFile(
      *   For this implementation there is no other form on constituent.
      *   However, in time, if other forms of constituent are needed (e.g. Visitor), this can be reused.
     */
-    private var type: ConstituentType = ConstituentType.NextOfKin
+    var constituentType: ConstituentType = ConstituentType.NextOfKin
 
     fun update(updated: ConstituentFile){
         this.constituentID = updated.constituentID

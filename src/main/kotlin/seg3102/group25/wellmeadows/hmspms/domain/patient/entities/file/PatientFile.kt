@@ -1,10 +1,12 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file
 
+import com.google.cloud.firestore.annotation.Exclude
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.UpdatePatientFileDTO
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.ConstituentFile
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription.PatientPrescription
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class PatientFile(
     var patientNumber: String,
@@ -14,14 +16,14 @@ class PatientFile(
     var lastName: String,
     var address: String,
     var telephoneNumber: String,
-    var dateOfBirth: LocalDate,
+    var dateOfBirth: String,
     var gender: String,
     var maritalStatus: String,
     var externalDoctorId: String,
     var constituentFile: ConstituentFile // Next of Kin
 ) {
 
-    private val prescriptions: MutableList<PatientPrescription> = ArrayList()
+    var prescriptions: MutableList<PatientPrescription> = mutableListOf()
     var admitted: Boolean = false
     var division: FacilityDivision? = null
     var localDoctor: String? = null
@@ -78,8 +80,9 @@ class PatientFile(
         return false
     }
 
-    fun getPrescriptions(): List<PatientPrescription>{
-        return prescriptions
+    fun getFormattedDateOfBirth(): String {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE
+        return dateOfBirth.format(formatter)
     }
 
 }

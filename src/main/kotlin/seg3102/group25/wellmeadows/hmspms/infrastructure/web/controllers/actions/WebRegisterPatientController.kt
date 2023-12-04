@@ -24,23 +24,31 @@ class WebRegisterPatientController {
     @RequestMapping("/actions/register-patient")
     fun actionRegisterPatient(model: Model): String {
 
-        val registerPatientForm: RegisterPatientForm = RegisterPatientForm()
+        val registerPatientForm = RegisterPatientForm()
         model.addAttribute(registerPatientForm)
 
         return "actions/ActionRegisterPatient"
     }
 
     @PostMapping("/actions/register-patient")
-    fun actionRegisterPatientPost(@ModelAttribute("registerPatientForm") registerPatientForm: RegisterPatientForm): String {
+    fun actionRegisterPatientPost(@ModelAttribute("registerPatientForm") registerPatientForm: RegisterPatientForm, model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
         val dto = RegisterPatientFormConverter.convertForm(registerPatientForm)
+        val success = patientManagementFacade.requestRegisterPatient(employeeID, dto)
 
-        patientManagementFacade.requestRegisterPatient(employeeID, dto)
+        if (success) {
 
-        println(" Created Patient Successfully")
-        return "home"
+            model.addAttribute("successMessage", "Patient Registration Successful!") // Set success message
+
+        } else {
+
+            model.addAttribute("errorMessage", "Patient Registration Unsuccessful!") // Set error message
+
+        }
+
+        return "actions/ActionRegisterPatient"
     }
 
 }

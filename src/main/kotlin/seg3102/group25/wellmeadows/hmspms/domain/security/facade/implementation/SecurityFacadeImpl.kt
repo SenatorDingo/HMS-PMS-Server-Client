@@ -36,7 +36,7 @@ class SecurityFacadeImpl(
             return true
         }
         else if (existAccount != null){
-            if(security.checkAccess(existAccount.getTypes())){
+            if(security.checkAccess(existAccount.type!!)){
                 val domainEventGranted = AccessGranted(
                     UUID.randomUUID(),
                     Date(),

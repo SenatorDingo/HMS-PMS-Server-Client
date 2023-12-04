@@ -114,7 +114,7 @@ class StaffFacadeImpl(
         val types = ArrayList<StaffType>()
         val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
-            types.addAll(staffAccount.getTypes())
+            types.addAll(staffAccount.type!!)
         }
         return types
     }
@@ -168,7 +168,7 @@ class StaffFacadeImpl(
         val facilityID = ArrayList<String>()
         val staffAccount = staffAccountRepository.findSync(employeeNumber)
         if (staffAccount != null) {
-            facilityID.addAll(staffAccount.getFacilityIDs())
+            facilityID.addAll(staffAccount.facilityID!!)
         }
         return facilityID
     }
