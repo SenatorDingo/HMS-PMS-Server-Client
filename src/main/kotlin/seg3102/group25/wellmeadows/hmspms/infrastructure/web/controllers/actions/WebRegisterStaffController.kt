@@ -77,6 +77,7 @@ class WebRegisterStaffController {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
+        staffShiftForm.staffNumber = employeeID
         val dto = StaffShiftFormConverter.convertForm(staffShiftForm)
         var success = patientManagementFacade.requestUpdateStaffShift(employeeID, dto)
         /* DIRECT CALL - SAD */
