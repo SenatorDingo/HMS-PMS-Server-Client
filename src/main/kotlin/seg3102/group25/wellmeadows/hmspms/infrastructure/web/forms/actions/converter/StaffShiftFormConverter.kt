@@ -11,9 +11,7 @@ class StaffShiftFormConverter {
             return StaffShiftDTO(
                     staffNumber = staffShiftForm.staffNumber!!,
                     shiftType = staffShiftForm.shiftType!!,
-                    division = FacilityDivision(staffShiftForm.division!!,
-                        "", "", "", "",
-                        "", "", -1, "")
+                    division = staffShiftForm.division!!
             )
         }
     }

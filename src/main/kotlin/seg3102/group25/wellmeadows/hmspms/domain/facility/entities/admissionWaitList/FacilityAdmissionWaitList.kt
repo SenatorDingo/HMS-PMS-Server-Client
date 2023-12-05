@@ -7,5 +7,6 @@ class FacilityAdmissionWaitList(
         var chargeNurseId: String,
         var division: String,
         var admissionStatus: String,
+        var priority: Int,
         var createdOn: String
 )
