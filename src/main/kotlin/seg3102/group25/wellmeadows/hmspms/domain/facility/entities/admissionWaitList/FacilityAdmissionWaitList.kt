@@ -7,5 +7,5 @@ class FacilityAdmissionWaitList(
         var chargeNurseId: String,
         var division: String,
         var admissionStatus: String,
-        var createdOn: Date
+        var createdOn: String
 )
