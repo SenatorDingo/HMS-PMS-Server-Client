@@ -23,6 +23,10 @@ class WebRegisterPatientController {
 
     @RequestMapping("/actions/register-patient")
     fun actionRegisterPatient(model: Model): String {
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+        val roles = authentication.authorities.map { it.authority } // Retrieve roles
+
+        println("Roles allowed to access /actions/register-patient: $roles") // Print roles to console
 
         val registerPatientForm = RegisterPatientForm()
         model.addAttribute(registerPatientForm)
