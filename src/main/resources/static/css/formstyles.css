@@ -1,0 +1,91 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header, .content, footer {
+    margin-bottom: 20px;
+}
+
+.header {
+    text-align: center; /* Centers the content of .header */
+    margin-top: 20px; /* Adds space above the header */
+    margin-bottom: 20px; /* Adds space below the header for separation */
+}
+
+/* Form styling */
+form {
+    background: rgba(255, 255, 255, 0.7); /* Matte glass effect */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin-top: 0;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+}
+
+/* Labels and Input Fields */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e8e8e8; /* Light gray background */
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0078D4; /* Windows blue */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #005ba1;
+}
+
+/* Loading Text and Messages */
+#loadingText,
+.message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+/* Specific styling for success and error messages */
+.message.success {
+    color: green;
+}
+
+.message.error {
+    color: red;
+}
