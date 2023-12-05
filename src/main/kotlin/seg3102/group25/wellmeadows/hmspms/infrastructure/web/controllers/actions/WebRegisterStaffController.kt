@@ -3,6 +3,7 @@ package seg3102.group25.wellmeadows.hmspms.infrastructure.web.controllers.action
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
@@ -28,7 +29,11 @@ class WebRegisterStaffController {
 
 
     @RequestMapping("/actions/register-staff")
-    fun actionRegisterPatient(model: Model): String {
+    fun actionRegisterStaff(model: Model): String {
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+        val roles = authentication.authorities.map { it.authority } // Retrieve roles
+
+        println("Roles allowed to access /actions/register-staff: $roles") // Print roles to console
 
         val registerStaffForm = RegisterStaffForm()
         model.addAttribute("registerStaffForm", registerStaffForm)
@@ -37,11 +42,14 @@ class WebRegisterStaffController {
     }
 
     @PostMapping("/actions/register-staff")
-    fun actionRegisterPatientPost(@ModelAttribute("registerStaffForm") registerStaffForm: RegisterStaffForm,  model: Model): String {
+    fun actionRegisterStaffPost(@ModelAttribute("registerStaffForm") registerStaffForm: RegisterStaffForm,  model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
+        val passwordEncoder = BCryptPasswordEncoder()
+
         val dto = RegisterStaffFormConverter.convertForm(registerStaffForm)
+        dto.password = passwordEncoder.encode(dto.password)
         var success = patientManagementFacade.requestRegisterStaff(employeeID, dto)
 
         /* DIRECT CALL - SAD */
@@ -65,10 +73,11 @@ class WebRegisterStaffController {
     }
 
     @PostMapping("/actions/register-staff/shift")
-    fun actionRegisterPatientPost(@ModelAttribute("staffShiftForm") staffShiftForm: StaffShiftForm,  model: Model): String {
+    fun actionRegisterStaffShiftPost(@ModelAttribute("staffShiftForm") staffShiftForm: StaffShiftForm,  model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
+        staffShiftForm.staffNumber = employeeID
         val dto = StaffShiftFormConverter.convertForm(staffShiftForm)
         var success = patientManagementFacade.requestUpdateStaffShift(employeeID, dto)
         /* DIRECT CALL - SAD */

@@ -4,7 +4,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.Faci
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.ShiftType;
 
 class StaffShiftForm {
-    val staffNumber: String? = null
-    val shiftType: ShiftType? = null
-    val division: String? = null
+    var staffNumber: String? = null
+    var shiftType: ShiftType? = null
+    var division: String? = null
 }

@@ -20,18 +20,18 @@ import java.util.*
 @Configuration
 class WebSecurityConfig{
 
-    val superRole = arrayOf("ADMIN")
+    val superRole: Array<String> = arrayOf("ADMIN")
 
-    val admitPatientRole = AccessLevels.AdmitPatient.staffType.map { it.name }.toTypedArray()
-    val admitPatientRequestListRole = AccessLevels.AdmitPatientRequestList.staffType.map { it.name }.toTypedArray()
-    val consultPatientFileRole = AccessLevels.ConsultPatientFile.staffType.map { it.name }.toTypedArray()
-    val dischargePatientRole = AccessLevels.DischargePatient.staffType.map { it.name }.toTypedArray()
-    val prescribeMedicationRole = AccessLevels.PrescribeMedication.staffType.map { it.name }.toTypedArray()
-    val registerPatientRole = AccessLevels.RegisterPatient.staffType.map { it.name }.toTypedArray()
-    val registerStaffRole = AccessLevels.RegisterStaff.staffType.map { it.name }.toTypedArray()
-    val requestPatientAdmissionRole = AccessLevels.RequestPatientAdmission.staffType.map { it.name }.toTypedArray()
-    val updatePatientFileRole = AccessLevels.UpdatePatientFile.staffType.map { it.name }.toTypedArray()
-    val visualizeDivisionRole = AccessLevels.VisualizeDivision.staffType.map { it.name }.toTypedArray()
+    val admitPatientRole: Array<String> = AccessLevels.AdmitPatient.staffType.map { it.name }.toTypedArray()
+    val admitPatientRequestListRole: Array<String> = AccessLevels.AdmitPatientRequestList.staffType.map { it.name }.toTypedArray()
+    val consultPatientFileRole: Array<String> = AccessLevels.ConsultPatientFile.staffType.map { it.name }.toTypedArray()
+    val dischargePatientRole: Array<String> = AccessLevels.DischargePatient.staffType.map { it.name }.toTypedArray()
+    val prescribeMedicationRole: Array<String> = AccessLevels.PrescribeMedication.staffType.map { it.name }.toTypedArray()
+    val registerPatientRole: Array<String> = AccessLevels.RegisterPatient.staffType.map { it.name }.toTypedArray()
+    val registerStaffRole: Array<String> = AccessLevels.RegisterStaff.staffType.map { it.name }.toTypedArray()
+    val requestPatientAdmissionRole: Array<String> = AccessLevels.RequestPatientAdmission.staffType.map { it.name }.toTypedArray()
+    val updatePatientFileRole: Array<String> = AccessLevels.UpdatePatientFile.staffType.map { it.name }.toTypedArray()
+    val visualizeDivisionRole: Array<String> = AccessLevels.VisualizeDivision.staffType.map { it.name }.toTypedArray()
 
     @Bean
     @Order(1)
@@ -61,6 +61,7 @@ class WebSecurityConfig{
                 .requestMatchers("/admin/**").hasAnyRole(*superRole)
                 .requestMatchers("/swagger-ui/**").hasAnyRole(*superRole)
                 .requestMatchers("/actions/**").hasAnyRole(*superRole) // Cannot be performed through swagger
+                .anyRequest().authenticated()
            }
 
         return http.build()
@@ -72,16 +73,17 @@ class WebSecurityConfig{
     fun filterStaffChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests { requests -> requests
-                .requestMatchers("/actions/admit-patient").hasAnyRole(*admitPatientRole)
-                .requestMatchers("/actions/admit-patient-request-list").hasAnyRole(*admitPatientRequestListRole)
-                .requestMatchers("/actions/consult-patient").hasAnyRole(*consultPatientFileRole)
-                .requestMatchers("/actions/discharge-patient").hasAnyRole(*dischargePatientRole)
-                .requestMatchers("/actions/prescribe-medication").hasAnyRole(*prescribeMedicationRole)
-                .requestMatchers("/actions/register-patient").hasAnyRole(*registerPatientRole)
-                .requestMatchers("/actions/register-staff").hasAnyRole(*registerStaffRole)
-                .requestMatchers("/actions/request-patient-admission").hasAnyRole(*requestPatientAdmissionRole)
-                .requestMatchers("/actions/update-patient-file").hasAnyRole(*updatePatientFileRole)
-                .requestMatchers("/actions/visualize-division").hasAnyRole(*visualizeDivisionRole)
+                .requestMatchers("/actions/admit-patient").hasAnyAuthority(*admitPatientRole)
+                .requestMatchers("/actions/admit-patient-request-list").hasAnyAuthority(*admitPatientRequestListRole)
+                .requestMatchers("/actions/consult-patient").hasAnyAuthority(*consultPatientFileRole)
+                .requestMatchers("/actions/discharge-patient").hasAnyAuthority(*dischargePatientRole)
+                .requestMatchers("/actions/prescribe-medication").hasAnyAuthority(*prescribeMedicationRole)
+                .requestMatchers("/actions/register-patient").hasAnyAuthority(*registerPatientRole)
+                .requestMatchers("/actions/register-staff").hasAnyAuthority("PersonnelOfficer")
+                .requestMatchers("/actions/request-patient-admission").hasAnyAuthority(*requestPatientAdmissionRole)
+                .requestMatchers("/actions/update-patient-file").hasAnyAuthority(*updatePatientFileRole)
+                .requestMatchers("/actions/visualize-division").hasAnyAuthority(*visualizeDivisionRole)
+                .anyRequest().authenticated()
             }
             .authenticationProvider(StaffAuthenticationProvider())
         return  http.build()
