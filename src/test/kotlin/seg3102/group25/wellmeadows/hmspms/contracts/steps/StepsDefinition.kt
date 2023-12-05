@@ -328,13 +328,14 @@ class StepsDefinition{
     fun checkStaffTypeDoctor(){
         staff = StaffAccount("01", "", "", "", "")
         staff!!.addType(StaffType.LocalDoctor);
-        for (type in staff!!.type) {
+        for (type in staff!!.type) 
             if (type == StaffType.LocalDoctor) {
                 Assertions.assertThat(true).isTrue();
                 return;
             }
         }
         Assertions.assertThat(false).isTrue();
+
     }
 
     @When("The Staff Member requests to add prescription to Patient")

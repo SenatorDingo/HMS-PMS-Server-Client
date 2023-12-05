@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>HMS-PMS</title>
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <title>Prescribe Medication | WHMS</title>
 </head>
 <body>
-<h1>Prescribe Medication</h1>
-
+<div class="header">
+    <h1>Prescribe Medication</h1>
+</div>
 <form th:action="@{/actions/prescribe-medication}" th:object="${prescribeMedicationForm}" method="post">
     <table>
         <tr>
@@ -55,7 +57,9 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Prescribe Medication</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Prescribe Medication">
+            </td>
         </tr>
     </table>
 </form>

@@ -2,10 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>HMS-PMS</title>
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <title>Register Patient | WHMS</title>
 </head>
 <body>
-    <h1>Register Patient</h1>
+    <div class="header">
+        <h1 class="page-title">Register Patient</h1>
+    </div>
     <form th:action="@{/actions/register-patient}" th:object="${registerPatientForm}" method="post" onsubmit="showLoading()">
         <table>
             <tr>
@@ -88,15 +91,18 @@
             </tr>
 
             <tr>
-                <td colspan="2" style="text-align: center;"><button type="submit">Register</button></td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="Register">
+                </td>
             </tr>
+            
         </table>
 
         <!-- Display loading message -->
         <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
         <!-- Display success or error message -->
-        <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
-        <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+        <div class="message success" th:if="${successMessage != null}" th:text="${successMessage}"></div>
+        <div class="message error" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
 
     </form>
 
