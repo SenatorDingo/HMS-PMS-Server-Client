@@ -38,11 +38,11 @@ class WebAdmitPatientController {
 
         if (success) {
 
-            model.addAttribute("successMessage", "Patient Registration Successful!") // Set success message
+            model.addAttribute("successMessage", "Patient Admission Successful!") // Set success message
 
         } else {
 
-            model.addAttribute("errorMessage", "Patient Registration Unsuccessful!") // Set error message
+            model.addAttribute("errorMessage", "Patient Admission Unsuccessful!") // Set error message
 
         }
 
