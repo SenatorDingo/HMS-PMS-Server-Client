@@ -35,4 +35,8 @@ class DatabaseStaffAccount(
     @get:PropertyName("active")
     @set:PropertyName("active")
     var active: Boolean? = true
-)
+){
+    fun setTypeFromString(typeStringList: List<String>?) {
+        type = typeStringList?.map { StaffType.valueOf(it) }?.toMutableList()
+    }
+}

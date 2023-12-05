@@ -165,4 +165,15 @@ class PatientManagementFacadeImpl(
         return updatePatientFileUseCase.updatePatientFile(staffNumber, updatePatientFileInfo)
     }
 
+    override fun requestUpdateStaffShift(staffNumber: String, updateStaffShift: StaffShiftDTO): Boolean {
+        eventEmitter.emit(
+            RequestUpdatePatientFile(
+                UUID.randomUUID(),
+                Date(),
+                staffNumber
+            )
+        )
+        return registerStaffUseCase.updateShift(staffNumber, updateStaffShift)
+    }
+
 }

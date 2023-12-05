@@ -121,6 +121,11 @@ class ApplicationContextProvider {
     )
 
     @Bean
+    fun provideStaffRepository(): StaffAccountRepository {
+        return staffAccountRepository
+    }
+
+    @Bean
     fun providePatientManagementFacade(): PatientManagementFacade {
         return patientManagementFacade
     }

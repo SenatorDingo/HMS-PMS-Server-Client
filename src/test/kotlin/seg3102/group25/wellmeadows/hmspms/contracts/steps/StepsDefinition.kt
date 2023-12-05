@@ -1,6 +1,5 @@
 package seg3102.group25.wellmeadows.hmspms.contracts.steps
 
-import org.springframework.beans.factory.annotation.Autowire
 import seg3102.group25.wellmeadows.hmspms.application.dtos.*
 import seg3102.group25.wellmeadows.hmspms.application.services.*
 import seg3102.group25.wellmeadows.hmspms.application.usecases.*
@@ -15,12 +14,10 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 //import org.junit.jupiter.api.Assertions
 import org.assertj.core.api.Assertions
-import org.mockito.internal.matchers.Null
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterStaffDTO
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.factories.*
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.repositories.*
 import seg3102.group25.wellmeadows.hmspms.contracts.testStubs.services.EventEmitterStub
-import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.facade.implementation.StaffFacadeImpl
 import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
@@ -66,10 +63,10 @@ class StepsDefinition{
     fun submitStaffInformation(){
         staff = StaffAccount("", "", "", "", "")
         Assertions.assertThat(staff!!.employeeNumber).isNotNull
-        Assertions.assertThat(staff!!.getPassword()).isNotNull
-        Assertions.assertThat(staff!!.getFirstName()).isNotNull
-        Assertions.assertThat(staff!!.getLastName()).isNotNull
-        Assertions.assertThat(staff!!.getEmailAddress()).isNotNull
+        Assertions.assertThat(staff!!.password).isNotNull
+        Assertions.assertThat(staff!!.firstName).isNotNull
+        Assertions.assertThat(staff!!.lastName).isNotNull
+        Assertions.assertThat(staff!!.emailAddress).isNotNull
     }
 
     @Then("The HMS displays an acknowledgement message")
@@ -331,7 +328,7 @@ class StepsDefinition{
     fun checkStaffTypeDoctor(){
         staff = StaffAccount("01", "", "", "", "")
         staff!!.addType(StaffType.LocalDoctor);
-        for (type in staff!!.getType()) {
+        for (type in staff!!.type) {
             if (type == StaffType.LocalDoctor) {
                 Assertions.assertThat(true).isTrue();
                 return;

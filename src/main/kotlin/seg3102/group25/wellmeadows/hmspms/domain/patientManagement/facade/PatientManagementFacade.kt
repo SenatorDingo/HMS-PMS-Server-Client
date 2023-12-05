@@ -18,4 +18,5 @@ interface PatientManagementFacade {
     fun requestRegisterPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean
     fun requestRegisterStaff(staffNumber: String, registerStaffInfo: RegisterStaffDTO): Boolean
     fun requestUpdatePatientFile(staffNumber: String, updatePatientFileInfo: UpdatePatientFileDTO): Boolean
+    fun requestUpdateStaffShift(staffNumber: String, updateStaffShift: StaffShiftDTO): Boolean
 }
