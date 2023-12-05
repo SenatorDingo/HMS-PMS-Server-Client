@@ -29,7 +29,7 @@ class WebRegisterStaffController {
 
 
     @RequestMapping("/actions/register-staff")
-    fun actionRegisterPatient(model: Model): String {
+    fun actionRegisterStaff(model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val roles = authentication.authorities.map { it.authority } // Retrieve roles
 
@@ -42,7 +42,7 @@ class WebRegisterStaffController {
     }
 
     @PostMapping("/actions/register-staff")
-    fun actionRegisterPatientPost(@ModelAttribute("registerStaffForm") registerStaffForm: RegisterStaffForm,  model: Model): String {
+    fun actionRegisterStaffPost(@ModelAttribute("registerStaffForm") registerStaffForm: RegisterStaffForm,  model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
@@ -73,7 +73,7 @@ class WebRegisterStaffController {
     }
 
     @PostMapping("/actions/register-staff/shift")
-    fun actionRegisterPatientPost(@ModelAttribute("staffShiftForm") staffShiftForm: StaffShiftForm,  model: Model): String {
+    fun actionRegisterStaffShiftPost(@ModelAttribute("staffShiftForm") staffShiftForm: StaffShiftForm,  model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
