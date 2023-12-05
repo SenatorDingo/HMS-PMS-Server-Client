@@ -7,7 +7,7 @@
 <body>
 <h1>Register Staff</h1>
 
-<form th:action="@{/actions/register-staff}" th:object="${registerStaffForm}" method="post" onsubmit="showLoading()">
+<form th:action="@{/actions/register-staff}" th:object="${registerStaffForm}" method="post" onsubmit="showLoadingRegister()">
     <table>
         <tr>
             <td><label for="employeeNumber">Employee Number:</label></td>
@@ -33,22 +33,58 @@
             <td><label for="emailAddress">Email Address:</label></td>
             <td><input type="email" id="emailAddress" th:field="*{emailAddress}" required></td>
         </tr>
+        <tr>
+            <td><label for="role">Staff Role:</label></td>
+                <td><select id="role" name="role" th:field="*{role}">
+                    <option th:each="staffType : ${T(seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType).values()}"
+                            th:value="${staffType}" th:text="${staffType}"></option>
+                </select></td>
+        </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Register Staff</button></td>
+            <td th:if="${successMessage == null}" colspan="2" style="text-align: center;"><button type="submit">Register Staff</button></td>
         </tr>
     </table>
 
     <!-- Display loading message -->
-    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <div id="loadingTextRegister" style="display: none; color: yellow;">Loading...</div>
     <!-- Display success or error message -->
     <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
     <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
 
 </form>
+<!-- TODO: ISSUES - Need to fix staffShiftForm returning null values??? -->
+<form th:if="${successMessage != null}" th:action="@{/actions/register-staff/shift}" th:object="${staffShiftForm}" method="post" onsubmit="showLoadingShift()">
+    <table>
+        <tr>
+            <td><label for="division">Division ID:</label></td>
+            <td><input type="text" id="division" th:field="*{division}" required></td>
+        </tr>
+        <tr>
+            <td><label for="shiftType">Staff Role:</label></td>
+            <td><select id="shiftType" name="shiftType" th:field="*{shiftType}">
+                <option th:each="shiftType : ${T(seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.ShiftType).values()}"
+                        th:value="${shiftType}" th:text="${shiftType}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="submit">Update Shift</button></td>
+        </tr>
+    </table>
+
+    <!-- Display loading message -->
+    <div id="loadingTextShift" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessageShift != null}" th:text="${successMessageShift}" style="color: green;"></div>
+    <div th:if="${errorMessageShift != null}" th:text="${errorMessageShift}" style="color: red;"></div>
+
+</form>
 <script>
-    function showLoading() {
-        document.getElementById("loadingText").style.display = "block";
+    function showLoadingRegister() {
+        document.getElementById("loadingTextRegister").style.display = "block";
+    }
+    function showLoadingShift() {
+        document.getElementById("loadingTextShift").style.display = "block";
     }
 </script>
 

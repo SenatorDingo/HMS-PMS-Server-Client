@@ -14,5 +14,6 @@ class RegisterStaffFormConverter {
                     registerStaffForm.emailAddress!!
             )
         }
+
     }
 }

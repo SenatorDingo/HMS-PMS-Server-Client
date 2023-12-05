@@ -6,6 +6,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAcc
 import seg3102.group25.wellmeadows.hmspms.domain.staff.repositories.StaffAccountRepository
 import seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType
 import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabaseStaffAccount
+import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.StaffShiftForm
 
 open class StaffAccountRepoAdapter: StaffAccountRepository {
 
@@ -39,7 +40,33 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
+                    println(snapshot.value)
+                    println(snapshot.children.first())
+                    //val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
+                    // Workaround - WORKS -
+                    val types: MutableList<String> = mutableListOf()
+                    val firebaseStaffAccount = snapshot.children.firstOrNull()?.let { staffSnapshot ->
+                        val staffAccount = DatabaseStaffAccount()
+                        staffSnapshot.children.forEach { data ->
+                            when (data.key) {
+                                "employeeNumber" -> staffAccount.employeeNumber = data.value as? String
+                                "password" -> staffAccount.password = data.value as? String
+                                "firstName" -> staffAccount.firstName = data.value as? String
+                                "lastName" -> staffAccount.lastName = data.value as? String
+                                "emailAddress" -> staffAccount.emailAddress = data.value as? String
+                                "active" -> staffAccount.active = data.value as? Boolean
+                                "type" -> {
+                                    staffAccount.type = mutableListOf(StaffType.valueOf(data.value.toString())) // STUPID STUPID CODE, won't let me map to ENUM LIST :(
+                                }
+                                "facilityID" -> {
+                                    staffAccount.facilityID = (data.value as? List<*>)?.mapNotNull { it.toString() }?.toMutableList() // Haven't tested it yet...
+                                }
+                            }
+                        }
+
+                        staffAccount
+                    }
+                    println(types)
                     val staffAccount = StaffAccount(
                         firebaseStaffAccount?.employeeNumber ?: "",
                         firebaseStaffAccount?.password ?: "",
@@ -73,5 +100,19 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
             .child("staffAccounts").child(staffAccount.employeeNumber)
         newNode.setValueAsync(staffAccount)
         return staffAccount
+    }
+
+    override fun saveRoles(employeeID: String, roles: StaffType?): Boolean {
+        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("staffAccounts").child(employeeID).child("type")
+        newNode.setValueAsync(roles)
+        return true
+    }
+
+    override fun saveDivisions(staffShiftForm: StaffShiftForm): Boolean {
+        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("staffAccounts").child(staffShiftForm.staffNumber).child("division")
+        newNode.setValueAsync(staffShiftForm.division)
+        return true
     }
 }

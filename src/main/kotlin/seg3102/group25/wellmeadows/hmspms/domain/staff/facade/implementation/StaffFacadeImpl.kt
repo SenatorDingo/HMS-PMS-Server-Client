@@ -1,6 +1,7 @@
 package seg3102.group25.wellmeadows.hmspms.domain.staff.facade.implementation
 
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterStaffDTO
+import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.StaffShiftDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
 import seg3102.group25.wellmeadows.hmspms.domain.staff.entities.account.StaffAccount
 import seg3102.group25.wellmeadows.hmspms.domain.staff.events.*
