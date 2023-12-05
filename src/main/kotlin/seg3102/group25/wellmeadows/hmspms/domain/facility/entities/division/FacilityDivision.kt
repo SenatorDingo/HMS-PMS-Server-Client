@@ -19,12 +19,12 @@ class FacilityDivision(
     var telephoneExtension: String
 ) {
 
-    private var facilityType: FacilityType = FacilityType.None
-    private var numberBedsAvailable: Int = numberBeds
-    private var status: FacilityStatus = FacilityStatus.Incomplete
-    private val shifts: MutableList<FacilityShift> = mutableListOf()
-    private val admissionWaitList: MutableList<FacilityAdmissionWaitList> = mutableListOf()
-    private val admissions: MutableList<Admission> = mutableListOf()
+    var facilityType: FacilityType = FacilityType.None
+    var numberBedsAvailable: Int = numberBeds
+    var status: FacilityStatus = FacilityStatus.Incomplete
+    var shifts: MutableList<FacilityShift> = mutableListOf()
+    var admissionWaitList: MutableList<FacilityAdmissionWaitList> = mutableListOf()
+    var admissions: MutableList<Admission> = mutableListOf()
 
     fun update(updated: FacilityDivision){
         this.facilityType = updated.facilityType
@@ -42,7 +42,7 @@ class FacilityDivision(
         facilityType.setDivisionName(divisionName)
     }
 
-    fun setFacilityType(facilityType: FacilityType){
+    fun setFacilityTypeCustom(facilityType: FacilityType){
         this.facilityType = facilityType
         this.facilityType.setDivisionID(divisionId)
         this.facilityType.setDivisionName(divisionName)
@@ -69,20 +69,13 @@ class FacilityDivision(
         return status == FacilityStatus.Complete
     }
 
-    fun getShifts(): List<FacilityShift>{
-        return shifts
-    }
 
     fun addShift(staffNumber: String, shiftType: ShiftType): Boolean{
-        return shifts.add(FacilityShift(staffNumber, shiftType, this))
+        return shifts.add(FacilityShift(staffNumber, shiftType, this.divisionId))
     }
 
     fun removeShift(staffNumber: String, shiftType: ShiftType): Boolean{
         return shifts.removeIf { it.staffNumber == staffNumber && it.shiftType == shiftType }
-    }
-
-    fun getAdmissionWaitList(): List<FacilityAdmissionWaitList>{
-        return admissionWaitList
     }
 
     fun addAdmissionWaitList(admissionWaitList: FacilityAdmissionWaitList): Boolean{
@@ -93,9 +86,6 @@ class FacilityDivision(
         return admissionWaitList.removeIf { it.patientId == patientNumber }
     }
 
-    fun getAdmissions(): List<Admission>{
-        return admissions
-    }
 
     fun addAdmission(admission: Admission): Boolean{
         if(admissions.any {

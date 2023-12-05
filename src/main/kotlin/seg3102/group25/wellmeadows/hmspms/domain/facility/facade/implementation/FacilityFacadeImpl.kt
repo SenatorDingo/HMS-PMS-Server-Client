@@ -31,7 +31,7 @@ class FacilityFacadeImpl(
         val type: FacilityType = FacilityType.Ward
         type.setDivisionID(wardInfo.divisionId)
         type.setDivisionName(wardInfo.divisionName)
-        val existAccount = facilityRepository.find(type)
+        val existAccount = facilityRepository.findSync(type)
         if (existAccount != null){
             return false
         }
@@ -52,7 +52,7 @@ class FacilityFacadeImpl(
         val type: FacilityType = FacilityType.Clinic
         type.setDivisionID(clinicInfo.divisionId)
         type.setDivisionName(clinicInfo.divisionName)
-        val existAccount = facilityRepository.find(type)
+        val existAccount = facilityRepository.findSync(type)
         if (existAccount != null){
             return false
         }
@@ -70,7 +70,7 @@ class FacilityFacadeImpl(
     }
 
     override fun updateDivision(divisionType: FacilityType, divisionInfo: CreateDivisionDTO): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if (division != null) {
             val updated = facilityFactory.createDivision(divisionInfo)
             division.update(updated)
@@ -90,11 +90,11 @@ class FacilityFacadeImpl(
     }
 
     override fun getDivision(divisionType: FacilityType): FacilityDivision? {
-        return facilityRepository.find(divisionType)
+        return facilityRepository.findSync(divisionType)
     }
 
     override fun addAvailableBed(divisionType: FacilityType): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if (division != null) {
             val success = division.addAvailableBed()
             facilityRepository.save(division)
@@ -115,7 +115,7 @@ class FacilityFacadeImpl(
     }
 
     override fun removeAvailableBed(divisionType: FacilityType): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if (division != null) {
             val success = division.removeAvailableBed()
             facilityRepository.save(division)
@@ -136,7 +136,7 @@ class FacilityFacadeImpl(
     }
 
     override fun isFull(divisionType: FacilityType): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if (division != null) {
             return division.isFull()
         }
@@ -145,11 +145,10 @@ class FacilityFacadeImpl(
 
     override fun addShift(staffShiftInfo: StaffShiftDTO): Boolean {
         val shift = shiftFactory.createShift(staffShiftInfo)
-        val existAccount = shiftRepository.find(shift)
+        val existAccount = shiftRepository.findSync(shift)
         if (existAccount != null){
             return false
         }
-        shift.division.addShift(shift.staffNumber, shift.shiftType)
         shiftRepository.save(shift)
         eventEmitter.emit(
             ShiftAdded(
@@ -163,9 +162,8 @@ class FacilityFacadeImpl(
 
     override fun removeShift(staffShiftInfo: StaffShiftDTO): Boolean {
         val shift = shiftFactory.createShift(staffShiftInfo)
-        val existAccount = shiftRepository.find(shift)
+        val existAccount = shiftRepository.findSync(shift)
         if (existAccount != null){
-            shift.division.removeShift(shift.staffNumber, shift.shiftType)
             shiftRepository.remove(shift)
             eventEmitter.emit(
                 ShiftRemoved(
@@ -191,10 +189,10 @@ class FacilityFacadeImpl(
 
         val divisionType = FacilityType.Ward
         divisionType.setDivisionID(admissionWaitListInfo.divisionId)
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
 
         val admissionWaitList = admissionWaitListFactory.createAdmissionWaitList(admissionWaitListInfo)
-        val existAccount = admissionWaitListRepository.find(admissionWaitList)
+        val existAccount = admissionWaitListRepository.findSync(admissionWaitList)
         if (existAccount != null){
             return false
         }
@@ -216,7 +214,7 @@ class FacilityFacadeImpl(
     }
 
     override fun removeAdmissionWaitList(divisionType: FacilityType, patientID: String): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if(division != null){
             val success = division.removeAdmissionWaitList(patientID)
             facilityRepository.save(division)
@@ -235,16 +233,16 @@ class FacilityFacadeImpl(
     }
 
     override fun getAdmissions(divisionType: FacilityType): List<Admission> {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         var admissions: List<Admission> = ArrayList()
         if(division != null){
-            admissions = division.getAdmissions()
+            admissions = division.admissions
         }
         return admissions
     }
 
     override fun addAdmission(divisionType: FacilityType, admissionInfo: AdmitPatientDTO): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         val admission = Admission(
             admissionInfo.patientNumber,
             admissionInfo.localDoctor,
@@ -259,7 +257,7 @@ class FacilityFacadeImpl(
     }
 
     override fun removeAdmission(divisionType: FacilityType, patientID: String): Boolean {
-        val division = facilityRepository.find(divisionType)
+        val division = facilityRepository.findSync(divisionType)
         if(division != null){
             return division.removeAdmission(patientID)
         }

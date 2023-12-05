@@ -9,11 +9,11 @@ import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription.P
 import seg3102.group25.wellmeadows.hmspms.domain.patient.repositories.PatientFileRepository
 import seg3102.group25.wellmeadows.hmspms.domain.patient.valueObjects.PrescriptionType
 import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabaseConstituentFile
+import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabaseFacility
 import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabasePatientFile
 import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabasePatientPrescription
 
 class PatientFileRepoAdapter: PatientFileRepository {
-
 
     private val dataBase: FirebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -93,7 +93,9 @@ class PatientFileRepoAdapter: PatientFileRepository {
                                     )
 
                                 }
-                                "division" -> patientFile.division = data.value as? FacilityDivision
+                                "division" -> {
+                                    patientFile.division = data.value as? FacilityDivision
+                                }
                                 "dateOfBirth" -> patientFile.dateOfBirth = data.value as? String
                                 "externalDoctorId" -> patientFile.externalDoctorId = data.value as? String
                                 "gender" -> patientFile.gender = data.value as? String
@@ -141,7 +143,6 @@ class PatientFileRepoAdapter: PatientFileRepository {
                                                 prescription.finishDate ?: ""
                                         ))
                                     }
-
                                 }
                             }
                         }
