@@ -44,6 +44,11 @@
         <tr>
             <td th:if="${successMessage == null}" colspan="2" style="text-align: center;"><button type="submit">Register Staff</button></td>
         </tr>
+        <tr>
+            <td th:if="${successMessage == null}" colspan="2" style="text-align: center;">
+                <input type="button" value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
     </table>
 
     <!-- Display loading message -->
@@ -70,6 +75,11 @@
         <tr>
             <td colspan="2" style="text-align: center;"><button type="submit">Update Shift</button></td>
         </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
     </table>
 
     <!-- Display loading message -->
@@ -79,6 +89,7 @@
     <div th:if="${errorMessageShift != null}" th:text="${errorMessageShift}" style="color: red;"></div>
 
 </form>
+
 <script>
     function showLoadingRegister() {
         document.getElementById("loadingTextRegister").style.display = "block";
