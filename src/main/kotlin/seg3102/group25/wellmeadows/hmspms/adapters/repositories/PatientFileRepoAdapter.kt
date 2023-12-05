@@ -20,9 +20,8 @@ class PatientFileRepoAdapter: PatientFileRepository {
     }
 
     override fun savePrescription(patientFile: PatientFile,prescription: PatientPrescription): PatientFile? {
-        val patientID: String = patientFile.patientNumber
         val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
-                .child("patientFiles").child(patientID).child("prescriptions")
+                .child("patientFiles").child(prescription.patientId).child("prescriptions").child(prescription.prescriptionID)
         newNode.setValueAsync(prescription)
         return patientFile
 
