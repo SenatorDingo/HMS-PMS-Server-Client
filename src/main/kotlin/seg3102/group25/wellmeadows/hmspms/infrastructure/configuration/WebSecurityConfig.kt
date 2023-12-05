@@ -38,7 +38,7 @@ class WebSecurityConfig{
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests{ requests -> requests
-                .anyRequest()
+                .requestMatchers("/")
                 .authenticated()
             }
             .formLogin{form -> form
@@ -61,7 +61,6 @@ class WebSecurityConfig{
                 .requestMatchers("/admin/**").hasAnyRole(*superRole)
                 .requestMatchers("/swagger-ui/**").hasAnyRole(*superRole)
                 .requestMatchers("/actions/**").hasAnyRole(*superRole) // Cannot be performed through swagger
-                .anyRequest().authenticated()
            }
 
         return http.build()
