@@ -15,7 +15,6 @@ import seg3102.group25.wellmeadows.hmspms.domain.patient.factories.PatientPrescr
 import seg3102.group25.wellmeadows.hmspms.domain.patient.repositories.PatientFileRepository
 import seg3102.group25.wellmeadows.hmspms.domain.patient.repositories.PatientPrescriptionRepository
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PatientFacadeImpl(
     private val patientFileRepository: PatientFileRepository,
@@ -66,13 +65,13 @@ class PatientFacadeImpl(
     override fun createPatientPrescription(prescriptionDTO: PrescribeMedicationDTO): Boolean {
         val prescription = patientPrescriptionFactory.createPatientPrescription(prescriptionDTO)
         val patient = patientFileRepository.findSync(prescription.patientId)
-        val existAccount = patientPrescriptionRepository.find(prescription.prescriptionID)
+        val existAccount = patientPrescriptionRepository.findSync(prescription.prescriptionID)
         if (existAccount != null){
             return false
         }
         if(patient != null){
             patient.addPrescription(prescription)
-            patientFileRepository.save(patient)
+            patientFileRepository.savePrescription(patient,prescription)
             patientPrescriptionRepository.save(prescription)
             eventEmitter.emit(
                 PatientPrescriptionCreated(
@@ -89,7 +88,7 @@ class PatientFacadeImpl(
     override fun updatePatientPrescription(prescriptionDTO: PrescribeMedicationDTO): Boolean {
         val prescription = patientPrescriptionFactory.createPatientPrescription(prescriptionDTO)
         val patient = patientFileRepository.findSync(prescription.patientId)
-        val existAccount = patientPrescriptionRepository.find(prescription.prescriptionID)
+        val existAccount = patientPrescriptionRepository.findSync(prescription.prescriptionID)
         if (existAccount != null){
             if(patient != null){
                 patient.updatePrescription(prescription)

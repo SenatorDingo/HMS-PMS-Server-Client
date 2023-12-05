@@ -14,7 +14,7 @@ class PrescribeMedicationImpl(
 
     val security: Security = Security(AccessLevels.PrescribeMedication)
     override fun prescribeMedication(staffNumber: String, prescribeMedicationInfo: PrescribeMedicationDTO): Boolean {
-        if(securityFacade.checkAccess(staffNumber, security) && Security.isLoggedIn(staffNumber)){
+        if(securityFacade.checkAccess(staffNumber, security)){
             return patientFacade.createPatientPrescription(prescribeMedicationInfo)
         }
         return false

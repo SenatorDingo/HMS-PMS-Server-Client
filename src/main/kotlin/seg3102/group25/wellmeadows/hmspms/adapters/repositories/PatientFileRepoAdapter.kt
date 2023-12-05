@@ -4,6 +4,7 @@ import com.google.firebase.database.*
 import kotlinx.coroutines.*
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.ConstituentFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
+import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription.PatientPrescription
 import seg3102.group25.wellmeadows.hmspms.domain.patient.repositories.PatientFileRepository
 import seg3102.group25.wellmeadows.hmspms.infrastructure.database.mapper.DatabasePatientFile
 
@@ -16,6 +17,15 @@ class PatientFileRepoAdapter: PatientFileRepository {
         val existFile: PatientFile?
         runBlocking { existFile = find(patientNumber) }
         return existFile
+    }
+
+    override fun savePrescription(patientFile: PatientFile,prescription: PatientPrescription): PatientFile? {
+        val patientID: String = patientFile.patientNumber
+        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
+                .child("patientFiles").child(patientID).child("prescriptions")
+        newNode.setValueAsync(prescription)
+        return patientFile
+
     }
 
     override suspend fun find(patientNumber: String): PatientFile? {
@@ -93,4 +103,6 @@ class PatientFileRepoAdapter: PatientFileRepository {
         newNode.setValueAsync(patientFile)
         return patientFile
     }
+
+
 }
