@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class WebActionsController {
 
-    @RequestMapping("/actions/admit-patient")
-    fun actionAdmitPatient(): String {
-        return "actions/ActionAdmitPatient"
-    }
 
     @RequestMapping("/actions/admit-patient-request-list")
     fun actionAdmitPatientRequestList(): String {
