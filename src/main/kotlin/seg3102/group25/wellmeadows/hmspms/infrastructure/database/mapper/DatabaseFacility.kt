@@ -46,7 +46,7 @@ class DatabaseFacility(
 
     @get:PropertyName("facilityType")
     @set:PropertyName("facilityType")
-    var facilityType: String? = FacilityType.None.name,
+    var facilityType: FacilityType? = FacilityType.None,
 
     @get:PropertyName("numberBedsAvailable")
     @set:PropertyName("numberBedsAvailable")
@@ -54,7 +54,7 @@ class DatabaseFacility(
 
     @get:PropertyName("status")
     @set:PropertyName("status")
-    var status: String = FacilityStatus.Incomplete.name,
+    var status: FacilityStatus = FacilityStatus.Incomplete,
 
     @get:PropertyName("shifts")
     @set:PropertyName("shifts")

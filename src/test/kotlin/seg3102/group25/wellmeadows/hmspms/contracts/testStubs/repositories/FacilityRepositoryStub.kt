@@ -5,11 +5,15 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityR
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 
 class FacilityRepositoryStub : FacilityRepository {
-    override fun find(facilityIdentity: FacilityType): FacilityDivision? {
+    override suspend fun find(facilityIdentity: FacilityType): FacilityDivision? {
         TODO("Not yet implemented")
     }
 
     override fun save(division: FacilityDivision): FacilityDivision {
+        TODO("Not yet implemented")
+    }
+
+    override fun findSync(facilityIdentity: FacilityType): FacilityDivision? {
         TODO("Not yet implemented")
     }
 }

@@ -44,21 +44,39 @@ open class PatientPrescriptionRepoAdapter: PatientPrescriptionRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val firebasePatientPrescription = snapshot.getValue(DatabasePatientPrescription::class.java)
+                    //val firebasePatientPrescription = snapshot.getValue(DatabasePatientPrescription::class.java)
+                    val firebasePatientPrescription = DatabasePatientPrescription()
+                    snapshot.children.forEach { dataPP ->
+                        when (dataPP.key) {
+                            "createdOn" -> firebasePatientPrescription.createdOn = dataPP.value as? String
+                            "updatedLast" -> firebasePatientPrescription.updatedLast = dataPP.value as? String
+                            "prescriptionID" -> firebasePatientPrescription.prescriptionID = dataPP.value as? String
+                            "prescriptionType" -> firebasePatientPrescription.prescriptionType = dataPP.getValue(PrescriptionType::class.java)
+                            "doctorId" -> firebasePatientPrescription.doctorId = dataPP.value as? String
+                            "patientId" -> firebasePatientPrescription.patientId = dataPP.value as? String
+                            "drugNumber" -> firebasePatientPrescription.drugNumber = dataPP.value as? String
+                            "drugName" -> firebasePatientPrescription.drugName = dataPP.value as? String
+                            "unitsPerDay" -> firebasePatientPrescription.unitsPerDay = dataPP.getValue(Int::class.java)
+                            "unitsAtAdministrationTimes" -> firebasePatientPrescription.unitsAtAdministrationTimes = dataPP.getValue(Int::class.java)
+                            "methodOfAdministration" -> firebasePatientPrescription.methodOfAdministration = dataPP.value as? String
+                            "startDate" -> firebasePatientPrescription.startDate = dataPP.value as? String
+                            "finishDate" -> firebasePatientPrescription.finishDate = dataPP.value as? String
+                        }
+                    }
                     val patientPrescription = PatientPrescription(
-                            firebasePatientPrescription?.prescriptionID ?: "",
-                            firebasePatientPrescription?.updatedLast ?: "",
-                            firebasePatientPrescription?.prescriptionID ?: "",
-                            firebasePatientPrescription?.prescriptionType ?: PrescriptionType.Error,
-                            firebasePatientPrescription?.doctorId ?: "",
-                            firebasePatientPrescription?.patientId ?: "",
-                            firebasePatientPrescription?.drugNumber ?: "",
-                            firebasePatientPrescription?.drugName ?: "",
-                            firebasePatientPrescription?.unitsPerDay ?: -1,
-                            firebasePatientPrescription?.unitsAtAdministrationTimes ?: -1,
-                            firebasePatientPrescription?.methodOfAdministration ?: "",
-                            firebasePatientPrescription?.startDate ?: "",
-                            firebasePatientPrescription?.finishDate ?: ""
+                            firebasePatientPrescription.prescriptionID ?: "",
+                            firebasePatientPrescription.updatedLast ?: "",
+                            firebasePatientPrescription.prescriptionID ?: "",
+                            firebasePatientPrescription.prescriptionType ?: PrescriptionType.Error,
+                            firebasePatientPrescription.doctorId ?: "",
+                            firebasePatientPrescription.patientId ?: "",
+                            firebasePatientPrescription.drugNumber ?: "",
+                            firebasePatientPrescription.drugName ?: "",
+                            firebasePatientPrescription.unitsPerDay ?: -1,
+                            firebasePatientPrescription.unitsAtAdministrationTimes ?: -1,
+                            firebasePatientPrescription.methodOfAdministration ?: "",
+                            firebasePatientPrescription.startDate ?: "",
+                            firebasePatientPrescription.finishDate ?: ""
                     )
                     timeoutJob.cancel()
                     deferred.complete(patientPrescription)

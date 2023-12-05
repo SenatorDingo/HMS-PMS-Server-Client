@@ -4,7 +4,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.shift.Facilit
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.ShiftRepository
 
 class ShiftRepositoryStub : ShiftRepository {
-    override fun find(shift: FacilityShift): FacilityShift? {
+    override suspend fun find(shift: FacilityShift): FacilityShift? {
         TODO("Not yet implemented")
     }
 
@@ -17,6 +17,10 @@ class ShiftRepositoryStub : ShiftRepository {
     }
 
     override fun remove(shift: FacilityShift): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun findSync(shift: FacilityShift): FacilityShift? {
         TODO("Not yet implemented")
     }
 }

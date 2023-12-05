@@ -4,6 +4,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.Faci
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 
 interface FacilityRepository {
-    fun find(facilityIdentity: FacilityType): FacilityDivision?
+    suspend fun find(facilityIdentity: FacilityType): FacilityDivision?
     fun save(division: FacilityDivision): FacilityDivision
+    fun findSync(facilityIdentity: FacilityType): FacilityDivision?
 }

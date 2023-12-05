@@ -4,7 +4,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWait
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityAdmissionWaitListRepository
 
 class FacilityAdmissionWaitListRepositoryStub : FacilityAdmissionWaitListRepository {
-    override fun find(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList? {
+    override suspend fun find(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList? {
         TODO("Not yet implemented")
     }
 
@@ -13,6 +13,10 @@ class FacilityAdmissionWaitListRepositoryStub : FacilityAdmissionWaitListReposit
     }
 
     override fun save(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList {
+        TODO("Not yet implemented")
+    }
+
+    override fun findSync(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList? {
         TODO("Not yet implemented")
     }
 }

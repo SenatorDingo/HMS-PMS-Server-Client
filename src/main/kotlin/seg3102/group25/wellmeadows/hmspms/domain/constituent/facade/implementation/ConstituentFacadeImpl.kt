@@ -17,7 +17,7 @@ class ConstituentFacadeImpl(
 ): ConstituentFacade {
     override fun createConstituentNOKFile(accountInfo: RegisterPatientDTO): Boolean {
         val constituentID = accountInfo.nextOfKinFirstName + accountInfo.nextOfKinLastName
-        val existAccount = constituentFileRepository.find(constituentID)
+        val existAccount = constituentFileRepository.findSync(constituentID)
         if (existAccount != null){
             return false
         }
@@ -34,7 +34,7 @@ class ConstituentFacadeImpl(
     }
 
     override fun updateConstituentNOKFile(constituentID: String, accountInfo: RegisterPatientDTO): Boolean {
-        val constituentFile = constituentFileRepository.find(constituentID)
+        val constituentFile = constituentFileRepository.findSync(constituentID)
         if (constituentFile != null) {
             val updated = constituentFileFactory.createConstituentFile(accountInfo)
             constituentFile.update(updated)
@@ -52,7 +52,7 @@ class ConstituentFacadeImpl(
     }
 
     override fun getConstituentNOKFile(constituentID: String): ConstituentFile? {
-        return constituentFileRepository.find(constituentID)
+        return constituentFileRepository.findSync(constituentID)
     }
 
 

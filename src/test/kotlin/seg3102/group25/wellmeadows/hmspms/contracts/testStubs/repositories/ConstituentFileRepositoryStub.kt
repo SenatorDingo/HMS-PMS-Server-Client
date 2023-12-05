@@ -4,11 +4,15 @@ import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.Const
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.repositories.ConstituentFileRepository
 
 class ConstituentFileRepositoryStub : ConstituentFileRepository {
-    override fun find(constituentID: String): ConstituentFile? {
+    override suspend fun find(constituentID: String): ConstituentFile? {
         TODO("Not yet implemented")
     }
 
     override fun save(constituentFile: ConstituentFile): ConstituentFile {
+        TODO("Not yet implemented")
+    }
+
+    override fun findSync(constituentID: String): ConstituentFile? {
         TODO("Not yet implemented")
     }
 }
