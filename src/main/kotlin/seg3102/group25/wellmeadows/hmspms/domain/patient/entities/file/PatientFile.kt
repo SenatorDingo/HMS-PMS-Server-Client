@@ -80,9 +80,4 @@ class PatientFile(
         return false
     }
 
-    fun getFormattedDateOfBirth(): String {
-        val formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE
-        return dateOfBirth.format(formatter)
-    }
-
 }

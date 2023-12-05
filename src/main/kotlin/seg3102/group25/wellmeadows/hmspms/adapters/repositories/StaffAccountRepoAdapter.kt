@@ -40,11 +40,8 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    println(snapshot.value)
-                    println(snapshot.children.first())
                     //val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
                     // Workaround - WORKS -
-                    val types: MutableList<String> = mutableListOf()
                     val firebaseStaffAccount = snapshot.children.firstOrNull()?.let { staffSnapshot ->
                         val staffAccount = DatabaseStaffAccount()
                         staffSnapshot.children.forEach { data ->
@@ -56,7 +53,7 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
                                 "emailAddress" -> staffAccount.emailAddress = data.value as? String
                                 "active" -> staffAccount.active = data.value as? Boolean
                                 "type" -> {
-                                    staffAccount.type = mutableListOf(StaffType.valueOf(data.value.toString())) // STUPID STUPID CODE, won't let me map to ENUM LIST :(
+                                    staffAccount.type = mutableListOf(StaffType.valueOf(data.value.toString())) // STUPID CODE, won't let me map to ENUM LIST :(
                                 }
                                 "facilityID" -> {
                                     staffAccount.facilityID = (data.value as? List<*>)?.mapNotNull { it.toString() }?.toMutableList() // Haven't tested it yet...
@@ -66,7 +63,7 @@ open class StaffAccountRepoAdapter: StaffAccountRepository {
 
                         staffAccount
                     }
-                    println(types)
+
                     val staffAccount = StaffAccount(
                         firebaseStaffAccount?.employeeNumber ?: "",
                         firebaseStaffAccount?.password ?: "",
