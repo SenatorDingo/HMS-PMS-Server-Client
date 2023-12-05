@@ -1,12 +1,9 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file
 
-import com.google.cloud.firestore.annotation.Exclude
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.UpdatePatientFileDTO
 import seg3102.group25.wellmeadows.hmspms.domain.constituent.entities.file.ConstituentFile
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription.PatientPrescription
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class PatientFile(
     var patientNumber: String,
@@ -31,27 +28,29 @@ class PatientFile(
     var bedNumber: String? = null
     var privateInsuranceNumber: String? = null
 
-    fun update(updated: UpdatePatientFileDTO){
+    fun update(updated: UpdatePatientFileDTO) {
         this.patientNumber = updated.patientId
         this.medicalStaffId = updated.medicalStaffId
-        this.insuranceNumber = if(updated.insuranceNumber != null) updated.insuranceNumber!! else this.insuranceNumber
-        this.firstName = if(updated.firstName != null) updated.firstName!! else this.firstName
-        this.lastName = if(updated.lastName != null) updated.lastName!! else this.lastName
-        this.address = if(updated.address != null) updated.address!! else this.address
-        this.telephoneNumber = if(updated.telephoneNumber != null) updated.telephoneNumber!! else this.telephoneNumber
-        this.dateOfBirth = if(updated.dateOfBirth != null) updated.dateOfBirth!! else this.dateOfBirth
-        this.gender = if(updated.gender != null) updated.gender!! else this.gender
-        this.maritalStatus = if(updated.maritalStatus != null) updated.maritalStatus!! else this.maritalStatus
-        this.externalDoctorId = if(updated.externalDoctorId != null) updated.externalDoctorId!! else this.externalDoctorId
+        this.insuranceNumber = if (!updated.insuranceNumber.isNullOrEmpty()) updated.insuranceNumber!! else this.insuranceNumber
+        this.firstName = if (!updated.firstName.isNullOrEmpty()) updated.firstName!! else this.firstName
+        this.lastName = if (!updated.lastName.isNullOrEmpty()) updated.lastName!! else this.lastName
+        this.address = if (!updated.address.isNullOrEmpty()) updated.address!! else this.address
+        this.telephoneNumber = if (!updated.telephoneNumber.isNullOrEmpty()) updated.telephoneNumber!! else this.telephoneNumber
+        this.dateOfBirth = if (!updated.dateOfBirth.isNullOrEmpty()) updated.dateOfBirth!! else this.dateOfBirth
+        this.gender = if (!updated.gender.isNullOrEmpty()) updated.gender!! else this.gender
+        this.maritalStatus = if (!updated.maritalStatus.isNullOrEmpty()) updated.maritalStatus!! else this.maritalStatus
+        this.externalDoctorId = if (!updated.externalDoctorId.isNullOrEmpty()) updated.externalDoctorId!! else this.externalDoctorId
+
         this.constituentFile.update(ConstituentFile(
                 this.constituentFile.constituentID,
-            if(updated.nextOfKinFirstName != null) updated.nextOfKinFirstName!! else this.constituentFile.firstName,
-            if(updated.nextOfKinLastName != null) updated.nextOfKinLastName!! else this.constituentFile.lastName,
-            if(updated.nextOfKinAddress != null) updated.nextOfKinAddress!! else this.constituentFile.address,
-            if(updated.nextOfKinTelephoneNumber != null) updated.nextOfKinTelephoneNumber!! else this.constituentFile.telephoneNumber,
-            if(updated.nextOfKinRelationshipToPatient != null) updated.nextOfKinRelationshipToPatient!! else this.constituentFile.relationship,
-            ))
+                if (!updated.nextOfKinFirstName.isNullOrEmpty()) updated.nextOfKinFirstName!! else this.constituentFile.firstName,
+                if (!updated.nextOfKinLastName.isNullOrEmpty()) updated.nextOfKinLastName!! else this.constituentFile.lastName,
+                if (!updated.nextOfKinAddress.isNullOrEmpty()) updated.nextOfKinAddress!! else this.constituentFile.address,
+                if (!updated.nextOfKinTelephoneNumber.isNullOrEmpty()) updated.nextOfKinTelephoneNumber!! else this.constituentFile.telephoneNumber,
+                if (!updated.nextOfKinRelationshipToPatient.isNullOrEmpty()) updated.nextOfKinRelationshipToPatient!! else this.constituentFile.relationship
+        ))
     }
+
 
     fun admit(localDoctor: String, roomNumber: String, bedNumber: String, privateInsuranceNumber: String?, division: FacilityDivision) {
         admitted = true

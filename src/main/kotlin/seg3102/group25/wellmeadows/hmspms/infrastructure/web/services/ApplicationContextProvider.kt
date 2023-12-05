@@ -1,8 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.infrastructure.web.services
 
-import org.springframework.context.ApplicationEventPublisher
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Service
 import seg3102.group25.wellmeadows.hmspms.adapters.factories.*
 import seg3102.group25.wellmeadows.hmspms.adapters.repositories.*
@@ -119,6 +117,12 @@ class ApplicationContextProvider {
         admitPatientRequestListUseCase, dischargePatientUseCase, prescribeMedicationUseCase,
         registerPatientUseCase, registerStaffUseCase, requestPatientAdmissionUseCase, updatePatientFileUseCase
     )
+
+
+    @Bean
+    fun providePatientFacade(): PatientFacade{
+        return patientFacade
+    }
 
     @Bean
     fun provideStaffRepository(): StaffAccountRepository {
