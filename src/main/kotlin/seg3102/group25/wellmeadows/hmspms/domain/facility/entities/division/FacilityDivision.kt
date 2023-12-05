@@ -22,9 +22,9 @@ class FacilityDivision(
     private var facilityType: FacilityType = FacilityType.None
     private var numberBedsAvailable: Int = numberBeds
     private var status: FacilityStatus = FacilityStatus.Incomplete
-    private val shifts: MutableList<FacilityShift> = ArrayList()
-    private val admissionWaitList: MutableList<FacilityAdmissionWaitList> = ArrayList()
-    private val admissions: MutableList<Admission> = ArrayList()
+    private val shifts: MutableList<FacilityShift> = mutableListOf()
+    private val admissionWaitList: MutableList<FacilityAdmissionWaitList> = mutableListOf()
+    private val admissions: MutableList<Admission> = mutableListOf()
 
     fun update(updated: FacilityDivision){
         this.facilityType = updated.facilityType

@@ -22,7 +22,6 @@ class PatientPrescription(
     var startDate: String,
     var finishDate: String
 ){
-
     fun update(updated: PatientPrescription){
         this.unitsPerDay = updated.unitsPerDay
         this.numberOfAdministrationsPerDay = updated.numberOfAdministrationsPerDay
