@@ -19,14 +19,14 @@ open class PatientPrescriptionRepoAdapter: PatientPrescriptionRepository {
 
     override suspend fun find(prescriptionID: String): PatientPrescription? {
         val ref: DatabaseReference = dataBase.reference
-        val uidRef = ref.child("PatientPrescriptions").orderByChild("prescriptionID").equalTo(prescriptionID)
+        val uidRef = ref.child("patientPrescriptions").orderByChild("prescriptionID").equalTo(prescriptionID)
 
         val emptyListInt: MutableList<Int> = mutableListOf()
         val emptyListString: MutableList<String> = mutableListOf()
 
         val errorPrescription = PatientPrescription("", "", "", PrescriptionType.Error, "",
-                "", "", "", -1, -1, arrayListOf(), arrayListOf(),
-                "", "","")
+                "", "", "", -1, -1,
+                "", "", "")
         val deferred = CompletableDeferred<PatientPrescription?>()
 
         val timeoutJob = CoroutineScope(Dispatchers.Default).launch {
@@ -55,9 +55,7 @@ open class PatientPrescriptionRepoAdapter: PatientPrescriptionRepository {
                             firebasePatientPrescription?.drugNumber ?: "",
                             firebasePatientPrescription?.drugName ?: "",
                             firebasePatientPrescription?.unitsPerDay ?: -1,
-                            firebasePatientPrescription?.numberOfAdministrationsPerDay ?: -1,
-                            firebasePatientPrescription?.administrationTimes ?: arrayListOf(),
-                            firebasePatientPrescription?.unitsAtAdministrationTimes ?: arrayListOf(),
+                            firebasePatientPrescription?.unitsAtAdministrationTimes ?: -1,
                             firebasePatientPrescription?.methodOfAdministration ?: "",
                             firebasePatientPrescription?.startDate ?: "",
                             firebasePatientPrescription?.finishDate ?: ""

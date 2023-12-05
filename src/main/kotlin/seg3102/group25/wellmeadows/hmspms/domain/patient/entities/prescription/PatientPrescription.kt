@@ -1,8 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription
 
 import seg3102.group25.wellmeadows.hmspms.domain.patient.valueObjects.PrescriptionType
-import java.time.LocalDate
-import java.time.LocalTime
 import java.util.*
 
 class PatientPrescription(
@@ -15,9 +13,7 @@ class PatientPrescription(
     var drugNumber: String,
     var drugName: String,
     var unitsPerDay: Int,
-    var numberOfAdministrationsPerDay: Int,
-    var administrationTimes: List<String>,
-    var unitsAtAdministrationTimes: List<Int>,
+    var unitsAtAdministrationTimes: Int,
     var methodOfAdministration: String,
     var startDate: String,
     var finishDate: String
@@ -25,8 +21,6 @@ class PatientPrescription(
 
     fun update(updated: PatientPrescription){
         this.unitsPerDay = updated.unitsPerDay
-        this.numberOfAdministrationsPerDay = updated.numberOfAdministrationsPerDay
-        this.administrationTimes = updated.administrationTimes
         this.unitsAtAdministrationTimes = updated.unitsAtAdministrationTimes
         this.methodOfAdministration = updated.methodOfAdministration
         this.startDate = updated.startDate

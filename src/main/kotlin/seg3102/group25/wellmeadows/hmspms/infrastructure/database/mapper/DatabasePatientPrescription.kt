@@ -40,17 +40,10 @@ class DatabasePatientPrescription(
         @set:PropertyName("unitsPerDay")
         var unitsPerDay: Int? = null,
 
-        @get:PropertyName("numberOfAdministrationsPerDay")
-        @set:PropertyName("numberOfAdministrationsPerDay")
-        var numberOfAdministrationsPerDay: Int? = null,
-
-        @get:PropertyName("administrationTimes")
-        @set:PropertyName("administrationTimes")
-        var administrationTimes: List<String>? = null,
 
         @get:PropertyName("unitsAtAdministrationTimes")
         @set:PropertyName("unitsAtAdministrationTimes")
-        var unitsAtAdministrationTimes: List<Int>? = null,
+        var unitsAtAdministrationTimes: Int? = null,
 
         @get:PropertyName("methodOfAdministration")
         @set:PropertyName("methodOfAdministration")

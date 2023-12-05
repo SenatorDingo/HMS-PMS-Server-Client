@@ -71,7 +71,7 @@ class PatientFacadeImpl(
         }
         if(patient != null){
             patient.addPrescription(prescription)
-            patientFileRepository.save(patient)
+            patientFileRepository.savePrescription(patient,prescription)
             patientPrescriptionRepository.save(prescription)
             eventEmitter.emit(
                 PatientPrescriptionCreated(

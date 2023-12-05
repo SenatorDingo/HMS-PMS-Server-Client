@@ -12,8 +12,6 @@ class PrescribeMedicationFormConverter {
                     prescribeMedicationForm.drugNumber!!,
                     prescribeMedicationForm.drugName!!,
                     prescribeMedicationForm.unitsPerDay!!,
-                    prescribeMedicationForm.numberOfAdministrationsPerDay!!,
-                    prescribeMedicationForm.administrationTimes!!,
                     prescribeMedicationForm.unitsAtAdministrationTimes!!,
                     prescribeMedicationForm.methodOfAdministration!!,
                     prescribeMedicationForm.startDate!!,
