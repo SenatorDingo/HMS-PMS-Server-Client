@@ -6,6 +6,16 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFact
 
 class FacilityDtoFactory: FacilityFactory {
     override fun createDivision(createDivisionDTO: CreateDivisionDTO): FacilityDivision {
-        TODO("Not yet implemented")
+        return FacilityDivision(
+            createDivisionDTO.divisionId,
+            createDivisionDTO.divisionName,
+            createDivisionDTO.chargeNurseFirstName,
+            createDivisionDTO.chargeNurseLastName,
+            createDivisionDTO.chargeNurseTelExtension,
+            createDivisionDTO.chargeNurseBipExtension,
+            createDivisionDTO.location,
+            createDivisionDTO.numberBeds,
+            createDivisionDTO.telephoneExtension
+        )
     }
 }

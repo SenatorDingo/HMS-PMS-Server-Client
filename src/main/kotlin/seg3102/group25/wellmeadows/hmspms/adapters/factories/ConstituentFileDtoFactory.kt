@@ -6,6 +6,13 @@ import seg3102.group25.wellmeadows.hmspms.domain.constituent.factories.Constitue
 
 class ConstituentFileDtoFactory: ConstituentFileFactory {
     override fun createConstituentFile(registerPatientDTO: RegisterPatientDTO): ConstituentFile {
-        TODO("Not yet implemented")
+        return ConstituentFile(
+            registerPatientDTO.firstName+registerPatientDTO.lastName,
+            registerPatientDTO.nextOfKinFirstName,
+            registerPatientDTO.nextOfKinLastName,
+            registerPatientDTO.nextOfKinAddress,
+            registerPatientDTO.nextOfKinTelephoneNumber,
+            registerPatientDTO.nextOfKinRelationshipToPatient
+        )
     }
 }

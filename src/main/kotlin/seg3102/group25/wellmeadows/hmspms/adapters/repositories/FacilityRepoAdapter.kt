@@ -93,6 +93,7 @@ class FacilityRepoAdapter: FacilityRepository {
                                                 "chargeNurseId" -> admissionWaitList.chargeNurseId = dataWLC.value as? String
                                                 "division" -> admissionWaitList.division = dataWLC.value as? String
                                                 "admissionStatus" -> admissionWaitList.admissionStatus = dataWLC.value as? String
+                                                "priority" -> admissionWaitList.priority = dataWLC.getValue(Int::class.java)
                                                 "createdOn" -> admissionWaitList.createdOn = dataWLC.value as? String
                                             }
                                         }
@@ -102,6 +103,7 @@ class FacilityRepoAdapter: FacilityRepository {
                                                 admissionWaitList.chargeNurseId ?: "",
                                                 admissionWaitList.division ?: "",
                                                 admissionWaitList.admissionStatus ?: "",
+                                                admissionWaitList.priority ?: -1,
                                                 admissionWaitList.createdOn ?: "",
                                             )
                                         )

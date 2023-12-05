@@ -19,6 +19,10 @@ class DatabaseFacilityAdministrationWaitList (
     @set:PropertyName("admissionStatus")
     var admissionStatus: String? = null,
 
+    @get:PropertyName("priority")
+    @set:PropertyName("priority")
+    var priority: Int? = -1,
+
     @get:PropertyName("createdOn")
     @set:PropertyName("createdOn")
     var createdOn: String? = null

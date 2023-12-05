@@ -20,7 +20,7 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
         val ref: DatabaseReference = dataBase.reference
         val uidRef = ref.child("facilityAdmissionWaitlist").orderByChild("patientId").equalTo(facilityAdmissionWaitList.patientId)
 
-        val errorAccount = FacilityAdmissionWaitList("", "", "", "", "")
+        val errorAccount = FacilityAdmissionWaitList("", "", "", "", -1, "")
         val deferred = CompletableDeferred<FacilityAdmissionWaitList?>()
 
         val timeoutJob = CoroutineScope(Dispatchers.Default).launch {
@@ -48,6 +48,7 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
                                 "chargeNurseId" -> admissionWaitList.chargeNurseId = dataWLC.value as? String
                                 "division" -> admissionWaitList.division = dataWLC.value as? String
                                 "admissionStatus" -> admissionWaitList.admissionStatus = dataWLC.value as? String
+                                "priority" -> admissionWaitList.priority = dataWLC.getValue(Int::class.java)
                                 "createdOn" -> admissionWaitList.createdOn = dataWLC.value as? String
                             }
                         }
@@ -59,6 +60,7 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
                         facilityAdmissionWaitListThis?.chargeNurseId ?: "",
                         facilityAdmissionWaitListThis?.division ?: "",
                         facilityAdmissionWaitListThis?.admissionStatus ?: "",
+                        facilityAdmissionWaitListThis?.priority ?: -1,
                         facilityAdmissionWaitListThis?.createdOn ?: ""
                     )
                     timeoutJob.cancel()

@@ -8,19 +8,20 @@ import java.time.LocalDate
 
 class PatientPrescriptionDtoFactory: PatientPrescriptionFactory {
     override fun createPatientPrescription(prescribeMedicationDTO: PrescribeMedicationDTO): PatientPrescription {
-        return PatientPrescription(LocalDate.now().toString(),
-                LocalDate.now().toString(),
-                prescribeMedicationDTO.patientId + prescribeMedicationDTO.doctorId + prescribeMedicationDTO.drugName,
-                PrescriptionType.Medication,
-                prescribeMedicationDTO.doctorId,
-                prescribeMedicationDTO.patientId,
-                prescribeMedicationDTO.drugNumber,
-                prescribeMedicationDTO.drugName,
-                prescribeMedicationDTO.unitsPerDay,
-                prescribeMedicationDTO.unitsAtAdministrationTimes,
-                prescribeMedicationDTO.methodOfAdministration,
-                prescribeMedicationDTO.startDate,
-                prescribeMedicationDTO.finishDate
+        return PatientPrescription(
+            LocalDate.now().toString(),
+            LocalDate.now().toString(),
+            prescribeMedicationDTO.patientId + prescribeMedicationDTO.doctorId + prescribeMedicationDTO.drugName,
+            PrescriptionType.Medication,
+            prescribeMedicationDTO.doctorId,
+            prescribeMedicationDTO.patientId,
+            prescribeMedicationDTO.drugNumber,
+            prescribeMedicationDTO.drugName,
+            prescribeMedicationDTO.unitsPerDay,
+            prescribeMedicationDTO.unitsAtAdministrationTimes,
+            prescribeMedicationDTO.methodOfAdministration,
+            prescribeMedicationDTO.startDate,
+            prescribeMedicationDTO.finishDate
         )
     }
 }
