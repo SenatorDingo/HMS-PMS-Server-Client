@@ -35,5 +35,6 @@ enum class AccessLevels {
         override val staffType: List<StaffType> = listOf(StaffType.LocalDoctor, StaffType.MedicalDirector)
     };
 
+
     abstract val staffType: List<StaffType>
 }

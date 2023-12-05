@@ -20,6 +20,7 @@ import java.util.*
 @Configuration
 class WebSecurityConfig{
 
+    @get:Bean
     val superRole: Array<String> = arrayOf("ADMIN")
 
     val admitPatientRole: Array<String> = AccessLevels.AdmitPatient.staffType.map { it.name }.toTypedArray()
@@ -38,8 +39,8 @@ class WebSecurityConfig{
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests{ requests -> requests
-                .anyRequest()
-                .authenticated()
+                .requestMatchers("/").authenticated()
+                .anyRequest().authenticated()
             }
             .formLogin{form -> form
                 .loginPage("/login")
@@ -58,9 +59,8 @@ class WebSecurityConfig{
     fun filterAdminChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests{ requests -> requests
-                .requestMatchers("/admin/**").hasAnyRole(*superRole)
-                .requestMatchers("/swagger-ui/**").hasAnyRole(*superRole)
-                .requestMatchers("/actions/**").hasAnyRole(*superRole) // Cannot be performed through swagger
+                .requestMatchers("/admin/**").hasAnyAuthority(*superRole)
+                .requestMatchers("/swagger-ui/**").hasAnyAuthority(*superRole)
                 .anyRequest().authenticated()
            }
 
@@ -73,16 +73,16 @@ class WebSecurityConfig{
     fun filterStaffChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests { requests -> requests
-                .requestMatchers("/actions/admit-patient").hasAnyAuthority(*admitPatientRole)
-                .requestMatchers("/actions/admit-patient-request-list").hasAnyAuthority(*admitPatientRequestListRole)
-                .requestMatchers("/actions/consult-patient").hasAnyAuthority(*consultPatientFileRole)
-                .requestMatchers("/actions/discharge-patient").hasAnyAuthority(*dischargePatientRole)
-                .requestMatchers("/actions/prescribe-medication").hasAnyAuthority(*prescribeMedicationRole)
-                .requestMatchers("/actions/register-patient").hasAnyAuthority(*registerPatientRole)
-                .requestMatchers("/actions/register-staff").hasAnyAuthority("PersonnelOfficer")
-                .requestMatchers("/actions/request-patient-admission").hasAnyAuthority(*requestPatientAdmissionRole)
-                .requestMatchers("/actions/update-patient-file").hasAnyAuthority(*updatePatientFileRole)
-                .requestMatchers("/actions/visualize-division").hasAnyAuthority(*visualizeDivisionRole)
+                .requestMatchers("/actions/admit-patient/**").hasAnyAuthority(*admitPatientRole)
+                .requestMatchers("/actions/admit-patient-request-list/**").hasAnyAuthority(*admitPatientRequestListRole)
+                .requestMatchers("/actions/consult-patient/**").hasAnyAuthority(*consultPatientFileRole)
+                .requestMatchers("/actions/discharge-patient/**").hasAnyAuthority(*dischargePatientRole)
+                .requestMatchers("/actions/prescribe-medication/**").hasAnyAuthority(*prescribeMedicationRole)
+                .requestMatchers("/actions/register-patient/**").hasAnyAuthority(*registerPatientRole)
+                .requestMatchers("/actions/register-staff/**").hasAnyAuthority(*registerStaffRole)
+                .requestMatchers("/actions/request-patient-admission/**").hasAnyAuthority(*requestPatientAdmissionRole)
+                .requestMatchers("/actions/update-patient-file/**").hasAnyAuthority(*updatePatientFileRole)
+                .requestMatchers("/actions/visualize-division/**").hasAnyAuthority(*visualizeDivisionRole)
                 .anyRequest().authenticated()
             }
             .authenticationProvider(StaffAuthenticationProvider())

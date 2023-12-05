@@ -8,5 +8,5 @@ enum class StaffType{
     Nurse,
     Auxiliary,
     ChargeNurse,
-    SpecialistStaff
+    SpecialistStaff,
 }

@@ -5,12 +5,51 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>HOME</h1>
+    <h1>Welcome! HMS - PMS</h1>
 
-    <div th:if="${roles != null}">
-        <div>Hello</div>
+    <div th:if="${visualizeDivision != null}">
+        <div>visualizeDivision</div>
+        <a href="/actions/visualize-division">Redirect</a>
     </div>
-    <div>World</div>
+    <div th:if="${updatePatientFile != null}">
+        <div>updatePatientFile</div>
+        <a href="/actions/update-patient-file">Redirect</a>
+    </div>
+    <div th:if="${requestPatientAdmission != null}">
+        <div>requestPatientAdmission</div>
+        <a href="/actions/request-patient-admission">Redirect</a>
+    </div>
+    <div th:if="${registerStaff != null}">
+        <div>registerStaff</div>
+        <a href="/actions/register-staff">Redirect</a>
+    </div>
+    <div th:if="${registerPatient != null}">
+        <div>registerPatient</div>
+        <a href="/actions/register-patient">Redirect</a>
+    </div>
+    <div th:if="${prescribeMedication != null}">
+        <div>prescribeMedication</div>
+        <a href="/actions/prescribe-medication">Redirect</a>
+    </div>
+    <div th:if="${dischargePatient != null}">
+        <div>dischargePatient</div>
+        <a href="/actions/discharge-patient">Redirect</a>
+    </div>
+    <div th:if="${consultPatientFile != null}">
+        <div>consultPatientFile</div>
+        <a href="/actions/consult-patient-file">Redirect</a>
+    </div>
+    <div th:if="${admitPatient != null}">
+        <div>admitPatient</div>
+        <a href="/actions/admit-patient">Redirect"</a>
+    </div>
+    <div th:if="${admitPatientFromRequestList != null}">
+        <div>admitPatientFromRequestList</div>
+        <a href="/actions/admit-patient-from-request-list">Redirect</a>
+    </div>
 
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </body>
 </html>
