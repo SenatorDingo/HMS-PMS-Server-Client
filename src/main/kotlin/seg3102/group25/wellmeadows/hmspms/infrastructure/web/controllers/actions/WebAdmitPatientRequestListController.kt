@@ -19,7 +19,7 @@ class WebAdmitPatientRequestListController {
     lateinit var patientManagementFacade: PatientManagementFacade
 
 
-    @RequestMapping("/actions/register-patient")
+    @RequestMapping("/actions/admit-patient-request-list")
     fun actionAdmitPatientRequestList(model: Model): String {
 
         val admitPatientRequestListForm = AdmitPatientRequestListForm()
@@ -28,12 +28,16 @@ class WebAdmitPatientRequestListController {
         return "actions/ActionAdmitPatientRequestList"
     }
 
-    @PostMapping("/actions/register-patient")
+    @PostMapping("/actions/admit-patient-request-list")
     fun actionAdmitPatientRequestListPost(@ModelAttribute("admitPatientRequestListForm") admitPatientRequestListForm: AdmitPatientRequestListForm, model: Model): String {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
         val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
+
+        //TODO: Implemenet Direct Call
+
+        /*
         val success = patientManagementFacade.requestAdmitPatientRequestList(employeeID, dto)
 
         if (success) {
@@ -45,6 +49,8 @@ class WebAdmitPatientRequestListController {
             model.addAttribute("errorMessage", "Patient Admit From Request List Unsuccessful!") // Set error message
 
         }
+
+         */
 
         return "actions/ActionAdmitPatientRequestList"
     }
