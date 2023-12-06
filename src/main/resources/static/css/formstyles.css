@@ -48,6 +48,9 @@ label {
     color: #333;
 }
 
+input[type="number"],
+input[type="email"],
+input[type="password"],
 input[type="text"],
 input[type="date"] {
     width: 100%;

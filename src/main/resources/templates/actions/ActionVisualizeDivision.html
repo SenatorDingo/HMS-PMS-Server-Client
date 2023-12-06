@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
 </head>
 <body>
-<h1>Visualize Division</h1>
-
-<form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post">
+    <header class="header">
+        <h1>Visualize Division</h1>
+    </header>
+    <div class="content">
+    <form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post">
     <table>
         <tr>
             <td><label for="chargeNurseID">Charge Nurse ID:</label></td>
@@ -20,7 +24,9 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Visualize Division</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Visualize Division">
+            </td>
         </tr>
 
         <tr>
@@ -68,5 +74,6 @@
         </tr>
     </table>
 </form>
+</div>
 </body>
 </html>
