@@ -34,22 +34,17 @@ class WebRequestPatientAdmissionController {
 
         val dto = RequestPatientAdmissionFormConverter.convertForm(requestPatientAdmissionForm)
 
-        //TODO: Direct call
-        //val success = patientManagementFacade.requestRequestPatientAdmission(employeeID, dto)
-
-        /*
+        val success = patientManagementFacade.requestPatientAdmission(employeeID, dto)
 
         if (success) {
 
-            model.addAttribute("successMessage", "Patient Admission Successful!") // Set success message
+            model.addAttribute("successMessage", "Patient Admission to Waitlist Successful!") // Set success message
 
         } else {
 
-            model.addAttribute("errorMessage", "Patient Admission Unsuccessful!") // Set error message
+            model.addAttribute("errorMessage", "Patient Admission to Waitlist Unsuccessful!") // Set error message
 
         }
-
-         */
 
         return "actions/ActionRequestPatientAdmission"
     }

@@ -11,37 +11,8 @@
         <h1>Discharge Patient</h1>
     </div>
 
-<form th:action="@{/actions/discharge-patient}" th:object="${dischargePatientForm}" method="post" onsubmit="showLoading()">
-    <table>
-        <tr>
-            <td><label for="patientId">Patient ID:</label></td>
-            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Discharge Patient</button></td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <input type="button" value="Return" onclick="window.location.href='/'">
-            </td>
-        </tr>
-    </table>
-    <!-- Display loading message -->
-    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
-    <!-- Display success or error message -->
-    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
-    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
-
-</form>
-
-<script>
-    function showLoading() {
-        document.getElementById("loadingText").style.display = "block";
-    }
-</script>
     <div class="content">
-        <form th:action="@{/actions/discharge-patient}" th:object="${dischargePatientForm}" method="post">
+        <form th:action="@{/actions/discharge-patient}" th:object="${dischargePatientForm}" method="post" onsubmit="showLoading()">
             <table>
                 <tr>
                     <td><label for="patientId">Patient ID:</label></td>
@@ -59,7 +30,19 @@
                     </td>
                 </tr>
             </table>
+
+            <!-- Display loading message -->
+            <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+            <!-- Display success or error message -->
+            <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+            <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
         </form>
     </div>
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
+
 </body>
 </html>
