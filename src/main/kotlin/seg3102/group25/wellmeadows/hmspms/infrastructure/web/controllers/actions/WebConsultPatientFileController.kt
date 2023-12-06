@@ -47,6 +47,7 @@ class WebConsultPatientFileController {
         if (success) {
 
             model.addAttribute("successMessage", "Patient File Load Successful!") // Set success message
+            model.addAttribute("patientInfo", patientFile)
 
         } else {
 
