@@ -133,4 +133,9 @@ class ApplicationContextProvider {
     fun providePatientManagementFacade(): PatientManagementFacade {
         return patientManagementFacade
     }
+
+    @Bean
+    fun provideFacilityFacade(): FacilityFacade{
+        return facilityFacade
+    }
 }
