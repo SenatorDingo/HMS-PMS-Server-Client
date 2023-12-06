@@ -8,7 +8,7 @@
 <body>
 <h1>Admit Patient</h1>
 
-<form th:action="@{/actions/admit-patient}" th:object="${admitPatientForm}" method="post">
+<form th:action="@{/actions/admit-patient}" th:object="${admitPatientForm}" method="post" onsubmit="showLoading()">
     <table>
         <tr>
             <td><label for="patientNumber">Patient Number:</label></td>
@@ -35,8 +35,16 @@
             <td><input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}"></td>
         </tr>
 
-        <tr>
+        <tr th:if="${errorMessage == null}">
             <td colspan="2" style="text-align: center;"><button type="submit">Admit Patient</button></td>
+        </tr>
+        <tr th:if="${errorMessage != null}">
+            <td><label for="waitlist">Would you like to add patient to waitlist?</label></td>
+        </tr>
+        <tr th:if="${errorMessage != null}">
+            <td id="waitlist" colspan="2" style="text-align: center;">
+                <input type="button" value="Waitlist Patient" onclick="window.location.href='/actions/request-patient-admission'">
+            </td>
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
@@ -44,6 +52,19 @@
             </td>
         </tr>
     </table>
+
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
 </form>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
 <h1>Request Patient Admission</h1>
 
-<form th:action="@{/actions/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post">
+<form th:action="@{/actions/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post" onsubmit="showLoading()">
     <table>
         <tr>
             <td><label for="chargeNurseId">Charge Nurse ID:</label></td>
@@ -48,6 +48,18 @@
             </td>
         </tr>
     </table>
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
 </form>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
 </body>
 </html>
