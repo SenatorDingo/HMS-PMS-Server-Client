@@ -22,7 +22,10 @@ class AdmitPatientImpl(
     val security: Security = Security(AccessLevels.AdmitPatient)
     override fun admitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean {
         if(securityFacade.checkAccess(staffNumber, security) && isLoggedIn(staffNumber)){
-            val division = staffFacade.getFacilityIDs(staffNumber).first()
+            val list = staffFacade.getFacilityIDs(staffNumber)
+            if(list.isEmpty())
+                return false
+            val division = list.first()
             val facilityType = FacilityType.Ward
             facilityType.setDivisionID(division)
             facilityFacade.getDivision(facilityType)
