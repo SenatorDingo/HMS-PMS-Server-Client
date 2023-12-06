@@ -54,20 +54,59 @@
             <td th:text="${patientInfo.lastName}"></td>
         </tr>
         <tr>
+            <td><strong>DOB: </strong></td>
+            <td th:text="${patientInfo.dateOfBirth}"></td>
+        </tr>
+        <tr>
+            <td><strong>Gender: </strong></td>
+            <td th:text="${patientInfo.gender}"></td>
+        </tr>
+        <tr>
             <td><strong>Address:</strong></td>
             <td th:text="${patientInfo.address}"></td>
         </tr>
 
         <tr>
+            <th colspan="2" style="text-align: center;">Medication Information</th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table border="1">
+                    <tr>
+                        <th>Doctor ID</th>
+                        <th>Drug Name</th>
+                        <th>Units Per Day</th>
+                        <th>Method of Administration</th>
+                        <th>Start Date</th>
+                        <th>Finish Date</th>
+                    </tr>
+                    <tr th:each="prescription : ${patientInfo.prescriptions}">
+                        <td th:text="${prescription.doctorId}"></td>
+                        <td th:text="${prescription.drugName}"></td>
+                        <td th:text="${prescription.unitsPerDay}"></td>
+                        <td th:text="${prescription.methodOfAdministration}"></td>
+                        <td th:text="${prescription.startDate}"></td>
+                        <td th:text="${prescription.finishDate}"></td>
+                    </tr>
+                </table>
+        <tr>
             <th colspan="2" style="text-align: center;">Next of Kin Information</th>
         </tr>
         <tr>
-            <td><strong>Next of Kin Name:</strong></td>
+            <td><strong>Next of Kin First Name:</strong></td>
             <td th:text="${patientInfo.constituentFile.firstName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Last Name:</strong></td>
+            <td th:text="${patientInfo.constituentFile.lastName}"></td>
         </tr>
         <tr>
             <td><strong>Next of Kin Phone:</strong></td>
             <td th:text="${patientInfo.constituentFile.telephoneNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Relationship:</strong></td>
+            <td th:text="${patientInfo.constituentFile.relationship}"></td>
         </tr>
     </table>
 </form>

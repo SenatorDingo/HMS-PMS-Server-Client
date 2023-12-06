@@ -29,6 +29,44 @@
             </td>
         </tr>
     </table>
+
+    <table th:if="${successMessage != null}">
+        <tr>
+            <th colspan="2" style="text-align: center;">Facility Division Information</th>
+        </tr>
+        <tr>
+            <td><strong>Division ID:</strong></td>
+            <td th:text="${facility.divisionId}"></td>
+        </tr>
+        <tr>
+            <td><strong>Division Name:</strong></td>
+            <td th:text="${facility.divisionName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Charge Nurse:</strong></td>
+            <td th:text="${facility.chargeNurseFirstName + ' ' + facility.chargeNurseLastName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Charge Nurse Tel Extension:</strong></td>
+            <td th:text="${facility.chargeNurseTelExtension}"></td>
+        </tr>
+        <tr>
+            <td><strong>Charge Nurse Bip Extension:</strong></td>
+            <td th:text="${facility.chargeNurseBipExtension}"></td>
+        </tr>
+        <tr>
+            <td><strong>Location:</strong></td>
+            <td th:text="${facility.location}"></td>
+        </tr>
+        <tr>
+            <td><strong>Number of Beds:</strong></td>
+            <td th:text="${facility.numberBeds}"></td>
+        </tr>
+        <tr>
+            <td><strong>Telephone Extension:</strong></td>
+            <td th:text="${facility.telephoneExtension}"></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

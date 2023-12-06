@@ -37,7 +37,6 @@ class WebConsultPatientFileController {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
-        //TODO: Implemenet Direct Call
 
         val dto = ConsultPatientFileFormConverter.convertForm(consultPatientFileForm)
 
