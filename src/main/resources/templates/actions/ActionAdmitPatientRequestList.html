@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
@@ -9,11 +9,6 @@
 
 <form th:action="@{/actions/admit-patient-request-list}" th:object="${admitPatientRequestListForm}" method="post">
     <table>
-        <tr>
-            <td><label for="patientId">Patient ID:</label></td>
-            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
-        </tr>
-
         <tr>
             <td><label for="chargeNurseId">Charge Nurse ID:</label></td>
             <td><input type="text" id="chargeNurseId" th:field="*{chargeNurseId}" required></td>
@@ -25,12 +20,7 @@
         </tr>
 
         <tr>
-            <td><label for="admissionStatus">Admission Status:</label></td>
-            <td><input type="text" id="admissionStatus" th:field="*{admissionStatus}" required></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Admit Patient Request List</button></td>
+            <td colspan="2" style="text-align: center;"><button type="submit">Visualize</button></td>
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
@@ -39,6 +29,23 @@
         </tr>
     </table>
 
+
 </form>
+
+<table th:if="${patientList != null}" th:object="${patientList}">
+    <tr th:each="patient : ${patientList}">
+
+
+
+
+
+
+
+<tr>
+    <td> <label for="admissionStatus"> Admission Status:</label></td>
+    <td><input type="text" id="admissionStatus" th:field="*{admissionStatus}" required></td>
+</tr>
+
+</table>
 </body>
 </html>
