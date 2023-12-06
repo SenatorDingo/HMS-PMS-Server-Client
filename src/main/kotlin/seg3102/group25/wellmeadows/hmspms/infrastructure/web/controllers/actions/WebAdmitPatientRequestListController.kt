@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
-import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.AdmitPatientRequestListForm
@@ -50,15 +49,11 @@ class WebAdmitPatientRequestListController {
         val successLoadFacility = (facility != null)
 
         if (successLoadFacility) {
-            val patientList: MutableList<PatientFile> = arrayListOf()
-            if (facility != null) {
-                for (wait in facility) {
-                    val patientID = wait.patientId
-                    patientFacade.getPatientFile(patientID)?.let { patientList.add(it) }
-                }
-                model.addAttribute("patientList", patientList)
+
+
+                model.addAttribute("patientList", facility)
                 model.addAttribute("successMessageVisualize", "Division Visualized")
-            }
+
 
 
             val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
