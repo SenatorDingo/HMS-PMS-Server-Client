@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
 </head>
 <body>
-<h1>Admit Patient Request List</h1>
+    <div class="header">
+        <h1>Admit Patient Request List</h1>
+    </div>
 
+<div class="content">
 <form th:action="@{/actions/admit-patient-request-list}" th:object="${admitPatientRequestListForm}" method="post">
     <table>
         <tr>
@@ -20,8 +25,11 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Visualize</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Visualize">
+            </td>
         </tr>
+        
         <tr>
             <td colspan="2" style="text-align: center;">
                 <input type="button" value="Return" onclick="window.location.href='/'">
@@ -57,6 +65,7 @@
         </tr>
     </table>
 </form>
+</div>
 
 </body>
 </html>

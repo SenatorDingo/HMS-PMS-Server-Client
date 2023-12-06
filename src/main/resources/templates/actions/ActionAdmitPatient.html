@@ -3,68 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
 </head>
 <body>
-<h1>Admit Patient</h1>
+    <header class="header">
+        <h1>Admit Patient</h1>
+    </header>
 
-<form th:action="@{/actions/admit-patient}" th:object="${admitPatientForm}" method="post" onsubmit="showLoading()">
-    <table>
-        <tr>
-            <td><label for="patientNumber">Patient Number:</label></td>
-            <td><input type="text" id="patientNumber" th:field="*{patientNumber}" required></td>
-        </tr>
+    <div class="content">
+        <form th:action="@{/actions/admit-patient}" th:object="${admitPatientForm}" method="post" onsubmit="showLoading()">
+            <table>
+                <tr>
+                    <td><label for="patientNumber">Patient Number:</label></td>
+                    <td><input type="text" id="patientNumber" th:field="*{patientNumber}" required></td>
+                </tr>
 
-        <tr>
-            <td><label for="localDoctor">Local Doctor:</label></td>
-            <td><input type="text" id="localDoctor" th:field="*{localDoctor}" required></td>
-        </tr>
+                <tr>
+                    <td><label for="localDoctor">Local Doctor:</label></td>
+                    <td><input type="text" id="localDoctor" th:field="*{localDoctor}" required></td>
+                </tr>
 
-        <tr>
-            <td><label for="roomNumber">Room Number:</label></td>
-            <td><input type="text" id="roomNumber" th:field="*{roomNumber}" required></td>
-        </tr>
+                <tr>
+                    <td><label for="roomNumber">Room Number:</label></td>
+                    <td><input type="text" id="roomNumber" th:field="*{roomNumber}" required></td>
+                </tr>
 
-        <tr>
-            <td><label for="bedNumber">Bed Number:</label></td>
-            <td><input type="text" id="bedNumber" th:field="*{bedNumber}" required></td>
-        </tr>
+                <tr>
+                    <td><label for="bedNumber">Bed Number:</label></td>
+                    <td><input type="text" id="bedNumber" th:field="*{bedNumber}" required></td>
+                </tr>
 
-        <tr>
-            <td><label for="privateInsuranceNumber">Private Insurance Number:</label></td>
-            <td><input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}"></td>
-        </tr>
+                <tr>
+                    <td><label for="privateInsuranceNumber">Private Insurance Number:</label></td>
+                    <td><input type="text" id="privateInsuranceNumber" th:field="*{privateInsuranceNumber}"></td>
+                </tr>
 
-        <tr th:if="${errorMessage == null}">
-            <td colspan="2" style="text-align: center;"><button type="submit">Admit Patient</button></td>
-        </tr>
-        <tr th:if="${errorMessage != null}">
-            <td><label for="waitlist">Would you like to add patient to waitlist?</label></td>
-        </tr>
-        <tr th:if="${errorMessage != null}">
-            <td id="waitlist" colspan="2" style="text-align: center;">
-                <input type="button" value="Waitlist Patient" onclick="window.location.href='/actions/request-patient-admission'">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <input type="button" value="Return" onclick="window.location.href='/'">
-            </td>
-        </tr>
-    </table>
-
+                <tr th:if="${errorMessage == null}">
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Admit Patient">
+                    </td>
+                </tr>
+                <tr th:if="${errorMessage != null}">
+                    <td><label for="waitlist">Would you like to add patient to waitlist?</label></td>
+                </tr>
+                <tr th:if="${errorMessage != null}">
+                    <td id="waitlist" colspan="2" style="text-align: center;">
+                        <input type="button" value="Waitlist Patient" onclick="window.location.href='/actions/request-patient-admission'">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="button" value="Return" onclick="window.location.href='/'">
+                    </td>
+                </tr>
+            </table>
     <!-- Display loading message -->
     <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
     <!-- Display success or error message -->
     <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
     <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+        </form>
+    </div>
 
-</form>
-
-<script>
-    function showLoading() {
-        document.getElementById("loadingText").style.display = "block";
-    }
-</script>
+    <script>
+        function showLoading() {
+            document.getElementById("loadingText").style.display = "block";
+        }
+    </script>
 </body>
 </html>
