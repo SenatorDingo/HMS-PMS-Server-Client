@@ -9,86 +9,110 @@
 <body>
 <h1>Visualize Division</h1>
 
-<form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post" onsubmit="showLoading()">
-    <header class="header">
-        <h1>Visualize Division</h1>
-    </header>
-    <div class="content">
-    <form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post">
-    <table>
-        <tr>
-            <td><label for="chargeNurseID">Charge Nurse ID:</label></td>
-            <td><input type="text" id="chargeNurseID" th:field="*{chargeNurseID}" required></td>
-        </tr>
+        <form th:action="@{/actions/visualize-division}" th:object="${visualizeDivisionForm}" method="post" onsubmit="showLoading()">
+            <header class="header">
+                <h1>Visualize Division</h1>
+            </header>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td><label for="chargeNurseID">Charge Nurse ID:</label></td>
+                        <td><input type="text" id="chargeNurseID" th:field="*{chargeNurseID}" required></td>
+                    </tr>
 
-        <tr>
-            <td><label for="divisionId">Division ID:</label></td>
-            <td><input type="text" id="divisionId" th:field="*{divisionId}" required></td>
-        </tr>
+                    <tr>
+                        <td><label for="divisionId">Division ID:</label></td>
+                        <td><input type="text" id="divisionId" th:field="*{divisionId}" required></td>
+                    </tr>
 
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <input type="submit" value="Visualize Division">
-            </td>
-        </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="submit" value="Visualize Division">
+                        </td>
+                    </tr>
 
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <input type="button" value="Return" onclick="window.location.href='/'">
-            </td>
-        </tr>
-    </table>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="button" value="Return" onclick="window.location.href='/'">
+                        </td>
+                    </tr>
+                </table>
 
-    <table th:if="${successMessage != null}">
-        <tr>
-            <th colspan="2" style="text-align: center;">Facility Division Information</th>
-        </tr>
-        <tr>
-            <td><strong>Division ID:</strong></td>
-            <td th:text="${facility.divisionId}"></td>
-        </tr>
-        <tr>
-            <td><strong>Division Name:</strong></td>
-            <td th:text="${facility.divisionName}"></td>
-        </tr>
-        <tr>
-            <td><strong>Charge Nurse:</strong></td>
-            <td th:text="${facility.chargeNurseFirstName + ' ' + facility.chargeNurseLastName}"></td>
-        </tr>
-        <tr>
-            <td><strong>Charge Nurse Tel Extension:</strong></td>
-            <td th:text="${facility.chargeNurseTelExtension}"></td>
-        </tr>
-        <tr>
-            <td><strong>Charge Nurse Bip Extension:</strong></td>
-            <td th:text="${facility.chargeNurseBipExtension}"></td>
-        </tr>
-        <tr>
-            <td><strong>Location:</strong></td>
-            <td th:text="${facility.location}"></td>
-        </tr>
-        <tr>
-            <td><strong>Number of Beds:</strong></td>
-            <td th:text="${facility.numberBeds}"></td>
-        </tr>
-        <tr>
-            <td><strong>Telephone Extension:</strong></td>
-            <td th:text="${facility.telephoneExtension}"></td>
-        </tr>
-    </table>
-    <!-- Display loading message -->
-    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
-    <!-- Display success or error message -->
-    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
-    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+                <table th:if="${patientList != null}" >
+                    <tr>
+                        <td colspan="2">
+                            <table border="1">
+                                <tr>
+                                    <th>Patient ID: </th>
+                                    <th>Rationale: </th>
+                                    <th>Priority: </th>
+                                    <th></th>
+                                </tr>
+                                <tr th:each="patient : ${patientList}">
+                                    <td th:text="${patient.patientId}"></td>
+                                    <td th:text="${patient.admissionStatus}"></td>
+                                    <td th:text="${patient.priority}"></td>
+                                 </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
 
-</form>
 
-<script>
-    function showLoading() {
-        document.getElementById("loadingText").style.display = "block";
-    }
-</script>
-</div>
+                <!--
+                <table th:if="${successMessage != null}">
+                    <tr>
+                        <th colspan="2" style="text-align: center;">Facility Division Information</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Division ID:</strong></td>
+                        <td th:text="${facility.divisionId}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Division Name:</strong></td>
+                        <td th:text="${facility.divisionName}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charge Nurse:</strong></td>
+                        <td th:text="${facility.chargeNurseFirstName + ' ' + facility.chargeNurseLastName}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charge Nurse Tel Extension:</strong></td>
+                        <td th:text="${facility.chargeNurseTelExtension}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charge Nurse Bip Extension:</strong></td>
+                        <td th:text="${facility.chargeNurseBipExtension}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong></td>
+                        <td th:text="${facility.location}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number of Beds:</strong></td>
+                        <td th:text="${facility.numberBeds}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telephone Extension:</strong></td>
+                        <td th:text="${facility.telephoneExtension}"></td>
+                    </tr>
+                </table>
+                -->
+                <!-- Display loading message -->
+                <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+                <!-- Display success or error message -->
+                <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+                <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+            </div>
+
+
+        </form>
+
+                <script>
+                    function showLoading() {
+                        document.getElementById("loadingText").style.display = "block";
+                    }
+                </script>
+
 </body>
 </html>
