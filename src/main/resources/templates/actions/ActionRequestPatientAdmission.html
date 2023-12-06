@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
 </head>
 <body>
-<h1>Request Patient Admission</h1>
+    <div class="header">
+        <h1>Request Patient Admission</h1>
+    </div>
 
+<div class="content">
 <form th:action="@{/actions/request-patient-admission}" th:object="${requestPatientAdmissionForm}" method="post" onsubmit="showLoading()">
     <table>
         <tr>
@@ -40,8 +45,11 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Request Patient Admission</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Request Patient Admission">
+            </td>
         </tr>
+
         <tr>
             <td colspan="2" style="text-align: center;">
                 <input type="button" value="Return" onclick="window.location.href='/'">
@@ -55,6 +63,7 @@
     <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
 
 </form>
+</div>
 
 <script>
     function showLoading() {
