@@ -8,12 +8,13 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
 import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
 import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.AdmitPatientRequestListForm
-import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.converter.AdmitPatientRequestListFormConverter
+
 
 @Controller
 class WebAdmitPatientRequestListController {
@@ -48,15 +49,11 @@ class WebAdmitPatientRequestListController {
         val facility = facilityFacade.getAdmissionWaitList(facilityCaller)
         val successLoadFacility = (facility != null)
 
-        if (successLoadFacility) {
 
+        if (successLoadFacility) {
 
                 model.addAttribute("patientList", facility)
                 model.addAttribute("successMessageVisualize", "Division Visualized")
-
-
-
-            val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
 
         } else {
 
@@ -64,9 +61,18 @@ class WebAdmitPatientRequestListController {
 
         }
 
-
-
         return "actions/ActionAdmitPatientRequestList"
+    }
+
+    @PostMapping("/actions/admit-patient-request-list/admit")
+    fun admitPatient(@RequestParam("patientId") patientId: String?, @RequestParam("divisionId") divisionId: String?): String? {
+        val facilityCaller = FacilityType.Ward
+        facilityCaller.setDivisionID(divisionId ?: "null")
+
+        // TODO: Doesn't actually remove - needs to be fixed
+        facilityFacade.removeAdmissionWaitList(facilityCaller, patientId ?: "null")
+
+        return "redirect:/actions/admit-patient" // Redirect to a success page after admission
     }
 
 }

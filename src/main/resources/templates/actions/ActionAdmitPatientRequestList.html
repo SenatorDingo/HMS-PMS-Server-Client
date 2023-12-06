@@ -28,8 +28,11 @@
             </td>
         </tr>
     </table>
+</form>
 
-    <table th:if="${patientList != null}" th:object="${patientList}">
+
+<form th:if="${patientList != null}" th:action="@{/actions/admit-patient-request-list/admit}" method="post">
+    <table th:object="${patientList}">
         <tr>
             <td colspan="2">
                 <table border="1">
@@ -37,27 +40,22 @@
                         <th>Patient ID: </th>
                         <th>Rationale: </th>
                         <th>Priority: </th>
-
+                        <th></th>
                     </tr>
                     <tr th:each="patient : ${patientList}">
                         <td th:text="${patient.patientId}"></td>
                         <td th:text="${patient.admissionStatus}"></td>
-                        <td th:text="${patient.Priority}"></td>
+                        <td th:text="${patient.priority}"></td>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="hidden" th:name="patientId" th:value="${patient.patientId}" />
+                            <input type="hidden" th:name="divisionId" th:value="${patient.division}" />
+                            <button type="submit">Admit</button>
+                        </td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-
-    
-
-
-</form>
-
-
-
-<form>
-
 </form>
 
 </body>
