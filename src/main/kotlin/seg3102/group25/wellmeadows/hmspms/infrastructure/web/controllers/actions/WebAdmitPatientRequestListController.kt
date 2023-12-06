@@ -51,15 +51,14 @@ class WebAdmitPatientRequestListController {
 
         if (successLoadFacility) {
             val patientList: MutableList<PatientFile> = arrayListOf()
-            val waitList = facility?.admissionWaitList
-            if (waitList != null) {
-                for (wait in waitList){
+            if (facility != null) {
+                for (wait in facility) {
                     val patientID = wait.patientId
                     patientFacade.getPatientFile(patientID)?.let { patientList.add(it) }
                 }
-                    model.addAttribute("patientList", patientList)
-                    model.addAttribute("successMessageVisualize", "Division Visualized")
-            } // Set success message
+                model.addAttribute("patientList", patientList)
+                model.addAttribute("successMessageVisualize", "Division Visualized")
+            }
 
 
             val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
