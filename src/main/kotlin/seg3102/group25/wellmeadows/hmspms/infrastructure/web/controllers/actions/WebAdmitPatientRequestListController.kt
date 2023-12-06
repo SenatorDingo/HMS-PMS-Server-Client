@@ -8,6 +8,9 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import seg3102.group25.wellmeadows.hmspms.domain.facility.facade.FacilityFacade
+import seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.FacilityType
+import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.AdmitPatientRequestListForm
@@ -20,6 +23,8 @@ class WebAdmitPatientRequestListController {
     lateinit var patientManagementFacade: PatientManagementFacade
     @Autowired
     lateinit var patientFacade: PatientFacade
+    @Autowired
+    lateinit var facilityFacade: FacilityFacade
 
 
 
@@ -37,16 +42,27 @@ class WebAdmitPatientRequestListController {
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val employeeID: String = authentication.name
 
-        val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
 
-        //TODO: Implemenet Direct Call
+        //TODO: Implement Direct Call
+        val facilityCaller = FacilityType.Ward
+        facilityCaller.setDivisionID(admitPatientRequestListForm.divisionID!!)
+        val facility = facilityFacade.getAdmissionWaitList(facilityCaller)
+        val successLoadFacility = (facility != null)
 
-        /*
-        val success = patientManagementFacade.requestAdmitPatientRequestList(employeeID, dto)
+        if (successLoadFacility) {
+            val patientList: MutableList<PatientFile> = arrayListOf()
+            val waitList = facility?.admissionWaitList
+            if (waitList != null) {
+                for (wait in waitList){
+                    val patientID = wait.patientId
+                    patientFacade.getPatientFile(patientID)?.let { patientList.add(it) }
+                }
+                    model.addAttribute("patientList", patientList)
+                    model.addAttribute("successMessageVisualize", "Division Visualized")
+            } // Set success message
 
-        if (success) {
 
-            model.addAttribute("successMessage", "Patient Admit From Request List Successful!") // Set success message
+            val dto = AdmitPatientRequestListFormConverter.convertForm(admitPatientRequestListForm)
 
         } else {
 
@@ -54,7 +70,7 @@ class WebAdmitPatientRequestListController {
 
         }
 
-         */
+
 
         return "actions/ActionAdmitPatientRequestList"
     }
