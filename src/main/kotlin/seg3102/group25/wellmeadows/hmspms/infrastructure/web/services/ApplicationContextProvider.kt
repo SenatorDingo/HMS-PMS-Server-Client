@@ -20,6 +20,7 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.AdmissionFac
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityAdmissionWaitListFactory
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.FacilityFactory
 import seg3102.group25.wellmeadows.hmspms.domain.facility.factories.ShiftFactory
+import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityAdmissionRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityAdmissionWaitListRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityRepository
 import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.ShiftRepository
@@ -55,6 +56,7 @@ class ApplicationContextProvider {
     final val patientFileRepository: PatientFileRepository = PatientFileRepoAdapter()
     final val patientPrescriptionRepository: PatientPrescriptionRepository = PatientPrescriptionRepoAdapter()
     final val staffAccountRepository: StaffAccountRepository = StaffAccountRepoAdapter()
+    final val facilityAdmissionRepository: FacilityAdmissionRepository = FacilityAdmissionRepoAdapter()
 
     val admissionDtoFactory: AdmissionFactory = AdmissionDtoFactory()
     final val constituentFileFactory: ConstituentFileFactory = ConstituentFileDtoFactory()
@@ -75,7 +77,7 @@ class ApplicationContextProvider {
     )
     final val patientFacade: PatientFacade = PatientFacadeImpl(
         patientFileRepository, patientPrescriptionRepository, patientFileFactory,
-        patientPrescriptionFactory, domainEventEmitter
+        patientPrescriptionFactory, facilityAdmissionRepository, domainEventEmitter
     )
     final val securityFacade: SecurityFacade = SecurityFacadeImpl(
         staffAccountRepository, domainEventEmitter

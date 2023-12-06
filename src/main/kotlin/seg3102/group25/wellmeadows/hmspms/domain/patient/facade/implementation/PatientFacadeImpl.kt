@@ -5,7 +5,9 @@ import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.PrescribeMedi
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.RegisterPatientDTO
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.UpdatePatientFileDTO
 import seg3102.group25.wellmeadows.hmspms.application.services.DomainEventEmitter
+import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admission.Admission
 import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.division.FacilityDivision
+import seg3102.group25.wellmeadows.hmspms.domain.facility.repositories.FacilityAdmissionRepository
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.file.PatientFile
 import seg3102.group25.wellmeadows.hmspms.domain.patient.entities.prescription.PatientPrescription
 import seg3102.group25.wellmeadows.hmspms.domain.patient.events.*
@@ -21,6 +23,7 @@ class PatientFacadeImpl(
     private val patientPrescriptionRepository: PatientPrescriptionRepository,
     private val patientFileFactory: PatientFileFactory,
     private val patientPrescriptionFactory: PatientPrescriptionFactory,
+    private val facilityAdmissionRepoAdapter: FacilityAdmissionRepository,
     private val eventEmitter: DomainEventEmitter
 ): PatientFacade {
     override fun createPatientFile(patientDTO: RegisterPatientDTO): Boolean {
@@ -117,7 +120,24 @@ class PatientFacadeImpl(
     }
 
     override fun admitPatient(admitPatientInfo: AdmitPatientDTO, patientNumber: String, division: FacilityDivision): Boolean {
+
         val existAccount = patientFileRepository.findSync(patientNumber)
+        if (existAccount != null){
+            val admitted: Admission? = facilityAdmissionRepoAdapter.findSync(patientNumber, admitPatientInfo.roomNumber)
+            if (admitted == null){
+                val admission = Admission(admitPatientInfo.patientNumber,
+                        admitPatientInfo.localDoctor,
+                        admitPatientInfo.roomNumber,
+                        admitPatientInfo.bedNumber,
+                        admitPatientInfo.privateInsuranceNumber)
+                facilityAdmissionRepoAdapter.save(admission)
+                return true
+            }
+
+        }
+        return false
+        /*
+
         if (existAccount != null){
             existAccount.admit(
                 admitPatientInfo.localDoctor,
@@ -135,12 +155,16 @@ class PatientFacadeImpl(
             return true
         }
         return false
+
+         */
+
+
     }
 
-    override fun dischargePatient(patientNumber: String): Boolean {
+    override fun dischargePatient(patientNumber: String, divisionID:String): Boolean {
         val existAccount = patientFileRepository.findSync(patientNumber)
         if (existAccount != null){
-            existAccount.discharge()
+            facilityAdmissionRepoAdapter.remove(patientNumber, divisionID)
             eventEmitter.emit(
                 PatientDischarged(
                     UUID.randomUUID(),

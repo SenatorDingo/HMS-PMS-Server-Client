@@ -157,7 +157,7 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
     override fun remove(patientID: String): Boolean {
         val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
             .child("facilityAdmissionWaitlist").child(patientID)
-        newNode.removeValueAsync()
+        newNode.setValueAsync(null)
         return true
     }
 

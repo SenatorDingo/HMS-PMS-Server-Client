@@ -16,5 +16,5 @@ interface PatientFacade {
     fun updatePatientPrescription(prescriptionDTO: PrescribeMedicationDTO): Boolean
     fun getPatientPrescriptions(patientNumber: String): List<PatientPrescription>
     fun admitPatient(admitPatientInfo: AdmitPatientDTO, patientNumber: String, division: FacilityDivision): Boolean
-    fun dischargePatient(patientNumber: String): Boolean
+    fun dischargePatient(patientNumber: String, divisionID: String): Boolean
 }

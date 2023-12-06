@@ -93,7 +93,7 @@ class PatientManagementFacadeImpl(
         return admitPatientRequestListUseCase.admitPatientFromRequestList(staffNumber, admitPatientRequestListInfo, admitPatientInfo)
     }
 
-    override fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean {
+    override fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO, divisionID: String): Boolean {
         eventEmitter.emit(
             RequestDischargePatient(
                 UUID.randomUUID(),
@@ -101,7 +101,7 @@ class PatientManagementFacadeImpl(
                 staffNumber
             )
         )
-        return dischargePatientUseCase.dischargePatient(staffNumber, dischargePatientInfo)
+        return dischargePatientUseCase.dischargePatient(staffNumber, dischargePatientInfo, divisionID)
     }
 
     override fun requestPatientAdmission(

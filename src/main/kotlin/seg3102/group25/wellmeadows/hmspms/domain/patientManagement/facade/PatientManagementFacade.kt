@@ -1,7 +1,6 @@
 package seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade
 
 import org.springframework.stereotype.Component
-import org.springframework.stereotype.Service
 import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.*
 
 @Component
@@ -12,7 +11,7 @@ interface PatientManagementFacade {
 
     fun requestAdmitPatient(staffNumber: String, admitPatientInfo: AdmitPatientDTO): Boolean
     fun requestAdmitPatientRequestList(staffNumber: String, admitPatientInfo: AdmitPatientDTO, admitPatientRequestListInfo: AdmitPatientRequestListDTO): Boolean
-    fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean
+    fun requestDischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO, divisionID:String): Boolean
     fun requestPatientAdmission(staffNumber: String, requestPatientAdmissionInfo: RequestPatientAdmissionDTO): Boolean
     fun requestPrescribeMedication(staffNumber: String, prescribeMedicationInfo: PrescribeMedicationDTO): Boolean
     fun requestRegisterPatient(staffNumber: String, registerPatientInfo: RegisterPatientDTO): Boolean

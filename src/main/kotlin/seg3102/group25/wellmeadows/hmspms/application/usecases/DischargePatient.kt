@@ -4,5 +4,5 @@ import seg3102.group25.wellmeadows.hmspms.application.dtos.queries.DischargePati
 
 // Define an interface for discharging patients from a division
 interface DischargePatient {
-    fun dischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO): Boolean
+    fun dischargePatient(staffNumber: String, dischargePatientInfo: DischargePatientDTO, divisionID: String): Boolean
 }

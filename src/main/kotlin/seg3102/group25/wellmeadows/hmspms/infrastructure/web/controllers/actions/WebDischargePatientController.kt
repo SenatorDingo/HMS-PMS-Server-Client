@@ -34,7 +34,7 @@ class WebDischargePatientController {
         val employeeID: String = authentication.name
 
         val dto = DischargePatientFormConverter.convertForm(dischargePatientForm)
-        val success = patientManagementFacade.requestDischargePatient(employeeID, dto)
+        val success = patientManagementFacade.requestDischargePatient(employeeID, dto, dischargePatientForm.divisionId!!)
 
         if (success) {
 
