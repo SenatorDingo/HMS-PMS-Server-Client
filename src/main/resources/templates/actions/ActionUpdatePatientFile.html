@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
     <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
 </head>
 <body>
-<h1>Update Patient File</h1>
+
+<div class="header">
+    <h1>Update Patient File</h1>
+</div>
 
 <form th:action="@{/actions/update-patient-file}" th:object="${updatePatientFileForm}" method="post">
     <table>
@@ -94,7 +99,9 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Update Patient File</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Update Patient File">
+            </td>
         </tr>
 
         <tr>

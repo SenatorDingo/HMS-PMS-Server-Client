@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <style>
+        /* Add custom CSS to position the image */
+        .top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Add padding to the body to prevent text overlap */
+        body {
+            padding-top: 125px; /* Adjust this value based on the size of your image */
+        }
+
+        /* Style for the error message */
+        .error-message {
+            text-align: left; /* Changed from center to left */
+        }
+    </style>
 </head>
 <body>
-    <h1>ERROR</h1>
+    <img src="../images/win_sad.png" class="top-left">
+    <div class="error-message">
+        <h1>ERROR</h1>
+        <h4>Oops, looks like we ran into some issues.</h4>
+    </div>
 </body>
 </html>
