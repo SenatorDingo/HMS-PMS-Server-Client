@@ -29,23 +29,36 @@
         </tr>
     </table>
 
+    <table th:if="${patientList != null}" th:object="${patientList}">
+        <tr>
+            <td colspan="2">
+                <table border="1">
+                    <tr>
+                        <th>Patient ID: </th>
+                        <th>Rationale: </th>
+                        <th>Priority: </th>
+
+                    </tr>
+                    <tr th:each="patient : ${patientList}">
+                        <td th:text="${patient.patientId}"></td>
+                        <td th:text="${patient.admissionStatus}"></td>
+                        <td th:text="${patient.Priority}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    
+
 
 </form>
 
-<table th:if="${patientList != null}" th:object="${patientList}">
-    <tr th:each="patient : ${patientList}">
 
 
+<form>
 
+</form>
 
-
-
-
-<tr>
-    <td> <label for="admissionStatus"> Admission Status:</label></td>
-    <td><input type="text" id="admissionStatus" th:field="*{admissionStatus}" required></td>
-</tr>
-
-</table>
 </body>
 </html>
