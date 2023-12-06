@@ -12,16 +12,16 @@
         
         <!-- Functionalities -->
         <div class="grid-container">
-            <a class="card" href="/actions/visualize-division">Visualize Division</a>
-            <a class="card" href="/actions/update-patient-file">Update Patient File</a>
-            <a class="card" href="/actions/request-patient-admission">Request Patient Admission</a>
-            <a class="card" href="/actions/register-staff">Register Staff</a>
-            <a class="card" href="/actions/register-patient">Register Patient</a>
-            <a class="card" href="/actions/prescribe-medication">Prescribe Medication</a>
-            <a class="card" href="/actions/discharge-patient">Discharge Patient</a>
-            <a class="card" href="/actions/consult-patient-file">Consult Patient File</a>
-            <a class="card" href="/actions/admit-patient">Admit Patient</a>
-            <a class="card" href="/actions/admit-patient-request-list">Admit Patient From Request List</a>
+            <a th:if="${visualizeDivision != null}" class="card" href="/actions/visualize-division">Visualize Division</a>
+            <a th:if="${updatePatientFile != null}" class="card" href="/actions/update-patient-file">Update Patient File</a>
+            <a th:if="${requestPatientAdmission != null}" class="card" href="/actions/request-patient-admission">Request Patient Admission</a>
+            <a th:if="${registerStaff != null}" class="card" href="/actions/register-staff">Register Staff</a>
+            <a th:if="${registerPatient != null}" class="card" href="/actions/register-patient">Register Patient</a>
+            <a th:if="${prescribeMedication != null}" class="card" href="/actions/prescribe-medication">Prescribe Medication</a>
+            <a th:if="${dischargePatient != null}" class="card" href="/actions/discharge-patient">Discharge Patient</a>
+            <a th:if="${consultPatientFile != null}" class="card" href="/actions/consult-patient-file">Consult Patient File</a>
+            <a th:if="${admitPatient != null}" class="card" href="/actions/admit-patient">Admit Patient</a>
+            <a th:if="${admitPatientFromRequestList != null}" class="card" href="/actions/admit-patient-request-list">Admit Patient From Request List</a>
         </div>
 
         <!-- Logout Button -->
