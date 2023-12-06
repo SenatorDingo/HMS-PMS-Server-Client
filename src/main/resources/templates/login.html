@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
     <title>Login | WHMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
 </head>
 <body>
     <div class="header">
@@ -12,12 +13,6 @@
     <div class="container">
         <main class="content">
             <div class="column">
-                <div th:if="${param.error}">
-                    <p>Invalid Username and Password, Try Again</p>
-                </div>
-                <div th:if="${param.logout}">
-                    <p>You Have Been Logged Out Successfully</p>
-                </div>
                 <form th:action="@{/login}" method="post">
                     <div>
                         <label for="usr"><b>Username</b></label>
@@ -31,6 +26,12 @@
                         <input type="submit" value="Sign In"/>
                     </div>
                 </form>
+                <div th:if="${param.error}">
+                    <p>Invalid Username and Password, Try Again</p>
+                </div>
+                <div th:if="${param.logout}">
+                    <p>You Have Been Logged Out Successfully</p>
+                </div>
             </div>
         </main>
         <footer>

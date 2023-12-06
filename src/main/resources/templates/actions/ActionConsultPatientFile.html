@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>HMS-PMS</title>
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
 </head>
 <body>
-<h1>Consult Patient File</h1>
+<div class="header">
+    <h1>Consult Patient File</h1>
+</div>
 
 <form th:action="@{/actions/consult-patient-file}" th:object="${consultPatientFileForm}" method="post">
     <table>
@@ -20,8 +24,11 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="text-align: center;"><button type="submit">Consult Patient File</button></td>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Consult Patient File">
+            </td>
         </tr>
+
         <tr>
             <td colspan="2" style="text-align: center;">
                 <input type="button" value="Return" onclick="window.location.href='/'">
@@ -89,6 +96,8 @@
                         <td th:text="${prescription.finishDate}"></td>
                     </tr>
                 </table>
+            </td>
+        </tr>
         <tr>
             <th colspan="2" style="text-align: center;">Next of Kin Information</th>
         </tr>

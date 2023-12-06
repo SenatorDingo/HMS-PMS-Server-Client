@@ -1,55 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Dashboard | WHMS</title>
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
 </head>
 <body>
-    <h1>Welcome! HMS - PMS</h1>
+    <div class="dashboard">
+        <h1>Wellmeadows Hospital Management System</h1>
+        
+        <!-- Functionalities -->
+        <div class="grid-container">
+            <a class="card" href="/actions/visualize-division">Visualize Division</a>
+            <a class="card" href="/actions/update-patient-file">Update Patient File</a>
+            <a class="card" href="/actions/request-patient-admission">Request Patient Admission</a>
+            <a class="card" href="/actions/register-staff">Register Staff</a>
+            <a class="card" href="/actions/register-patient">Register Patient</a>
+            <a class="card" href="/actions/prescribe-medication">Prescribe Medication</a>
+            <a class="card" href="/actions/discharge-patient">Discharge Patient</a>
+            <a class="card" href="/actions/consult-patient-file">Consult Patient File</a>
+            <a class="card" href="/actions/admit-patient">Admit Patient</a>
+            <a class="card" href="/actions/admit-patient-request-list">Admit Patient From Request List</a>
+        </div>
 
-    <div th:if="${visualizeDivision != null}">
-        <div>visualizeDivision</div>
-        <a href="/actions/visualize-division">Redirect</a>
+        <!-- Logout Button -->
+        <div class="logout-container">
+            <form name="logoutForm" th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="logout-button"/>
+            </form>
+        </div>
+        
     </div>
-    <div th:if="${updatePatientFile != null}">
-        <div>updatePatientFile</div>
-        <a href="/actions/update-patient-file">Redirect</a>
-    </div>
-    <div th:if="${requestPatientAdmission != null}">
-        <div>requestPatientAdmission</div>
-        <a href="/actions/request-patient-admission">Redirect</a>
-    </div>
-    <div th:if="${registerStaff != null}">
-        <div>registerStaff</div>
-        <a href="/actions/register-staff">Redirect</a>
-    </div>
-    <div th:if="${registerPatient != null}">
-        <div>registerPatient</div>
-        <a href="/actions/register-patient">Redirect</a>
-    </div>
-    <div th:if="${prescribeMedication != null}">
-        <div>prescribeMedication</div>
-        <a href="/actions/prescribe-medication">Redirect</a>
-    </div>
-    <div th:if="${dischargePatient != null}">
-        <div>dischargePatient</div>
-        <a href="/actions/discharge-patient">Redirect</a>
-    </div>
-    <div th:if="${consultPatientFile != null}">
-        <div>consultPatientFile</div>
-        <a href="/actions/consult-patient-file">Redirect</a>
-    </div>
-    <div th:if="${admitPatient != null}">
-        <div>admitPatient</div>
-        <a href="/actions/admit-patient">Redirect"</a>
-    </div>
-    <div th:if="${admitPatientFromRequestList != null}">
-        <div>admitPatientFromRequestList</div>
-        <a href="/actions/admit-patient-request-list">Redirect</a>
-    </div>
-
-    <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
 </body>
 </html>
