@@ -197,9 +197,11 @@ class FacilityFacadeImpl(
             return false
         }
         admissionWaitList.division = divisionType.facilityDivisionID
-        if(division != null){
-            division.addAdmissionWaitList(admissionWaitList)
-            facilityRepository.save(division)
+        //if(division != null){ // TODO: FutureProof
+            division?.addAdmissionWaitList(admissionWaitList)
+            if (division != null) {
+                facilityRepository.save(division)
+            }
             admissionWaitListRepository.save(admissionWaitList)
             eventEmitter.emit(
                 PatientAdmissionWaitListed(
@@ -209,7 +211,7 @@ class FacilityFacadeImpl(
                 )
             )
             return true
-        }
+        //}
         return false
     }
 
