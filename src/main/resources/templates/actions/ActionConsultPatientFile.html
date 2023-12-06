@@ -28,6 +28,48 @@
             </td>
         </tr>
     </table>
+
+    <table th:if="${successMessage != null}">
+        <tr>
+            <th colspan="2" style="text-align: center;">Patient Information</th>
+        </tr>
+        <tr>
+            <td><strong>Patient Number:</strong></td>
+            <td th:text="${patientInfo.patientNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>Medical Staff ID:</strong></td>
+            <td th:text="${patientInfo.medicalStaffId}"></td>
+        </tr>
+        <tr>
+            <td><strong>Insurance Number:</strong></td>
+            <td th:text="${patientInfo.insuranceNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>First Name:</strong></td>
+            <td th:text="${patientInfo.firstName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Last Name:</strong></td>
+            <td th:text="${patientInfo.lastName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Address:</strong></td>
+            <td th:text="${patientInfo.address}"></td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center;">Next of Kin Information</th>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Name:</strong></td>
+            <td th:text="${patientInfo.constituentFile.firstName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Phone:</strong></td>
+            <td th:text="${patientInfo.constituentFile.telephoneNumber}"></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.AdmitPatientRequestListForm
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.converter.AdmitPatientRequestListFormConverter
@@ -17,6 +18,9 @@ class WebAdmitPatientRequestListController {
 
     @Autowired
     lateinit var patientManagementFacade: PatientManagementFacade
+    @Autowired
+    lateinit var patientFacade: PatientFacade
+
 
 
     @RequestMapping("/actions/admit-patient-request-list")

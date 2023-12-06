@@ -8,6 +8,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import seg3102.group25.wellmeadows.hmspms.domain.patient.facade.PatientFacade
 import seg3102.group25.wellmeadows.hmspms.domain.patientManagement.facade.PatientManagementFacade
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.ConsultPatientFileForm
 import seg3102.group25.wellmeadows.hmspms.infrastructure.web.forms.actions.converter.ConsultPatientFileFormConverter
@@ -17,6 +18,9 @@ class WebConsultPatientFileController {
 
     @Autowired
     lateinit var patientManagementFacade: PatientManagementFacade
+    @Autowired
+    lateinit var patientFacade: PatientFacade
+
 
 
     @RequestMapping("/actions/consult-patient-file")
@@ -36,12 +40,14 @@ class WebConsultPatientFileController {
         //TODO: Implemenet Direct Call
 
         val dto = ConsultPatientFileFormConverter.convertForm(consultPatientFileForm)
-        /*
-        val success = patientManagementFacade.requestConsultPatientFile(employeeID, dto)
+
+        val patientFile = patientFacade.getPatientFile(dto.patientId)
+        val success = (patientFile != null)
 
         if (success) {
 
             model.addAttribute("successMessage", "Patient File Load Successful!") // Set success message
+            model.addAttribute("patientInfo", patientFile)
 
         } else {
 
@@ -49,7 +55,6 @@ class WebConsultPatientFileController {
 
         }
 
-         */
 
         return "actions/ActionConsultPatientFile"
     }
