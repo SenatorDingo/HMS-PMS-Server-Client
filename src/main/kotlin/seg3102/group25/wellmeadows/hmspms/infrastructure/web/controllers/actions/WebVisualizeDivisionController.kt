@@ -38,17 +38,16 @@ class WebVisualizeDivisionController {
 
 
         val dto = VisualizeDivisionFormConverter.convertForm(visualizeDivisionForm)
-        val facilityType = FacilityType.Ward
-        facilityType.setDivisionID(dto.divisionId)
-        val facility = facilityFacade.getDivision(facilityType)
+        val facilityCaller = FacilityType.Ward
+        facilityCaller.setDivisionID(dto.divisionId)
+        val facility = facilityFacade.getAdmissionWaitList(facilityCaller)
+        val successLoadFacility = (facility != null)
 
-        val success = (facility != null)
 
-        if (success) {
+        if (successLoadFacility) {
 
-            model.addAttribute("successMessage", "Division Loading Successful!") // Set success message
-            model.addAttribute("facility", facility)
-
+            model.addAttribute("patientList", facility)
+            model.addAttribute("successMessageVisualize", "Division Visualized")
         } else {
 
             model.addAttribute("errorMessage", "Division Loading Unsuccessful!") // Set error message
