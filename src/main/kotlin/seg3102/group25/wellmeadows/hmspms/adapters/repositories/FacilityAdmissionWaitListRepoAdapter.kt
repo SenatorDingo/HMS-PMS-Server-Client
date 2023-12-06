@@ -90,7 +90,7 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
 
     override suspend fun findAll(divisionID: String): List<FacilityAdmissionWaitList>? {
         val ref: DatabaseReference = dataBase.reference
-        val uidRef = ref.child("facilityAdmissionWaitlist").orderByChild("divisionId").equalTo(divisionID)
+        val uidRef = ref.child("facilityAdmissionWaitlist").orderByChild("division").equalTo(divisionID)
 
         val errorAccount = mutableListOf(FacilityAdmissionWaitList("", "", "", "", -1, ""))
         val deferred = CompletableDeferred<List<FacilityAdmissionWaitList>?>()
@@ -113,9 +113,9 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
                     //val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
                     val list: MutableList<FacilityAdmissionWaitList> = mutableListOf()
                     // Workaround - WORKS -
-                    snapshot.children.forEach { waitlistSnapshot ->
+                    snapshot.children.forEach {
                         val admissionWaitList = DatabaseFacilityAdministrationWaitList()
-                        waitlistSnapshot.children.forEach { dataWLC ->
+                        it.children.forEach { dataWLC ->
                             when (dataWLC.key) {
                                 "patientId" -> admissionWaitList.patientId = dataWLC.value as? String
                                 "chargeNurseId" -> admissionWaitList.chargeNurseId = dataWLC.value as? String
