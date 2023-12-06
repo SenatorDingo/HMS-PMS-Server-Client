@@ -16,6 +16,12 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
         return existFile
     }
 
+    override fun findSyncAll(divisionID: String): List<FacilityAdmissionWaitList>? {
+        val existFile: List<FacilityAdmissionWaitList>?
+        runBlocking { existFile = findAll(divisionID) }
+        return existFile
+    }
+
     override suspend fun find(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList? {
         val ref: DatabaseReference = dataBase.reference
         val uidRef = ref.child("facilityAdmissionWaitlist").orderByChild("patientId").equalTo(facilityAdmissionWaitList.patientId)
@@ -81,9 +87,78 @@ class FacilityAdmissionWaitListRepoAdapter: FacilityAdmissionWaitListRepository 
         return result
     }
 
-    override fun findAll(): List<FacilityAdmissionWaitList> {
-        //TODO("Not yet implemented")
-        return mutableListOf() // Won't be used in this project
+
+    override suspend fun findAll(divisionID: String): List<FacilityAdmissionWaitList>? {
+        val ref: DatabaseReference = dataBase.reference
+        val uidRef = ref.child("facilityAdmissionWaitlist").orderByChild("divisionId").equalTo(divisionID)
+
+        val errorAccount = mutableListOf(FacilityAdmissionWaitList("", "", "", "", -1, ""))
+        val deferred = CompletableDeferred<List<FacilityAdmissionWaitList>?>()
+
+        val timeoutJob = CoroutineScope(Dispatchers.Default).launch {
+            delay(10000) // Timeout after 5 seconds (adjust as needed)
+            if (!deferred.isCompleted) { // Check if the deferred is not completed
+                deferred.complete(errorAccount) // Complete with errorAccount in case of timeout
+            }
+        }
+
+        val valueEventListener = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                timeoutJob.cancel()
+                deferred.complete(errorAccount)
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    //val firebaseStaffAccount = snapshot.getValue(DatabaseStaffAccount::class.java)
+                    val list: MutableList<FacilityAdmissionWaitList> = mutableListOf()
+                    // Workaround - WORKS -
+                    snapshot.children.forEach { waitlistSnapshot ->
+                        val admissionWaitList = DatabaseFacilityAdministrationWaitList()
+                        waitlistSnapshot.children.forEach { dataWLC ->
+                            when (dataWLC.key) {
+                                "patientId" -> admissionWaitList.patientId = dataWLC.value as? String
+                                "chargeNurseId" -> admissionWaitList.chargeNurseId = dataWLC.value as? String
+                                "division" -> admissionWaitList.division = dataWLC.value as? String
+                                "admissionStatus" -> admissionWaitList.admissionStatus = dataWLC.value as? String
+                                "priority" -> admissionWaitList.priority = dataWLC.getValue(Int::class.java)
+                                "createdOn" -> admissionWaitList.createdOn = dataWLC.value as? String
+                            }
+                        }
+
+                        list.add(FacilityAdmissionWaitList(
+                            admissionWaitList.patientId ?: "",
+                            admissionWaitList.chargeNurseId ?: "",
+                            admissionWaitList.division ?: "",
+                            admissionWaitList.admissionStatus ?: "",
+                            admissionWaitList.priority ?: -1,
+                            admissionWaitList.createdOn ?: ""
+                        ))
+                    }
+
+                    timeoutJob.cancel()
+                    deferred.complete(list)
+                } else {
+                    timeoutJob.cancel()
+                    deferred.complete(null)
+                }
+            }
+        }
+        uidRef.addListenerForSingleValueEvent(valueEventListener)
+
+        val result = deferred.await()
+
+        // Remove the listener after getting the result or timeout
+        uidRef.removeEventListener(valueEventListener)
+
+        return result
+    }
+
+    override fun remove(patientID: String): Boolean {
+        val newNode: DatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("facilityAdmissionWaitlist").child(patientID)
+        newNode.removeValueAsync()
+        return true
     }
 
     override fun save(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList {
