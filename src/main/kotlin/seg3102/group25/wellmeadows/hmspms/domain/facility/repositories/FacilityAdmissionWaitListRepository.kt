@@ -4,7 +4,9 @@ import seg3102.group25.wellmeadows.hmspms.domain.facility.entities.admissionWait
 
 interface FacilityAdmissionWaitListRepository {
     suspend fun find(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList?
-    fun findAll(): List<FacilityAdmissionWaitList>
+    suspend fun findAll(divisionID: String): List<FacilityAdmissionWaitList>?
     fun save(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList
     fun findSync(facilityAdmissionWaitList: FacilityAdmissionWaitList): FacilityAdmissionWaitList?
+    fun remove(patientID: String): Boolean
+    fun findSyncAll(divisionID: String): List<FacilityAdmissionWaitList>?
 }

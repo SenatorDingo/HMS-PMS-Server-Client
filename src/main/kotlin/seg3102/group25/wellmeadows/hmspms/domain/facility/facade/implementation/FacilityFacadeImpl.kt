@@ -182,7 +182,7 @@ class FacilityFacadeImpl(
     }
 
     override fun getAdmissionWaitList(divisionType: FacilityType): List<FacilityAdmissionWaitList> {
-        return admissionWaitListRepository.findAll()
+        return admissionWaitListRepository.findSyncAll(divisionType.facilityDivisionID) ?: mutableListOf()
     }
 
     override fun createAdmissionWaitList(admissionWaitListInfo: RequestPatientAdmissionDTO): Boolean {
@@ -217,10 +217,13 @@ class FacilityFacadeImpl(
 
     override fun removeAdmissionWaitList(divisionType: FacilityType, patientID: String): Boolean {
         val division = facilityRepository.findSync(divisionType)
-        if(division != null){
-            val success = division.removeAdmissionWaitList(patientID)
-            facilityRepository.save(division)
-            if(success) {
+        //if(division != null){ // TODO: Futureproof
+            var success = division?.removeAdmissionWaitList(patientID)
+            success = admissionWaitListRepository.remove(divisionType.facilityDivisionID)
+            if (division != null) {
+                facilityRepository.save(division)
+            }
+            if(success == true) {
                 eventEmitter.emit(
                     PatientAdmissionUnWaitListed(
                         UUID.randomUUID(),
@@ -230,7 +233,7 @@ class FacilityFacadeImpl(
                 )
                 return true
             }
-        }
+        //}
         return false
     }
 
